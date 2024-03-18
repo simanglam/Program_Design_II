@@ -7,4 +7,8 @@ The repo for final project of program design II in CCU.
 | github 帳號 | 名字 | 學號 |
 | ----- | ----- | ----- |
 | simanglam | 周造麟 | 412910010 |
-| 某個人 | 某個人 | 某個人 | 
+| jhenyulin | 林振宇 | 412910027 | 
+| Poki1246 | 汪柏昱 | 412910030 | 
+| xup6m4c06 | 林育函 | 412530036 | 
+| WillieHuang | 黃偉宸 | 411315011 | 
+| Brightchao | 趙柏榕 | 411315044 | 
