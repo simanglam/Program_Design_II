@@ -49,12 +49,9 @@ public class MainMenu extends InputAdapter implements Screen{
         SpriteBatch batch = game.getSpriteBatch();
         this.world.update();
 
-        this.world.render();
         batch.setProjectionMatrix(this.world.camera.combined);
         this.stage.act();
-        batch.begin();
-        this.world.player.draw(batch);
-        batch.end();
+        this.world.render(batch);
         stage.getViewport().apply();
         this.stage.draw();
     }

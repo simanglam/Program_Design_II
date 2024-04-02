@@ -1,11 +1,13 @@
 package com.simanglam;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
@@ -89,10 +91,16 @@ public class World {
         this.viewport.apply();
     }
 
-    public void render(){
-        this.camera.update();
+    public void render(SpriteBatch batch){
         this.viewport.apply();
         setView(camera);
-        this.renderer.render();
+        int[] backgroundLayers = { 0, 1 }; // don't allocate every frame!
+        int[] foregroundLayers = { 2 };    // don't allocate every frame!
+        //System.out.println(String.format("%s %s %s", this.tiledMap.getLayers().get(0).getName(), this.tiledMap.getLayers().get(1).getName(), this.tiledMap.getLayers().get(2).getName()));
+        this.renderer.render(backgroundLayers);
+        batch.begin();
+        player.draw(batch);
+        batch.end();
+        this.renderer.render(foregroundLayers);
     }
 }
