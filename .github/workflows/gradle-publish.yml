@@ -34,7 +34,8 @@ jobs:
     - name: Download assets
       run: |
           git clone https://${{ secrets.accessToken }}@github.com/simanglam/Cute-RPG-World.git
-          mv Cute-RPG-World/* assets/Cute\ RPG\ World
+          mkdir assets/Cute\ RPG\ World
+          mv Cute-RPG-World/* assets/Cute\ RPG\ World/
 
     - name: Build with Gradle
       run: ./gradlew html:dist
