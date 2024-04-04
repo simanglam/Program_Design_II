@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -39,7 +40,10 @@ public class World {
         playerCollideUpdate(true);
         player.updateY();
         playerCollideUpdate(false);
-        this.camera.position.set(player.getPosition(), 10);
+        Vector2 tempView = new Vector2();
+        tempView.x = Math.max(Math.min(player.getPosition().x, ((int)tiledMap.getProperties().get("width") * (int)tiledMap.getProperties().get("tilewidth")) - (this.viewport.getScreenWidth() / 2)), 0 + (this.viewport.getWorldWidth() / 2));
+        tempView.y = Math.max(Math.min(player.getPosition().y, ((int)tiledMap.getProperties().get("height") * (int)tiledMap.getProperties().get("tileheight")) - (this.viewport.getScreenHeight() / 2)), 0 + (this.viewport.getWorldHeight() / 2));
+        this.camera.position.set(tempView, 10);
         this.camera.update();
     }
 
@@ -64,7 +68,6 @@ public class World {
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
             Rectangle rectangle = rectangleObject.getRectangle();
             if (Intersector.overlaps(playerRectangle, rectangle)) {
-                System.out.println(rectangle);
                 if (x){
                     if (player.isHeadLeft()){
                         player.setPosition(rectangle.x + rectangle.getWidth(), playerRectangle.y);
