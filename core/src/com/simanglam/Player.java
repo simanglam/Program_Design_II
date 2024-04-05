@@ -19,7 +19,7 @@ public class Player implements InputProcessor{
     int count = 0;
     float accu;
     public Player(){
-        this.rectangle = new Rectangle(0, 0, 16, 16);
+        this.rectangle = new Rectangle(16, 16, 16, 16);
         this.heading = new Vector2(0, 0);
         this.lastHeading = this.heading.cpy();
         accu = 0f;
