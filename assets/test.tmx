@@ -275,8 +275,8 @@
   <object id="12" x="205.837" y="-9.04729" width="68.77" height="14.9938">
    <properties>
     <property name="entry" value="test2"/>
-    <property name="entryX" type="float" value="205"/>
-    <property name="entryY" type="float" value="6"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="32"/>
     <property name="exit" value="test"/>
     <property name="next" value="test2.tmx"/>
     <property name="portal" type="bool" value="true"/>

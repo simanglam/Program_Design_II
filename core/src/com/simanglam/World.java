@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class World {
@@ -27,8 +28,8 @@ public class World {
         this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.camera = new OrthographicCamera();
         this.player = new Player();
+        this.viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, camera);
         camera.position.set(player.getPosition(), 0);
-        this.viewport = new ExtendViewport(640, 480, camera);
     }
 
     public void setView(OrthographicCamera camera){
@@ -40,10 +41,10 @@ public class World {
         playerCollideUpdate(true);
         player.updateY();
         playerCollideUpdate(false);
-        Vector2 tempView = new Vector2();
-        tempView.x = Math.max(Math.min(player.getPosition().x, ((int)tiledMap.getProperties().get("width") * (int)tiledMap.getProperties().get("tilewidth")) - (this.viewport.getScreenWidth() / 2)), 0 + (this.viewport.getWorldWidth() / 2));
-        tempView.y = Math.max(Math.min(player.getPosition().y, ((int)tiledMap.getProperties().get("height") * (int)tiledMap.getProperties().get("tileheight")) - (this.viewport.getScreenHeight() / 2)), 0 + (this.viewport.getWorldHeight() / 2));
-        this.camera.position.set(tempView, 10);
+        float[] tempView = {0, 0, 0};
+        tempView[0] = Math.max(Math.min(player.getPosition().x, ((int)tiledMap.getProperties().get("width") * (int)tiledMap.getProperties().get("tilewidth")) - (this.viewport.getWorldWidth() / 2)), 0 + (this.viewport.getWorldWidth() / 2));
+        tempView[1] = Math.max(Math.min(player.getPosition().y, ((int)tiledMap.getProperties().get("height") * (int)tiledMap.getProperties().get("tileheight")) - (this.viewport.getWorldHeight() / 2)), 0 + (this.viewport.getWorldHeight() / 2));
+        this.camera.position.set(tempView);
         this.camera.update();
     }
 
@@ -82,9 +83,10 @@ public class World {
                 this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get("物件層 1").getObjects().getByType(RectangleMapObject.class)) {
                     if (rectangleObject.getProperties().get("portal") != null && ((String)rectangleObject.getProperties().get("entry")).equals((String)rObject.getProperties().get("exit"))){
-                        player.setPosition((float)rectangleObject.getProperties().get("entryX"), (float)rectangleObject.getProperties().get("entryY"));
+                        player.setPosition(rectangleObject.getRectangle().x - (float)rectangleObject.getProperties().get("entryX"), rectangleObject.getRectangle().y - (float)rectangleObject.getProperties().get("entryY"));
+                        System.out.println(rectangleObject.getRectangle());
                         System.out.println(player.getPosition());
-                        break;
+                        return ;
                     }
                 }
             }
@@ -109,7 +111,7 @@ public class World {
     }
 
     public void resize(int x, int y){
-        this.viewport.update(x, y, true);
+        this.viewport.update(x, y, false);
         this.viewport.apply();
     }
 
