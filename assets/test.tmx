@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="11">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="80" tilewidth="16" tileheight="16" infinite="0" parallaxoriginx="16" parallaxoriginy="16" nextlayerid="6" nextobjectid="30">
  <tileset firstgid="1" name="CuteRPG_Field_Tiles" tilewidth="16" tileheight="16" tilecount="384" columns="24">
   <image source="Cute RPG World/Tilesets/CuteRPG_Field_Tiles.png" width="384" height="256"/>
  </tileset>
@@ -271,5 +271,22 @@
     <property name="description" value="A tree"/>
    </properties>
   </object>
+  <object id="11" x="-0.110805" y="-10.5271" width="206.363" height="14.9938"/>
+  <object id="12" x="205.837" y="-9.04729" width="68.77" height="14.9938">
+   <properties>
+    <property name="entry" value="test2"/>
+    <property name="entryX" type="float" value="205"/>
+    <property name="entryY" type="float" value="6"/>
+    <property name="exit" value="test"/>
+    <property name="next" value="test2.tmx"/>
+    <property name="portal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="13" x="272.936" y="-9.58676" width="1660.24" height="14.9938"/>
+  <object id="14" x="-14.2117" y="1276.84" width="1956.01" height="14.9938"/>
+  <object id="15" x="-20.9089" y="-8.64545" width="25.2588" height="638.37"/>
+  <object id="27" x="-19.4522" y="610.995" width="25.2588" height="674.758"/>
+  <object id="28" x="1904.59" y="3.76246" width="25.2588" height="638.37"/>
+  <object id="29" x="1906.86" y="622.366" width="25.2588" height="665.661"/>
  </objectgroup>
 </map>
