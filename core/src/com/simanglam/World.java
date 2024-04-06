@@ -36,10 +36,10 @@ public class World {
         this.renderer.setView(camera);
     }
 
-    public void update(){
-        player.updateX();
+    public void update(float deltaT){
+        player.updateX(deltaT);
         playerCollideUpdate(true);
-        player.updateY();
+        player.updateY(deltaT);
         playerCollideUpdate(false);
         float[] tempView = {0, 0, 0};
         tempView[0] = Math.max(Math.min(player.getPosition().x, ((int)tiledMap.getProperties().get("width") * (int)tiledMap.getProperties().get("tilewidth")) - (this.viewport.getWorldWidth() / 2)), 0 + (this.viewport.getWorldWidth() / 2));

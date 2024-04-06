@@ -51,7 +51,7 @@ public class GameScreen extends InputAdapter implements Screen{
     public void render(float deltaT){
         ScreenUtils.clear(0, 0, 0, 0);
         SpriteBatch batch = game.getSpriteBatch();
-        this.world.update();
+        this.world.update(deltaT);
 
         batch.setProjectionMatrix(this.world.camera.combined);
         this.stage.act();
