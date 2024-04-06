@@ -2,7 +2,7 @@ package com.simanglam;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.simanglam.scenes.MainMenu;
+import com.simanglam.scenes.GameScreen;
 
 public class Main extends Game {
 	private SpriteBatch batch;
@@ -12,7 +12,7 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		this.setScreen(new MainMenu(this));
+		this.setScreen(new GameScreen(this));
 	}
 
 	@Override

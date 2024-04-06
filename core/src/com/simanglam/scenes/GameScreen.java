@@ -15,25 +15,24 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.simanglam.Const;
 import com.simanglam.Dialog;
 import com.simanglam.Main;
 import com.simanglam.World;
 
-public class MainMenu extends InputAdapter implements Screen{
+public class GameScreen extends InputAdapter implements Screen{
     Main game;
     Stage stage;
-    Vector2 middle;
     World world;
     InputMultiplexer inputMultiplexer;
     Logger logger;
     Dialog dialog;
 
-    public MainMenu(final Main game){
+    public GameScreen(final Main game){
         this.game = game;
         this.world = new World();
-        this.stage = new Stage(new ExtendViewport(640, 480, new OrthographicCamera()));
+        this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
         this.stage.getCamera().position.set(0, 480, 0);
-        this.middle = new Vector2(1200, 1000).scl(.5f);
         this.logger = Logger.getLogger("Main");
         this.logger.setLevel(Level.ALL);
         this.inputMultiplexer = new InputMultiplexer();
@@ -41,6 +40,11 @@ public class MainMenu extends InputAdapter implements Screen{
         this.inputMultiplexer.addProcessor(this.world.player);
         this.inputMultiplexer.addProcessor(this);
         this.dialog = new Dialog(this.stage);
+        this.handleInput();
+    }
+
+    public void handleInput(){
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(this.inputMultiplexer);
     }
 
@@ -84,15 +88,20 @@ public class MainMenu extends InputAdapter implements Screen{
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode != Keys.Z)
-            return false;
-        Rectangle iRectangle = this.world.player.creatInvestgateRectangle();
-        RectangleMapObject collMapObject = world.getCollideObject(iRectangle);
-        if (collMapObject != null && collMapObject.getProperties().get("description") != null){
-            dialog.setDescription((String)collMapObject.getProperties().get("description"));
-            stage.addActor(dialog);
+        if (keycode == Keys.Z){
+            Rectangle iRectangle = this.world.player.creatInvestgateRectangle();
+            RectangleMapObject collMapObject = world.getCollideObject(iRectangle);
+            if (collMapObject != null && collMapObject.getProperties().get("description") != null){
+                dialog.setDescription((String)collMapObject.getProperties().get("description"));
+                stage.addActor(dialog);
+            }
+            return true;
         }
-        return true;
+        else if(keycode == Keys.ESCAPE){
+            this.world.player.freeze();
+            game.setScreen(new InfoScreen(this, game));
+        }
+        return false;
     }
 }
 

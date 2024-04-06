@@ -19,7 +19,7 @@ public class Player implements InputProcessor{
     int count = 0;
     float accu;
     public Player(){
-        this.rectangle = new Rectangle(0, 0, 16, 16);
+        this.rectangle = new Rectangle(16, 16, 16, 16);
         this.heading = new Vector2(0, 0);
         this.lastHeading = this.heading.cpy();
         accu = 0f;
@@ -33,16 +33,21 @@ public class Player implements InputProcessor{
 
     public void draw(SpriteBatch batch){
         int direction = 0;
-        if ((int)heading.y == -1){
+        Vector2 currentHeading = null;
+        if (heading.y != 0 || heading.x != 0)
+            currentHeading = heading;
+        else
+            currentHeading = lastHeading;
+        if ((int)currentHeading.y == -1){
             direction = 0;
         }
-        else if ((int)heading.x == -1){
+        else if ((int)currentHeading.x == -1){
             direction = 1;
         }
-        else if ((int)heading.x == 1){
+        else if ((int)currentHeading.x == 1){
             direction = 2;
         }
-        else if ((int)heading.y == 1){
+        else if ((int)currentHeading.y == 1){
             direction = 3;
         }
         else{
@@ -50,7 +55,7 @@ public class Player implements InputProcessor{
         }
         batch.draw(texturesRegions[count][direction], rectangle.x, rectangle.y);
         accu += Gdx.graphics.getDeltaTime();
-        if ((heading.x != 0 || heading.y != 0)){
+        if (currentHeading == heading){
             if (accu >= 0.25){
                 ++count;
                 count %= 4;
@@ -98,16 +103,16 @@ public class Player implements InputProcessor{
             return false;
         }
         if (keycode == Keys.A){
-            heading.x -= 1;
+            heading.x -= (heading.x >= 0) ? 1 : 0;
         }
         else if (keycode == Keys.S){
-            heading.y -= 1;
+            heading.y -= (heading.y >= 0) ? 1 : 0;
         }
         else if (keycode == Keys.D){
-            heading.x += 1;
+            heading.x += (heading.x <= 0) ? 1 : 0;
         }
         else if (keycode == Keys.W){
-            heading.y += 1;
+            heading.y += (heading.y <= 0) ? 1 : 0;
         }
         lastHeading.set(this.heading);
         return true;
@@ -119,18 +124,23 @@ public class Player implements InputProcessor{
             return false;
         }
         if (keycode == Keys.A){
-            heading.x += 1;
+            heading.x += (heading.x < 0) ? 1 : 0;
         }
         else if (keycode == Keys.S){
-            heading.y += 1;
+            heading.y += (heading.y < 0) ? 1 : 0;
         }
         else if (keycode == Keys.D){
-            heading.x -= 1;
+            heading.x -= (heading.x > 0) ? 1 : 0;
         }
         else if (keycode == Keys.W){
-            heading.y -= 1;
+            heading.y -= (heading.y > 0) ? 1 : 0;
         }
         return true;
+    }
+
+    public void freeze(){
+        this.heading.x = 0;
+        this.heading.y = 0;
     }
     @Override
     public boolean keyTyped(char character) { return false; }
