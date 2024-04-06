@@ -79,6 +79,7 @@ public class World {
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             System.out.println(rObject.getProperties().get("portal"));
             if (rObject.getProperties().get("portal") != null){
+                this.tiledMap.dispose();
                 this.tiledMap = new TmxMapLoader().load((String)rObject.getProperties().get("next"));
                 this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get("物件層 1").getObjects().getByType(RectangleMapObject.class)) {
