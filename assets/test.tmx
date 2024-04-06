@@ -268,7 +268,7 @@
   <object id="9" type="Rectangle" x="847.837" y="480.095" width="16" height="16"/>
   <object id="10" x="392.572" y="501.016" width="14.8788" height="11.4452">
    <properties>
-    <property name="description" value="A tree"/>
+    <property name="description" value="A tree//just a tree"/>
    </properties>
   </object>
   <object id="11" x="-0.110805" y="-10.5271" width="206.363" height="14.9938"/>
