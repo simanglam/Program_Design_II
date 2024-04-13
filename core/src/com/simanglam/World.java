@@ -119,8 +119,8 @@ public class World {
     public void render(SpriteBatch batch){
         this.viewport.apply();
         setView(camera);
-        int[] backgroundLayers = { 0, 1 }; // don't allocate every frame!
-        int[] foregroundLayers = { 2 };    // don't allocate every frame!
+        int[] backgroundLayers = { 0, 1, 2, 3}; // don't allocate every frame!
+        int[] foregroundLayers = { 4 };    // don't allocate every frame!
         this.renderer.render(backgroundLayers);
         batch.begin();
         player.draw(batch);
