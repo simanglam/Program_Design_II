@@ -36,10 +36,10 @@ public class World {
         this.renderer.setView(camera);
     }
 
-    public void update(){
-        player.updateX();
+    public void update(float deltaT){
+        player.updateX(deltaT);
         playerCollideUpdate(true);
-        player.updateY();
+        player.updateY(deltaT);
         playerCollideUpdate(false);
         float[] tempView = {0, 0, 0};
         tempView[0] = Math.max(Math.min(player.getPosition().x, ((int)tiledMap.getProperties().get("width") * (int)tiledMap.getProperties().get("tilewidth")) - (this.viewport.getWorldWidth() / 2)), 0 + (this.viewport.getWorldWidth() / 2));
@@ -79,6 +79,7 @@ public class World {
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             System.out.println(rObject.getProperties().get("portal"));
             if (rObject.getProperties().get("portal") != null){
+                this.tiledMap.dispose();
                 this.tiledMap = new TmxMapLoader().load((String)rObject.getProperties().get("next"));
                 this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get("物件層 1").getObjects().getByType(RectangleMapObject.class)) {
@@ -118,8 +119,8 @@ public class World {
     public void render(SpriteBatch batch){
         this.viewport.apply();
         setView(camera);
-        int[] backgroundLayers = { 0, 1 }; // don't allocate every frame!
-        int[] foregroundLayers = { 2 };    // don't allocate every frame!
+        int[] backgroundLayers = { 0, 1, 2, 3}; // don't allocate every frame!
+        int[] foregroundLayers = { 4 };    // don't allocate every frame!
         this.renderer.render(backgroundLayers);
         batch.begin();
         player.draw(batch);

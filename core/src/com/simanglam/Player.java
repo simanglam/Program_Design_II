@@ -81,21 +81,17 @@ public class Player implements InputProcessor{
         return new Rectangle((float)Math.floor(this.rectangle.x / 16) * 16 + lastHeading.x * 16, (float)Math.floor(this.rectangle.y / 16) * 16 + lastHeading.y * 16, 16, 16);
     }
 
-    public void updateX(){
-        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED);
+    public void updateX(float deltaT){
+        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED * 60 * deltaT);
         this.translate(mVector2.x, 0);
     }
 
-    public void updateY(){
-        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED);
+    public void updateY(float deltaT){
+        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED * 60 * deltaT);
         this.translate(0, mVector2.y);
     }
 
     public Rectangle getRectangle(){ return rectangle;}
-
-    public void collide(Rectangle rectangle){
-
-    }
 
     @Override
     public boolean keyDown(int keycode) {
