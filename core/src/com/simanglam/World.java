@@ -75,7 +75,6 @@ public class World {
         Rectangle playerRectangle = player.getRectangle();
         MapObjects rectangleMapObjects = getCollideObjects(playerRectangle);
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
-            System.out.println(rObject.getProperties().get("portal"));
             if (rObject.getProperties().get("portal") != null){
                 this.tiledMap.dispose();
                 this.tiledMap = new TmxMapLoader().load((String)rObject.getProperties().get("next"));
@@ -92,18 +91,18 @@ public class World {
             Rectangle rectangle = rObject.getRectangle();
             if (x){
                 if (player.isHeadLeft()){
-                    player.setPosition(rectangle.x + rectangle.getWidth(), playerRectangle.y);
+                    player.setPosition(rectangle.x + rectangle.getWidth() + 1, playerRectangle.y);
                 }
                 else if (player.isHeadRight()){
-                    player.setPosition(rectangle.x - playerRectangle.getWidth(), playerRectangle.y);
+                    player.setPosition(rectangle.x - playerRectangle.getWidth() - 1, playerRectangle.y);
                 }
             }
             else{
                 if (player.isHeadDown()){
-                    player.setPosition(playerRectangle.x, rectangle.y + rectangle.getHeight());
+                    player.setPosition(playerRectangle.x, rectangle.y + rectangle.getHeight() + 1);
                 }
                 else if (player.isHeadUP()){
-                    player.setPosition(playerRectangle.x, rectangle.y - playerRectangle.getHeight());
+                    player.setPosition(playerRectangle.x, rectangle.y - playerRectangle.getHeight() - 1);
                 }
             }
         }
