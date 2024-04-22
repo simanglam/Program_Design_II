@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -82,12 +81,12 @@ public class Player implements InputProcessor{
     }
 
     public void updateX(float deltaT){
-        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED * 60 * deltaT);
+        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED * 45 * deltaT);
         this.translate(mVector2.x, 0);
     }
 
     public void updateY(float deltaT){
-        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED * 60 * deltaT);
+        Vector2 mVector2 = heading.cpy().scl(MOVING_SPEED * 45 * deltaT);
         this.translate(0, mVector2.y);
     }
 

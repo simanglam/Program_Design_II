@@ -1,3 +1,4 @@
+
 package com.simanglam.scenes;
 
 import java.util.logging.Level;
@@ -14,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.simanglam.Const;
 import com.simanglam.Dialog;
 import com.simanglam.Main;
