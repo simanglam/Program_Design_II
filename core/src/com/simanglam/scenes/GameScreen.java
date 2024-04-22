@@ -99,7 +99,7 @@ public class GameScreen extends InputAdapter implements Screen{
         }
         else if(keycode == Keys.ESCAPE){
             this.world.player.freeze();
-            game.setScreen(new InfoScreen(this, game));
+            game.setScreen(game.getInfoScreen());
         }
         return false;
     }

@@ -14,14 +14,12 @@ import com.simanglam.Const;
 import com.simanglam.Main;
 
 public class InfoScreen extends InputAdapter implements Screen {
-    GameScreen prev;
     Main game;
     Stage stage;
     InputMultiplexer inputMultiplexer;
 
-    public InfoScreen(final GameScreen prev, final Main game){
+    public InfoScreen(final Main game){
         this.game = game;
-        this.prev = prev;
         this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         this.inputMultiplexer = new InputMultiplexer(this, stage);
         Gdx.input.setInputProcessor(this.inputMultiplexer);
@@ -71,10 +69,7 @@ public class InfoScreen extends InputAdapter implements Screen {
 
     @Override
     public boolean keyDown(int keyCode){
-        game.setScreen(prev);
-        prev.handleInput();
-        if (keyCode == Keys.A || keyCode == Keys.S || keyCode == Keys.D || keyCode == Keys.W)
-            prev.keyDown(keyCode);
+        game.setScreen(game.getGameScreen());
         return true;
     }
 
