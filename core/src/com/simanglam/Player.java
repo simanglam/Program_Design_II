@@ -90,7 +90,7 @@ public class Player implements InputProcessor{
         this.translate(0, mVector2.y);
     }
 
-    public Rectangle getRectangle(){ return rectangle;}
+    public Rectangle getRectangle(){return rectangle;}
 
     @Override
     public boolean keyDown(int keycode) {
