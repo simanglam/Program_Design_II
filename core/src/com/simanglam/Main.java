@@ -1,18 +1,26 @@
 package com.simanglam;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.simanglam.scenes.GameScreen;
+import com.simanglam.scenes.InfoScreen;
 
 public class Main extends Game {
 	private SpriteBatch batch;
+	private Screen gameScreen;
+	private Screen infoScreen;
 
 	public SpriteBatch getSpriteBatch(){return this.batch;}
-	
+	public Screen getGameScreen(){return gameScreen;}
+	public Screen getInfoScreen(){return infoScreen;}
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		this.setScreen(new GameScreen(this));
+		infoScreen = new InfoScreen(this);
+		gameScreen = new GameScreen(this);
+		this.setScreen(gameScreen);
 	}
 
 	@Override
