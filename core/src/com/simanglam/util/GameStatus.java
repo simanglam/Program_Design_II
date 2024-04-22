@@ -1,6 +1,8 @@
-package com.simanglam;
+package com.simanglam.util;
 
 import java.util.ArrayList;
+
+import com.simanglam.fighting.Pokemon;
 
 public class GameStatus {
     static GameStatus gameStatus;

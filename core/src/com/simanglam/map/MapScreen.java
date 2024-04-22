@@ -1,5 +1,5 @@
 
-package com.simanglam.scenes;
+package com.simanglam.map;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.math.Rectangle;
-import com.simanglam.Const;
-import com.simanglam.Dialog;
 import com.simanglam.Main;
-import com.simanglam.World;
+import com.simanglam.map.ui.Dialog;
+import com.simanglam.util.Const;
 
-public class GameScreen extends InputAdapter implements Screen{
+public class MapScreen extends InputAdapter implements Screen{
     Main game;
     Stage stage;
     World world;
@@ -28,7 +27,7 @@ public class GameScreen extends InputAdapter implements Screen{
     Logger logger;
     Dialog dialog;
 
-    public GameScreen(final Main game){
+    public MapScreen(final Main game){
         this.game = game;
         this.world = new World();
         this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));

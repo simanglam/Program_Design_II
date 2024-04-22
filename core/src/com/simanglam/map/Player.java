@@ -1,4 +1,4 @@
-package com.simanglam;
+package com.simanglam.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;

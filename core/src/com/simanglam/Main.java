@@ -3,7 +3,7 @@ package com.simanglam;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.simanglam.scenes.GameScreen;
+import com.simanglam.map.MapScreen;
 import com.simanglam.scenes.InfoScreen;
 
 public class Main extends Game {
@@ -19,7 +19,7 @@ public class Main extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		infoScreen = new InfoScreen(this);
-		gameScreen = new GameScreen(this);
+		gameScreen = new MapScreen(this);
 		this.setScreen(gameScreen);
 	}
 
