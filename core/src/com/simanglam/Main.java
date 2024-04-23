@@ -3,8 +3,9 @@ package com.simanglam;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.simanglam.fighting.bosswar.BossWarScreen;
 import com.simanglam.map.MapScreen;
-import com.simanglam.scenes.InfoScreen;
+import com.simanglam.util.InfoScreen;
 
 public class Main extends Game {
 	private SpriteBatch batch;
@@ -20,7 +21,7 @@ public class Main extends Game {
 		batch = new SpriteBatch();
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
-		this.setScreen(gameScreen);
+		this.setScreen(new BossWarScreen(this));
 	}
 
 	@Override

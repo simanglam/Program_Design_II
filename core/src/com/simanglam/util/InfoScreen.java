@@ -1,4 +1,4 @@
-package com.simanglam.scenes;
+package com.simanglam.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.simanglam.Main;
-import com.simanglam.util.Const;
 
 public class InfoScreen extends InputAdapter implements Screen {
     Main game;
