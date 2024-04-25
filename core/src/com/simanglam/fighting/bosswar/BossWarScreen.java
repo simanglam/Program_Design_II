@@ -1,7 +1,10 @@
 package com.simanglam.fighting.bosswar;
 
 import com.simanglam.Main;
+import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class BossWarScreen implements Screen {
+public class BossWarScreen extends AbstractScreen {
     Main game;
     BossWarWorld world;
     Stage Stage;
@@ -22,6 +25,10 @@ public class BossWarScreen implements Screen {
         this.camera = new OrthographicCamera();
     }
 
+    public void handleInput(){
+        Gdx.input.setInputProcessor(world);
+    }
+
     public void render(float delta){
         ScreenUtils.clear(0, 0, 0, 0);
         this.world.update(delta, game.getSpriteBatch());
@@ -29,6 +36,7 @@ public class BossWarScreen implements Screen {
 
     public void resize(int x, int y){
         this.Stage.getViewport().update(x, y);
+        world.resize(x, y);
     }
 
     public void pause(){};
