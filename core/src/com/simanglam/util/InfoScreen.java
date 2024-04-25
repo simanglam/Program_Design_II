@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.simanglam.Main;
 
-public class InfoScreen extends InputAdapter implements Screen {
+public class InfoScreen extends AbstractScreen {
     Main game;
     Stage stage;
     InputMultiplexer inputMultiplexer;
@@ -29,6 +29,11 @@ public class InfoScreen extends InputAdapter implements Screen {
         this.stage.addActor(window);
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage.getViewport().apply(true);
+    }
+
+    @Override
+    public void handleInput(){
+        
     }
 
     @Override

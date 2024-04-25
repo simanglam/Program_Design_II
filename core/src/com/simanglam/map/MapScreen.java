@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
 import com.simanglam.util.Const;
+import com.simanglam.util.AbstractScreen;
 
 public class MapScreen extends InputAdapter implements Screen{
     Main game;
