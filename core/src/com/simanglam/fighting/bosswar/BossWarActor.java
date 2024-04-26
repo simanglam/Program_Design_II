@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.simanglam.util.Const;
 
-public class BossWarActor{
+public class BossWarActor implements Cloneable{
     TextureRegion textures[][];
     int healtPoint, current, forward, movingSpeed, direction, attackCoolDown, ATK;
     float accu, attackAccu;
@@ -92,5 +92,9 @@ public class BossWarActor{
 
     public void setPosition(float x, float y){
         position.setPosition(x, y);
+    }
+
+    public BossWarActor clone(){
+        return new BossWarActor(textures, direction > 0);
     }
 }
