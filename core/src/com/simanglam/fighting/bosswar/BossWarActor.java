@@ -2,99 +2,139 @@ package com.simanglam.fighting.bosswar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureArray;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Json;
 import com.simanglam.util.Const;
 
-public class BossWarActor implements Cloneable{
-    TextureRegion textures[][];
-    int healtPoint, current, forward, movingSpeed, direction, attackCoolDown, ATK;
-    float accu, attackAccu;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class BossWarActor {
+    Texture textures[][];
+    int healtPoint, current, forward, movingSpeed, direction, attackCoolDown, ATK, animateLenth;
+    float animateAccu, attackAccu, animateCooldown;
     boolean attackable;
     Rectangle position;
     Rectangle attackableRange;
-    Rectangle VisionRange;
+    Rectangle visionRange;
 
-    public BossWarActor(String path, boolean enemy){
-        init(enemy);
-        textures = new TextureRegion[3][2];
-        int xoffset = 5, yoffset = 12;
-        Texture t = new Texture(Gdx.files.internal(path));
-        for (int y = 0; y < 2; y++){
-            for (int x = 0; x < 3; x++){
-                textures[x][y] = new TextureRegion(t, 5 + ((14 + 10) * x), yoffset + ((14 + 10) * y), 14, 14);
+    public BossWarActor(String path, boolean enemy) {
+        Json json = new Json();
+        String data = "";
+
+        try {
+            Scanner s = new Scanner(new File(path + "/info.json"));
+            while (s.hasNextLine()) {
+                data = data.concat(s.nextLine());
             }
-            yoffset += (enemy) ? 24 : 0;
         }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        CharacterInfo info = json.fromJson(CharacterInfo.class, data);
+
+        textures = new Texture[3][info.image];
+        String imagePrefix[] = {"idle", "team", "enemy"};
+        for (int x = 0; x < imagePrefix.length; x++) {
+            for (int y = 0; y < info.image; y++) {
+                textures[x][y] = new Texture(path + "/image/" + imagePrefix[x] + "-" + y + ".png");
+            }
+        }
+
         attackable = false;
-    }
-
-    public BossWarActor(TextureRegion[][] textureRegions, boolean enemy){
-        init(enemy);
-        this.textures = textureRegions;
-
-    }
-
-    private void init(boolean enemy){
-        healtPoint = 10;
+        healtPoint = info.healthPoint;
         current = forward = 0;
+        animateAccu = 0;
+        animateCooldown = info.animateCooldown;
+        animateLenth = info.image;
         attackAccu = 0;
-        attackCoolDown = 2;
+        attackCoolDown = info.attackCooldown;
         direction = (enemy) ? 1 : -1;
-        movingSpeed = 2;
-        ATK = 10;
-        position = new Rectangle(Const.maxViewportWidth, 60, 14, 14);
+        movingSpeed = info.speed;
+        ATK = info.ATK;
+
+        position = new Rectangle(Const.maxViewportWidth, 60, info.size, info.size);
+        if(enemy) position.x = 0;
         attackableRange = new Rectangle(position);
-        attackableRange.width = 100;
+        attackableRange.width = info.range;
+        visionRange = new Rectangle(position);
+        visionRange.width = info.vision;
     }
 
-    public void update(float delta, boolean enemyInSight){
+    public BossWarActor(BossWarActor bossWarActor) {
+        textures = bossWarActor.textures;
+        this.forward = bossWarActor.forward;
+        this.current = bossWarActor.current;
+        this.attackable = bossWarActor.attackable;
+        healtPoint = bossWarActor.healtPoint;
+        animateAccu = 0;
+        animateCooldown = bossWarActor.animateCooldown;
+        animateLenth = bossWarActor.animateLenth;
+        attackAccu = 0;
+        attackCoolDown = bossWarActor.attackCoolDown;
+        direction = bossWarActor.direction;
+        movingSpeed = bossWarActor.movingSpeed;
+        ATK = bossWarActor.ATK;
+
+        position = new Rectangle(bossWarActor.position);
+        attackableRange = new Rectangle(bossWarActor.attackableRange);
+        visionRange = new Rectangle(bossWarActor.visionRange);
+    }
+
+    public void update(float delta, boolean enemyInSight) {
         forward = 0;
-        accu += delta;
+        animateAccu += delta;
         attackAccu += delta;
-        if (accu >= 0.25){
-            accu -= 0.25;
-            current = (current + 1) % 3;
+        if (animateAccu >= animateCooldown) {
+            animateAccu -= animateCooldown;
+            current = (current + 1) % animateLenth;
         }
-        if (!enemyInSight){
+        if (!enemyInSight) {
             position.x += movingSpeed * 20 * delta * direction;
-            forward = 1;
+            forward = (direction < 0) ? 1 : 2;
             attackable = false;
-        }
-        else{
+        } else {
             attackable = attackCoolDown <= attackAccu;
         }
+        visionRange.x = (direction == 1) ? position.x : position.x - visionRange.width;
     }
 
-    public void draw(SpriteBatch batch){
-        batch.draw(textures[current][forward], position.x, position.y);
+    public void draw(SpriteBatch batch) {
+        batch.draw(textures[forward][current], position.x, position.y);
     }
 
-    public boolean readyToAttack(){
+    public boolean readyToAttack() {
         return attackable;
     }
 
-    public AttackInfo generateAttackInfo(){
+    public Rectangle getVisionRange() {
+        return visionRange;
+    }
+
+    public AttackInfo generateAttackInfo() {
         attackAccu = 0;
         attackableRange.x = (direction > 0) ? position.x : position.x - attackableRange.width;
         attackableRange.y = position.y;
         return new AttackInfo((direction < 0) ? "player" : "enemy", attackableRange, ATK);
     }
 
-    public void beingAttack(AttackInfo attackInfo){
-        if (Intersector.overlaps(position, attackInfo.demageRectangle)){
+    public void beingAttack(AttackInfo attackInfo) {
+        if (Intersector.overlaps(position, attackInfo.demageRectangle)) {
             this.healtPoint -= attackInfo.damege;
-            System.out.println("Hello");
+            System.out.printf("%d %d %d\n", direction, healtPoint, attackInfo.damege);
         }
     }
 
-    public void setPosition(float x, float y){
+    public void setPosition(float x, float y) {
         position.setPosition(x, y);
     }
+}
 
-    public BossWarActor clone(){
-        return new BossWarActor(textures, direction > 0);
-    }
+class CharacterInfo{
+    public int ATK, healthPoint, attackCooldown, speed, range, vision, image, size, animateCooldown;
 }

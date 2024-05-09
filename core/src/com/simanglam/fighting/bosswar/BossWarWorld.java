@@ -23,6 +23,7 @@ public class BossWarWorld extends InputAdapter {
     Viewport viewport;
     OrthographicCamera camera;
     Vector3 lastTouchDown;
+
     public BossWarWorld(){
         pokemonArray = new ArrayList<BossWarActor>();
         enemyArray = new ArrayList<BossWarActor>();
@@ -32,11 +33,11 @@ public class BossWarWorld extends InputAdapter {
         this.viewport = new FitViewport(Const.maxViewportWidth / 2, Const.maxViewportHeight / 2, camera);
         this.viewport.getCamera().position.set(Const.maxViewportWidth / 4, Const.maxViewportHeight / 4, 0);
         this.viewport.apply();
-        this.enemyTower = new BossWarActor("Cute RPG World/Enemies/Enemy_01_01.png", true);
-        enemyTower.setPosition(0, 0);
-        this.playserTower = new BossWarActor("Cute RPG World/Enemies/Enemy_01_01.png", false);
-        pokemonArray.add(new BossWarActor("Cute RPG World/Enemies/Enemy_01_01.png", false));
-        enemyArray.add(new BossWarActor("Cute RPG World/Enemies/Enemy_01_01.png", true));
+        this.enemyTower = new BossWarActor("enemies/base/", true);
+        enemyTower.setPosition(0, 60);
+        this.playserTower = new BossWarActor("enemies/base/", false);
+        pokemonArray.add(new BossWarActor("enemies/base/", false));
+        enemyArray.add(new BossWarActor("enemies/base/", true));
         enemyArray.get(0).setPosition(0, 60);
         map = new Texture("bosswar.png");
         lastTouchDown = new Vector3(0, 0, 0);
@@ -97,14 +98,16 @@ public class BossWarWorld extends InputAdapter {
         batch.setProjectionMatrix(this.viewport.getCamera().combined);
         batch.begin();
         batch.draw(map, 0, 0);
+        enemyTower.draw(batch);
+        playserTower.draw(batch);
         for (BossWarActor actor: pokemonArray){
-            actor.update(delta, detectEnemy(false, actor.position));
+            actor.update(delta, detectEnemy(false, actor.getVisionRange()));
             actor.draw(batch);
             if(actor.readyToAttack())
                 pendingAttack.add(actor.generateAttackInfo());
         }
         for (BossWarActor actor: enemyArray){
-            actor.update(delta, detectEnemy(true, actor.position));
+            actor.update(delta, detectEnemy(true, actor.getVisionRange()));
             actor.draw(batch);
             if(actor.readyToAttack())
                 pendingAttack.add(actor.generateAttackInfo());
@@ -127,7 +130,7 @@ public class BossWarWorld extends InputAdapter {
             try {
                 BossWarActor actor = enemyArray.get(i);
                 if (actor.healtPoint <= 0)
-                    pokemonArray.remove(actor);
+                    enemyArray.remove(actor);
             } catch (Exception e) {
                 System.err.println(e);
             }
