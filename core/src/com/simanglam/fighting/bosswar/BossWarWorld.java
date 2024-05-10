@@ -2,6 +2,7 @@ package com.simanglam.fighting.bosswar;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,8 @@ public class BossWarWorld extends InputAdapter {
     Viewport viewport;
     OrthographicCamera camera;
     Vector3 lastTouchDown;
+    BossWarActor enemyProto;
+    BossWarActor playerProto;
 
     public BossWarWorld(){
         pokemonArray = new ArrayList<BossWarActor>();
@@ -33,12 +36,13 @@ public class BossWarWorld extends InputAdapter {
         this.viewport = new FitViewport(Const.maxViewportWidth / 2, Const.maxViewportHeight / 2, camera);
         this.viewport.getCamera().position.set(Const.maxViewportWidth / 4, Const.maxViewportHeight / 4, 0);
         this.viewport.apply();
-        this.enemyTower = new BossWarActor("enemies/base/", true);
-        enemyTower.setPosition(0, 60);
-        this.playserTower = new BossWarActor("enemies/base/", false);
-        pokemonArray.add(new BossWarActor("enemies/base/", false));
-        enemyArray.add(new BossWarActor("enemies/base/", true));
-        enemyArray.get(0).setPosition(0, 60);
+        enemyProto = new BossWarActor("enemies/base/", true);
+        playerProto = new BossWarActor("enemies/base/", false);
+        this.enemyTower = new BossWarActor(enemyProto);
+        enemyTower.setPosition(0, 120);
+        this.playserTower = new BossWarActor(playerProto);
+        pokemonArray.add(new BossWarActor(playerProto));
+        enemyArray.add(new BossWarActor(enemyProto));
         map = new Texture("bosswar.png");
         lastTouchDown = new Vector3(0, 0, 0);
     }
@@ -51,8 +55,10 @@ public class BossWarWorld extends InputAdapter {
     }
 
     public boolean keyDown(int keycode){
-        pokemonArray.get(0).setPosition(Const.maxViewportWidth / 2, pokemonArray.get(0).position.y);
-
+        if (keycode == Input.Keys.A)
+            pokemonArray.add(new BossWarActor(playerProto));
+        if (keycode == Input.Keys.D)
+            enemyArray.add(new BossWarActor(enemyProto));
         return true;
     }
 

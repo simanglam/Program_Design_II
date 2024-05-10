@@ -28,7 +28,7 @@ public class BossWarActor {
         String data = "";
 
         try {
-            Scanner s = new Scanner(new File(path + "/info.json"));
+            Scanner s = new Scanner(new File(path + "/bosswar-info.json"));
             while (s.hasNextLine()) {
                 data = data.concat(s.nextLine());
             }
@@ -58,7 +58,7 @@ public class BossWarActor {
         movingSpeed = info.speed;
         ATK = info.ATK;
 
-        position = new Rectangle(Const.maxViewportWidth, 60, info.size, info.size);
+        position = new Rectangle(Const.maxViewportWidth, 120, info.size, info.size);
         if(enemy) position.x = 0;
         attackableRange = new Rectangle(position);
         attackableRange.width = info.range;
