@@ -1,4 +1,4 @@
-package com.simanglam;
+package com.simanglam.util;
 
 public class Const {
     public static final int maxViewportWidth = 480;

@@ -1,4 +1,4 @@
-package com.simanglam;
+package com.simanglam.map.ui;
 
 import java.util.ArrayList;
 

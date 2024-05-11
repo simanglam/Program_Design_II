@@ -1,30 +1,24 @@
-package com.simanglam.scenes;
+package com.simanglam.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.simanglam.Const;
 import com.simanglam.Main;
 
-public class InfoScreen extends InputAdapter implements Screen {
-    GameScreen prev;
+public class InfoScreen extends AbstractScreen {
     Main game;
     Stage stage;
     InputMultiplexer inputMultiplexer;
 
-    public InfoScreen(final GameScreen prev, final Main game){
+    public InfoScreen(final Main game){
         this.game = game;
-        this.prev = prev;
         this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         this.inputMultiplexer = new InputMultiplexer(this, stage);
         Gdx.input.setInputProcessor(this.inputMultiplexer);
@@ -35,6 +29,11 @@ public class InfoScreen extends InputAdapter implements Screen {
         this.stage.addActor(window);
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage.getViewport().apply(true);
+    }
+
+    @Override
+    public void handleInput(){
+        
     }
 
     @Override
@@ -74,10 +73,7 @@ public class InfoScreen extends InputAdapter implements Screen {
 
     @Override
     public boolean keyDown(int keyCode){
-        game.setScreen(prev);
-        prev.handleInput();
-        if (keyCode == Keys.A || keyCode == Keys.S || keyCode == Keys.D || keyCode == Keys.W)
-            prev.keyDown(keyCode);
+        game.setScreen(game.getGameScreen());
         return true;
     }
 
