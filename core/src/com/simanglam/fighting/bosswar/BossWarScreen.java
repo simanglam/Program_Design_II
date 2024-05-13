@@ -1,22 +1,19 @@
 package com.simanglam.fighting.bosswar;
 
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.simanglam.Main;
-import com.simanglam.util.AbstractScreen;
-import com.simanglam.util.Const;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.simanglam.Main;
+import com.simanglam.util.AbstractScreen;
+import com.simanglam.util.Const;
 
 public class BossWarScreen extends AbstractScreen {
     Main game;
@@ -52,7 +49,7 @@ public class BossWarScreen extends AbstractScreen {
         this.stage.act(delta);
         this.stage.getViewport().apply();
         this.stage.draw();
-    };
+    }
 
     public void resize(int x, int y){
         this.stage.getViewport().update(x, y);
