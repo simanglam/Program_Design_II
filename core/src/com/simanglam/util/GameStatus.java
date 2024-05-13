@@ -5,22 +5,34 @@ import java.util.ArrayList;
 import com.simanglam.fighting.Pokemon;
 
 public class GameStatus {
-    static GameStatus gameStatus;
+    private static GameStatus gameStatus;
     private ArrayList<InventoryItem> playerInventory;
-    private ArrayList<Pokemon> pokemons;
 
-
-    private GameStatus(){
+    private GameStatus() {
         playerInventory = new ArrayList<InventoryItem>();
     }
 
-    public static GameStatus getGameStatus(){
-        if (gameStatus == null)
+    public static GameStatus getInstance() {
+        if (gameStatus == null) {
             gameStatus = new GameStatus();
+        }
         return gameStatus;
     }
 
-    public static void clearGameStatus(){
-        GameStatus.gameStatus = null;
+    public void clearGameStatus() {
+        playerInventory.clear();
+        gameStatus = null;
+    }
+
+    // Add more methods as needed
+
+    // Example method to add an item to the player's inventory
+    public void addItemToInventory(InventoryItem item) {
+        playerInventory.add(item);
+    }
+
+    // Example method to get the player's inventory
+    public ArrayList<InventoryItem> getPlayerInventory() {
+        return playerInventory;
     }
 }
