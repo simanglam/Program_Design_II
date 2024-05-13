@@ -39,7 +39,8 @@ public class MainPage extends AbstractScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Start button clicked!");
+                System.out.println("start the game");
+                game.setScreen(game.getGameScreen());
             }
         });
 
