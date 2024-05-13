@@ -7,17 +7,20 @@ import com.simanglam.fighting.bosswar.BossWarScreen;
 import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.InfoScreen;
+import com.simanglam.fighting.PokemonScreen;
 
 public class Main extends Game {
 	private SpriteBatch batch;
 	private Screen gameScreen;
 	private Screen infoScreen;
 	private Screen bossWarScreen;
+	private Screen pokemonScreen;
 
 	public SpriteBatch getSpriteBatch(){return this.batch;}
 	public Screen getGameScreen(){return gameScreen;}
 	public Screen getInfoScreen(){return infoScreen;}
 	public Screen getBossWarScreen(){return bossWarScreen;}
+	public Screen getPokemonScreen(){return pokemonScreen;}
 
 	@Override
 	public void create () {
@@ -25,7 +28,8 @@ public class Main extends Game {
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
 		bossWarScreen = new BossWarScreen(this);
-		this.setScreen(getBossWarScreen());
+		pokemonScreen = new PokemonScreen(this);
+		this.setScreen(getPokemonScreen());
 	}
 
 	@Override
