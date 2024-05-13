@@ -3,24 +3,23 @@ package com.simanglam.map;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.math.Rectangle;
 import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
-import com.simanglam.util.Const;
 import com.simanglam.util.AbstractScreen;
+import com.simanglam.util.Const;
 
-public class MapScreen extends InputAdapter implements Screen{
+public class MapScreen extends AbstractScreen{
     Main game;
     Stage stage;
     World world;
@@ -43,11 +42,13 @@ public class MapScreen extends InputAdapter implements Screen{
         this.handleInput();
     }
 
+    @Override
     public void handleInput(){
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(this.inputMultiplexer);
     }
 
+    @Override
     public void render(float deltaT){
         ScreenUtils.clear(0, 0, 0, 0);
         SpriteBatch batch = game.getSpriteBatch();
@@ -60,30 +61,11 @@ public class MapScreen extends InputAdapter implements Screen{
         this.stage.draw();
     }
 
-    public void show(){
-        
-    }
-
-    public void hide(){
-        
-    }
-
-    public void pause(){
-        
-    }
-
-    public void resume(){
-        
-    }
-
+    @Override
     public void resize(int x, int y){
         this.world.resize(x, y);
         stage.getViewport().update(x, y);
         this.dialog.setSize(stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight() / 5);
-    }
-
-    public void dispose(){
-
     }
 
     @Override
@@ -92,7 +74,7 @@ public class MapScreen extends InputAdapter implements Screen{
             Rectangle iRectangle = this.world.player.creatInvestgateRectangle();
             RectangleMapObject collMapObject = world.getCollideObject(iRectangle);
             if (collMapObject != null && collMapObject.getProperties().get("description") != null){
-                dialog.setDescription((String)collMapObject.getProperties().get("description"));
+                dialog.setDescription(((String)collMapObject.getProperties().get("description")).concat("你好"));
                 stage.addActor(dialog);
             }
             return true;
