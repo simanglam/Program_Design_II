@@ -33,7 +33,7 @@ public class Main extends Game {
 		bossWarScreen = new BossWarScreen(this);
 		pokemonScreen = new PokemonScreen(this);
         mainPage = new MainPage(this);
-		this.setScreen(mainPage);
+		this.setScreen(pokemonScreen);
 	}
 
     @Override
