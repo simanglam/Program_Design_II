@@ -21,6 +21,14 @@ public class PokemonScreen extends AbstractScreen {
     private Texture pokemon;
     private Stage stage;
     private BitmapFont font;
+    private Skin skin;
+
+    private enum ButtonType {
+        MAIN,
+        SKILL,
+        POKEMON,
+        BACKPACK
+    }
 
     public PokemonScreen(final Main game) {
         batch = new SpriteBatch();
@@ -28,61 +36,114 @@ public class PokemonScreen extends AbstractScreen {
         pokemon = new Texture("enemies/base/image/idle-0.png");
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         font = new BitmapFont();
-        Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-        TextButton backpackButton = new TextButton("Backpack", skin);
-        TextButton skillButton = new TextButton("Skill", skin);
-        TextButton pokemonButton = new TextButton("Pokemon", skin);
-        TextButton escapeButton = new TextButton("Escape", skin);
+        initializeButtons(game, ButtonType.MAIN);
+        handleInput();
+    }
 
+    private void initializeButtons(final Main game, ButtonType type) {
+        stage.clear();
+
+        String[] buttonLabels;
+        ClickListener[] buttonListeners;
+
+        switch (type) {
+            case MAIN:
+                buttonLabels = new String[]{"Backpack", "Skill", "Pokemon", "Escape"};
+                buttonListeners = new ClickListener[]{
+                        new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                initializeButtons(game, ButtonType.BACKPACK);
+                            }
+                        },
+                        new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                initializeButtons(game, ButtonType.SKILL);
+                            }
+                        },
+                        new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                initializeButtons(game, ButtonType.POKEMON);
+                            }
+                        },
+                        new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                game.setScreen(game.getGameScreen());
+                            }
+                        }
+                };
+                break;
+            case SKILL:
+                buttonLabels = new String[]{"Skill 1", "Skill 2", "Skill 3", "Skill 4", "Back"};
+                buttonListeners = createButtonListeners(game, "Skill");
+                break;
+            case POKEMON:
+                buttonLabels = new String[]{"Pokemon 1", "Pokemon 2", "Pokemon 3", "Pokemon 4", "Back"};
+                buttonListeners = createButtonListeners(game, "GO Pokemon");
+                break;
+            case BACKPACK:
+                buttonLabels = new String[]{"Tool 1", "Tool 2", "Tool 3", "Tool 4", "Back"};
+                buttonListeners = createButtonListeners(game, "Tool");
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+
+        addButtonsToStage(buttonLabels, buttonListeners);
+    }
+
+    private ClickListener[] createButtonListeners(final Main game, String messagePrefix) {
+        return new ClickListener[]{
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        System.out.println(messagePrefix + " 1 button clicked!");
+                    }
+                },
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        System.out.println(messagePrefix + " 2 button clicked!");
+                    }
+                },
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        System.out.println(messagePrefix + " 3 button clicked!");
+                    }
+                },
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        System.out.println(messagePrefix + " 4 button clicked!");
+                    }
+                },
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        initializeButtons(game, ButtonType.MAIN);
+                    }
+                }
+        };
+    }
+
+    private void addButtonsToStage(String[] labels, ClickListener[] listeners) {
         float buttonWidth = 200f;
         float buttonHeight = 60f;
-
         float buttonX = 10f;
         float buttonY = Gdx.graphics.getHeight() - buttonHeight - 10f;
 
-        backpackButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-        skillButton.setBounds(buttonX + buttonWidth + 10f, buttonY, buttonWidth, buttonHeight);
-        pokemonButton.setBounds(buttonX, buttonY - buttonHeight - 10f, buttonWidth, buttonHeight);
-        escapeButton.setBounds(buttonX + buttonWidth + 10f, buttonY - buttonHeight - 10f, buttonWidth, buttonHeight);
-
-        
-        backpackButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Backpack button clicked!");
-            }
-        });
-
-        skillButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Skill button clicked!");
-            }
-        });
-
-        pokemonButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Pokemon button clicked!");
-            }
-        });
-
-        escapeButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.getGameScreen());
-            }
-        });
-
-        stage.addActor(backpackButton);
-        stage.addActor(skillButton);
-        stage.addActor(pokemonButton);
-        stage.addActor(escapeButton);
-
-        handleInput();
-
-
+        for (int i = 0; i < labels.length; i++) {
+            TextButton button = new TextButton(labels[i], skin);
+            button.setBounds(buttonX + (i % 2) * (buttonWidth + 10f), buttonY - (i / 2) * (buttonHeight + 10f), buttonWidth, buttonHeight);
+            button.addListener(listeners[i]);
+            stage.addActor(button);
+        }
     }
 
     @Override
@@ -115,8 +176,6 @@ public class PokemonScreen extends AbstractScreen {
 
     @Override
     public void handleInput() {
-
-    Gdx.input.setInputProcessor(stage);
-
+        Gdx.input.setInputProcessor(stage);
     }
 }
