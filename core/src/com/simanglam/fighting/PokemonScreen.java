@@ -3,6 +3,7 @@ package com.simanglam.fighting;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,42 +20,36 @@ public class PokemonScreen extends AbstractScreen {
     private Texture map;
     private Texture pokemon;
     private Stage stage;
+    private BitmapFont font;
 
-    public PokemonScreen(Main game) {
+    public PokemonScreen(final Main game) {
         batch = new SpriteBatch();
         map = new Texture("bosswar.png");
         pokemon = new Texture("enemies/base/image/idle-0.png");
-
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
+        font = new BitmapFont();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-    
         TextButton backpackButton = new TextButton("Backpack", skin);
         TextButton skillButton = new TextButton("Skill", skin);
         TextButton pokemonButton = new TextButton("Pokemon", skin);
         TextButton escapeButton = new TextButton("Escape", skin);
 
-     
         float buttonWidth = 200f;
-        float buttonHeight = 50f;
-        backpackButton.setSize(buttonWidth, buttonHeight);
-        skillButton.setSize(buttonWidth, buttonHeight);
-        pokemonButton.setSize(buttonWidth, buttonHeight);
-        escapeButton.setSize(buttonWidth, buttonHeight);
+        float buttonHeight = 60f;
 
+        float buttonX = 10f;
+        float buttonY = Gdx.graphics.getHeight() - buttonHeight - 10f;
 
-        float buttonSpacing = 20f;
-        float buttonX = buttonSpacing;
-        float buttonY = Gdx.graphics.getHeight() - buttonHeight - buttonSpacing;
-        backpackButton.setPosition(buttonX, buttonY);
-        skillButton.setPosition(buttonX, buttonY - buttonHeight - buttonSpacing);
-        pokemonButton.setPosition(buttonX, buttonY - 2 * (buttonHeight + buttonSpacing));
-        escapeButton.setPosition(buttonX, buttonY - 3 * (buttonHeight + buttonSpacing));
+        backpackButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+        skillButton.setBounds(buttonX + buttonWidth + 10f, buttonY, buttonWidth, buttonHeight);
+        pokemonButton.setBounds(buttonX, buttonY - buttonHeight - 10f, buttonWidth, buttonHeight);
+        escapeButton.setBounds(buttonX + buttonWidth + 10f, buttonY - buttonHeight - 10f, buttonWidth, buttonHeight);
 
+        
         backpackButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 System.out.println("Backpack button clicked!");
             }
         });
@@ -76,18 +71,18 @@ public class PokemonScreen extends AbstractScreen {
         escapeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
-                System.out.println("Escape button clicked!");
+                game.setScreen(game.getGameScreen());
             }
         });
 
- 
         stage.addActor(backpackButton);
         stage.addActor(skillButton);
         stage.addActor(pokemonButton);
         stage.addActor(escapeButton);
 
-        Gdx.input.setInputProcessor(stage);
+        handleInput();
+
+
     }
 
     @Override
@@ -96,7 +91,7 @@ public class PokemonScreen extends AbstractScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(map, 0, 0);
+        batch.draw(map, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(pokemon, 50, 120);
         batch.draw(pokemon, 600, 120);
         batch.end();
@@ -115,10 +110,13 @@ public class PokemonScreen extends AbstractScreen {
         batch.dispose();
         map.dispose();
         stage.dispose();
+        font.dispose();
     }
 
     @Override
     public void handleInput() {
+
+    Gdx.input.setInputProcessor(stage);
 
     }
 }

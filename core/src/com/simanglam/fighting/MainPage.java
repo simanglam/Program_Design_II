@@ -26,7 +26,6 @@ public class MainPage extends AbstractScreen {
         texture = new Texture("main.png"); 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         font = new BitmapFont();
-
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json")); 
 
    
@@ -39,7 +38,7 @@ public class MainPage extends AbstractScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("start the game");
+                //System.out.println("start the game");
                 game.setScreen(game.getGameScreen());
             }
         });
