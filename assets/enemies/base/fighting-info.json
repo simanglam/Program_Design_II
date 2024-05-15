@@ -1,0 +1,96 @@
+{
+    "pokemons": [
+      {
+        "name": "Pikachu",
+        "image": "enemies/base/image/idle-0.png",
+        "health": 150,
+        "skills": [
+          {
+            "name": "Thunder Shock",
+            "power": 40
+          },
+          {
+            "name": "Electro Ball",
+            "power": 60
+          },
+          {
+            "name": "Quick Attack",
+            "power": 40
+          },
+          {
+            "name": "Thunderbolt",
+            "power": 90
+          }
+        ]
+      },
+      {
+        "name": "Charizard",
+        "image": "enemies/base/image/idle-0.png",
+        "health": 260,
+        "skills": [
+          {
+            "name": "Flamethrower",
+            "power": 90
+          },
+          {
+            "name": "Fire Spin",
+            "power": 70
+          },
+          {
+            "name": "Dragon Breath",
+            "power": 60
+          },
+          {
+            "name": "Air Slash",
+            "power": 75
+          }
+        ]
+      },
+      {
+        "name": "Bulbasaur",
+        "image": "enemies/base/image/idle-0.png",
+        "health": 120,
+        "skills": [
+          {
+            "name": "Vine Whip",
+            "power": 45
+          },
+          {
+            "name": "Razor Leaf",
+            "power": 55
+          },
+          {
+            "name": "Seed Bomb",
+            "power": 80
+          },
+          {
+            "name": "Solar Beam",
+            "power": 120
+          }
+        ]
+      },
+      {
+        "name": "Squirtle",
+        "image": "enemies/base/image/idle-0.png",
+        "health": 180,
+        "skills": [
+          {
+            "name": "Water Gun",
+            "power": 40
+          },
+          {
+            "name": "Bubble",
+            "power": 40
+          },
+          {
+            "name": "Water Pulse",
+            "power": 60
+          },
+          {
+            "name": "Hydro Pump",
+            "power": 110
+          }
+        ]
+      }
+    ]
+  }
