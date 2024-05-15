@@ -19,6 +19,7 @@ public class PokemonScreen extends AbstractScreen {
     private SpriteBatch batch;
     private Texture map;
     private Texture pokemon;
+    private Texture enemie;
     private Stage stage;
     private BitmapFont font;
     private Skin skin;
@@ -32,8 +33,9 @@ public class PokemonScreen extends AbstractScreen {
 
     public PokemonScreen(final Main game) {
         batch = new SpriteBatch();
-        map = new Texture("bosswar.png");
-        pokemon = new Texture("enemies/base/image/idle-0.png");
+        map = new Texture("main.png");
+        enemie = new Texture("enemies/base/image/smallfiredragon.png");
+        pokemon = new Texture("enemies/base/image/Jolteon.png");
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         font = new BitmapFont();
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
@@ -79,7 +81,7 @@ public class PokemonScreen extends AbstractScreen {
                 };
                 break;
             case SKILL:
-                buttonLabels = new String[]{"Skill 1", "Skill 2", "Skill 3", "Skill 4", "Back"};
+                buttonLabels = new String[]{"雷電球", "十萬伏特", "電光一閃", "陽光烈焰", "Back"};
                 buttonListeners = createButtonListeners(game, "Skill");
                 break;
             case POKEMON:
@@ -145,18 +147,26 @@ public class PokemonScreen extends AbstractScreen {
             stage.addActor(button);
         }
     }
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+    
         batch.begin();
         batch.draw(map, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(pokemon, 50, 120);
-        batch.draw(pokemon, 600, 120);
-        batch.end();
+        
+        // Draw pokemon image with reduced size
+        float pokemonReducedWidth = pokemon.getWidth() / 4.0f;
+        float pokemonReducedHeight = pokemon.getHeight() / 4.0f;
+        batch.draw(pokemon, 50, 60, pokemonReducedWidth, pokemonReducedHeight);
 
+        // Draw enemy image with reduced size
+        float enemyReducedWidth = enemie.getWidth() / 8.0f;
+        float enemyReducedHeight = enemie.getHeight() / 8.0f;
+        batch.draw(enemie, 400, 60, enemyReducedWidth, enemyReducedHeight);
+
+        batch.end();
+    
         stage.act(delta);
         stage.draw();
     }
