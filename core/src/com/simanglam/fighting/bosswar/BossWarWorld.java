@@ -19,32 +19,34 @@ public class BossWarWorld extends InputAdapter {
     ArrayList<BossWarActor> enemyArray;
     ArrayList<AttackInfo> pendingAttack;
     BossWarActor enemyTower;
-    BossWarActor playserTower;
+    BossWarActor playerTower;
     Texture map;
     Viewport viewport;
     OrthographicCamera camera;
     Vector3 lastTouchDown;
     BossWarActor enemyProto;
     BossWarActor playerProto;
+    int money;
 
     public BossWarWorld(){
-        pokemonArray = new ArrayList<BossWarActor>();
-        enemyArray = new ArrayList<BossWarActor>();
-        pendingAttack = new ArrayList<AttackInfo>();
+        pokemonArray = new ArrayList<>();
+        enemyArray = new ArrayList<>();
+        pendingAttack = new ArrayList<>();
         this.camera = new OrthographicCamera();
         camera.setToOrtho(false);
-        this.viewport = new FitViewport(Const.maxViewportWidth / 2, Const.maxViewportHeight / 2, camera);
-        this.viewport.getCamera().position.set(Const.maxViewportWidth / 4, Const.maxViewportHeight / 4, 0);
+        this.viewport = new FitViewport(Const.maxViewportWidth / 2f, Const.maxViewportHeight / 2f, camera);
+        this.viewport.getCamera().position.set(Const.maxViewportWidth / 4f, Const.maxViewportHeight / 4f, 0);
         this.viewport.apply();
         enemyProto = new BossWarActor("enemies/base/", true);
         playerProto = new BossWarActor("enemies/base/", false);
         this.enemyTower = new BossWarActor(enemyProto);
         enemyTower.setPosition(0, 120);
-        this.playserTower = new BossWarActor(playerProto);
+        this.playerTower = new BossWarActor(playerProto);
         pokemonArray.add(new BossWarActor(playerProto));
         enemyArray.add(new BossWarActor(enemyProto));
         map = new Texture("bosswar.png");
         lastTouchDown = new Vector3(0, 0, 0);
+        this.money = 0;
     }
 
     public void centerCamera(){
@@ -52,6 +54,10 @@ public class BossWarWorld extends InputAdapter {
             camera.position.x = map.getWidth() - this.viewport.getWorldWidth() / 2;
         else if(camera.position.x - this.viewport.getWorldWidth() / 2 <= 0)
             camera.position.x = this.viewport.getWorldWidth() / 2;
+    }
+
+    public int getMoney(){
+        return this.money;
     }
 
     public boolean keyDown(int keycode){
@@ -63,7 +69,7 @@ public class BossWarWorld extends InputAdapter {
     }
 
     public boolean scrolled(float x, float y){
-        if (viewport.getWorldWidth() + 10 * y <= map.getWidth() && viewport.getWorldHeight() + 10 * y <= map.getHeight() && viewport.getWorldWidth() + 10 * y > Const.maxViewportWidth / 2 && viewport.getWorldHeight() + 10 * y > Const.maxViewportHeight / 2){
+        if (viewport.getWorldWidth() + 10 * y <= map.getWidth() && viewport.getWorldHeight() + 10 * y <= map.getHeight() && viewport.getWorldWidth() + 10 * y > Const.maxViewportWidth / 2f&& viewport.getWorldHeight() + 10 * y > Const.maxViewportHeight / 2f){
             viewport.setWorldSize(viewport.getWorldWidth() + 10 * y, viewport.getWorldHeight() + 10 * y);
             viewport.apply();
             if (this.camera.position.y - viewport.getWorldHeight() / 2 != 0)
@@ -91,7 +97,7 @@ public class BossWarWorld extends InputAdapter {
     }
 
     public void resize(int x, int y){
-        this.viewport.setScreenSize(x, y);;
+        this.viewport.setScreenSize(x, y);
         this.viewport.apply();
         centerCamera();
         if (this.camera.position.y - viewport.getWorldHeight() / 2 != 0)
@@ -100,12 +106,14 @@ public class BossWarWorld extends InputAdapter {
     }
 
     public void update(float delta, SpriteBatch batch){
+        this.money += Math.max((int)delta, 1);
+        System.out.println(this.money);
         this.viewport.getCamera().update();
         batch.setProjectionMatrix(this.viewport.getCamera().combined);
         batch.begin();
         batch.draw(map, 0, 0);
         enemyTower.draw(batch);
-        playserTower.draw(batch);
+        playerTower.draw(batch);
         for (BossWarActor actor: pokemonArray){
             actor.update(delta, detectEnemy(false, actor.getVisionRange()));
             actor.draw(batch);
@@ -146,7 +154,7 @@ public class BossWarWorld extends InputAdapter {
     }
 
     public boolean detectEnemy(boolean enemy, Rectangle rectangle){
-        if (Intersector.overlaps((enemy) ? playserTower.position :enemyTower.position, rectangle)){
+        if (Intersector.overlaps((enemy) ? playerTower.position :enemyTower.position, rectangle)){
             return true;
         }
         for (BossWarActor actor : (enemy) ? pokemonArray : enemyArray){

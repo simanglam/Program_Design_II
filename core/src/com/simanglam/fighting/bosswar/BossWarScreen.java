@@ -3,10 +3,7 @@ package com.simanglam.fighting.bosswar;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
@@ -23,12 +20,15 @@ public class BossWarScreen extends AbstractScreen {
     BossWarWorld world;
     Stage stage;
     Camera camera;
+    Label label;
 
     public BossWarScreen(final Main game){
         this.game = game;
         this.world = new BossWarWorld();
         this.stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
         this.camera = new OrthographicCamera();
+        label = new Label("A" ,new Skin(Gdx.files.internal("data/uiskin.json")));
+        label.setPosition(200, 300);
         Button b1 = new Button(new Skin(Gdx.files.internal("data/uiskin.json")));
         ImageButton i1 = new ImageButton(new TextureRegionDrawable(new Texture("enemies/base/image/idle-0.png")));
         ImageButton i2 = new ImageButton(new TextureRegionDrawable(new Texture("enemies/base/image/idle-0.png")));
@@ -39,6 +39,7 @@ public class BossWarScreen extends AbstractScreen {
         b1.setSize(100, 100);
         i1.setSize(100, 100);
         i1.setColor(255, 255, 255, 255);
+        this.stage.addActor(label);
         this.stage.addActor(b1);
     }
 
@@ -50,6 +51,7 @@ public class BossWarScreen extends AbstractScreen {
         ScreenUtils.clear(0, 0, 0, 0);
         this.world.update(delta, game.getSpriteBatch());
         this.stage.act(delta);
+        label.setText(String.valueOf(world.getMoney()));
         this.stage.getViewport().apply();
         this.stage.draw();
     };
