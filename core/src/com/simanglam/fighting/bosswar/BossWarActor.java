@@ -101,7 +101,7 @@ public class BossWarActor {
         } else {
             attackable = attackCoolDown <= attackAccu;
         }
-        visionRange.x = (direction == 1) ? position.x : position.x - visionRange.width;
+        visionRange.x = (direction == 1) ? position.x + position.width : position.x - visionRange.width;
     }
 
     public void draw(SpriteBatch batch) {
@@ -118,7 +118,7 @@ public class BossWarActor {
 
     public AttackInfo generateAttackInfo() {
         attackAccu = 0;
-        attackableRange.x = (direction > 0) ? position.x : position.x - attackableRange.width;
+        attackableRange.x = (direction > 0) ? position.x + position.width : position.x - attackableRange.width;
         attackableRange.y = position.y;
         return new AttackInfo((direction < 0) ? "player" : "enemy", attackableRange, ATK);
     }
