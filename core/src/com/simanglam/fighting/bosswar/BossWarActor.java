@@ -2,17 +2,11 @@ package com.simanglam.fighting.bosswar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureArray;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Json;
 import com.simanglam.util.Const;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class BossWarActor {
     Texture textures[][];
@@ -25,18 +19,7 @@ public class BossWarActor {
 
     public BossWarActor(String path, boolean enemy) {
         Json json = new Json();
-        String data = "";
-
-        try {
-            Scanner s = new Scanner(new File(path + "/bosswar-info.json"));
-            while (s.hasNextLine()) {
-                data = data.concat(s.nextLine());
-            }
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        CharacterInfo info = json.fromJson(CharacterInfo.class, data);
+        CharacterInfo info = json.fromJson(CharacterInfo.class, Gdx.files.internal(path + "/bosswar-info.json"));
 
         textures = new Texture[3][info.image];
         String imagePrefix[] = {"idle", "team", "enemy"};
