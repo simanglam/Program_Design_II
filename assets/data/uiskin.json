@@ -44,9 +44,16 @@
     default-horizontal: { background: default-slider, knob: default-slider-knob },
     default-vertical: { background: default-slider, knob: default-round-large }
   },
+<<<<<<< Updated upstream
   SliderStyle: {
     default-horizontal: { parent: default-horizontal },
     default-vertical: { parent: default-vertical }
+=======
+  
+  "TextButtonStyle": {
+    "default": { "parent": "default", "font": "default-font", "fontColor": "white", "disabledFontColor": "gray" },
+    "toggle": { "parent": "default", "checked": "default-round-down", "downFontColor": "red" }
+>>>>>>> Stashed changes
   },
   LabelStyle: {
     default: { font: default-font, fontColor: white }
