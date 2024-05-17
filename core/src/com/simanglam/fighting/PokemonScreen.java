@@ -14,21 +14,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.badlogic.gdx.utils.Json;
+import com.simanglam.fighting.Pokemon;
+import com.simanglam.fighting.Skill;
 
 import java.util.List;
-
-class Skill {
-    public String name;
-    public int power;
-}
-
-class Pokemon {
-    public String name;
-    public String image;
-    public int health;
-    public List<Skill> skills;
-}
-
 class PokemonList {
     public List<Pokemon> pokemons;
 }
