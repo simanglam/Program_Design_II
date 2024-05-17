@@ -25,7 +25,13 @@ public class Main extends Game {
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
 		bossWarScreen = new BossWarScreen(this);
+<<<<<<< Updated upstream
 		this.setScreen(getBossWarScreen());
+=======
+		pokemonScreen = new PokemonScreen(this);
+        mainPage = new MainPage(this);
+		this.setScreen(mainPage);
+>>>>>>> Stashed changes
 	}
 
 	@Override
