@@ -38,19 +38,20 @@ public class PokemonScreen extends AbstractScreen {
                 return pokemon.skills;
             }
         }
-        return null; // or throw an exception if the pokemon is not found
+        return null;
     }
 
     private SpriteBatch batch;
     private Texture map;
     private Texture currentPokemonTexture;
-    private Texture enemie;
+    private Texture enemyTexture;
     private Stage stage;
     private BitmapFont font;
     private Skin skin;
     private String currentPokemonName;
     private int currentPokemonHealth;
     private int enemyHealth;
+    private Main game;
 
     private enum ButtonType {
         MAIN,
@@ -59,22 +60,23 @@ public class PokemonScreen extends AbstractScreen {
         BACKPACK
     }
 
+
     public PokemonScreen(final Main game) {
+        this.game = game;
         batch = new SpriteBatch();
         map = new Texture("FTbg.jpg");
-        enemie = new Texture("enemies/base/image/smallfiredragon.png");
-        currentPokemonTexture = new Texture(pokemonList.pokemons.get(0).image); // Use the image of the first Pokemon
-        currentPokemonName = pokemonList.pokemons.get(0).name; // Or any default Pokémon name you desire
-        currentPokemonHealth = pokemonList.pokemons.get(0).health; // Initialize health
-        enemyHealth=1000;
+        enemyTexture = new Texture("enemies/base/image/smallfiredragon.png");
+        currentPokemonTexture = new Texture(pokemonList.pokemons.get(0).image);
+        currentPokemonName = pokemonList.pokemons.get(0).name;
+        currentPokemonHealth = pokemonList.pokemons.get(0).health;
+        enemyHealth = 1000;
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
-        // Load and generate larger font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/font/pixel.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36; // Set the font size to 36, you can adjust this value
+        parameter.size = 36;
         font = generator.generateFont(parameter);
-        generator.dispose(); // Dispose the generator when done
+        generator.dispose();
 
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
@@ -132,12 +134,6 @@ public class PokemonScreen extends AbstractScreen {
                             new ClickListener() {
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
-                                    // No action needed
-                                }
-                            },
-                            new ClickListener() {
-                                @Override
-                                public void clicked(InputEvent event, float x, float y) {
                                     initializeButtons(game, ButtonType.MAIN);
                                 }
                             }
@@ -167,11 +163,33 @@ public class PokemonScreen extends AbstractScreen {
     private ClickListener[] createDynamicButtonListeners(final Main game, List<Skill> skills) {
         ClickListener[] listeners = new ClickListener[skills.size() + 1];
         for (int i = 0; i < skills.size(); i++) {
-            final String skillName = skills.get(i).name;
+            final Skill skill = skills.get(i);
             listeners[i] = new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println(skillName + " button clicked!");
+                    int damage = calculateDamage(skill);
+                    enemyHealth -= damage;
+                    System.out.println(currentPokemonName + " used " + skill.name + " and dealt " + damage + " damage to the enemy!");
+
+                    if (enemyHealth <= 0) {
+                        gameWon = true;
+
+                        stage.clear();
+
+                        batch.begin();
+                        font.draw(batch, "Victory!", Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2);
+                        batch.end();
+
+                        backButton = new TextButton("Back", skin);
+                        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 +100, 200, 60);
+                        backButton.addListener(new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                game.setScreen(game.getGameScreen());
+                            }
+                        });
+                        stage.addActor(backButton);
+                    }
                 }
             };
         }
@@ -184,6 +202,10 @@ public class PokemonScreen extends AbstractScreen {
         return listeners;
     }
 
+    private int calculateDamage(Skill skill) {
+        return skill.power;
+    }
+
     private ClickListener[] createPokemonButtonListeners(final Main game) {
         ClickListener[] listeners = new ClickListener[pokemonList.pokemons.size() + 1];
         for (int i = 0; i < pokemonList.pokemons.size(); i++) {
@@ -191,12 +213,12 @@ public class PokemonScreen extends AbstractScreen {
             listeners[i] = new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    currentPokemonTexture.dispose(); // Dispose the old texture
+                    currentPokemonTexture.dispose();
                     currentPokemonTexture = new Texture(pokemon.image);
-                    currentPokemonName = pokemon.name; // Update the currentPokemonName
-                    currentPokemonHealth = pokemon.health; // Update the currentPokemonHealth
+                    currentPokemonName = pokemon.name;
+                    currentPokemonHealth = pokemon.health;
                     System.out.println(pokemon.name + " selected!");
-                    initializeButtons(game, ButtonType.SKILL); // Reinitialize buttons to show skills for the selected Pokemon
+                    initializeButtons(game, ButtonType.SKILL);
                 }
             };
         }
@@ -258,6 +280,9 @@ public class PokemonScreen extends AbstractScreen {
         }
     }
 
+    private boolean gameWon = false;
+    private TextButton backButton;
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -268,18 +293,37 @@ public class PokemonScreen extends AbstractScreen {
 
         batch.draw(currentPokemonTexture, 50, 110);
 
-        // Draw enemy image with reduced size
-        float enemyReducedWidth = enemie.getWidth() / 8.0f;
-        float enemyReducedHeight = enemie.getHeight() / 8.0f;
-        batch.draw(enemie, 400, 110, enemyReducedWidth, enemyReducedHeight);
+        float enemyReducedWidth = enemyTexture.getWidth() / 8.0f;
+        float enemyReducedHeight = enemyTexture.getHeight() / 8.0f;
+        batch.draw(enemyTexture, 400, 110, enemyReducedWidth, enemyReducedHeight);
 
-        // Draw current Pokémon health with larger font
-        font.draw(batch, "HP" + currentPokemonHealth, 70, 70); // Adjust position as needed
+        font.draw(batch, "HP" + currentPokemonHealth, 70, 70);
         font.draw(batch, "HP" + enemyHealth, 400, 70);
+
         batch.end();
 
         stage.act(delta);
         stage.draw();
+
+        if (!gameWon && enemyHealth <= 0) {
+            gameWon = true;
+    
+            stage.clear();
+    
+            batch.begin();
+            font.draw(batch, "Victory!", Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2);
+            batch.end();
+    
+            backButton = new TextButton("Back to Main Menu", skin);
+            backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 60);
+            backButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.setScreen(game.getGameScreen());
+                }
+            });
+            stage.addActor(backButton);
+        }
     }
 
     @Override
@@ -292,7 +336,7 @@ public class PokemonScreen extends AbstractScreen {
         batch.dispose();
         map.dispose();
         currentPokemonTexture.dispose();
-        enemie.dispose();
+        enemyTexture.dispose();
         stage.dispose();
         font.dispose();
     }
@@ -302,3 +346,4 @@ public class PokemonScreen extends AbstractScreen {
         Gdx.input.setInputProcessor(stage);
     }
 }
+
