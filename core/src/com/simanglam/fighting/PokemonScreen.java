@@ -13,16 +13,53 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
+import com.badlogic.gdx.utils.Json;
+
+import java.util.List;
+
+class Skill {
+    public String name;
+    public int power;
+}
+
+class Pokemon {
+    public String name;
+    public String image;
+    public int health;
+    public List<Skill> skills;
+}
+
+class PokemonList {
+    public List<Pokemon> pokemons;
+}
 
 public class PokemonScreen extends AbstractScreen {
+    private static PokemonList pokemonList;
+    
+
+
+    static {
+        Json json = new Json();
+        pokemonList = json.fromJson(PokemonList.class, Gdx.files.internal("enemies/base/fighting-info.json"));
+    }
+
+    public static List<Skill> getSkillsByPokemonName(String pokemonName) {
+        for (Pokemon pokemon : pokemonList.pokemons) {
+            if (pokemon.name.equals(pokemonName)) {
+                return pokemon.skills;
+            }
+        }
+        return null; // or throw an exception if the pokemon is not found
+    }
 
     private SpriteBatch batch;
     private Texture map;
-    private Texture pokemon;
+    private Texture currentPokemonTexture;
     private Texture enemie;
     private Stage stage;
     private BitmapFont font;
     private Skin skin;
+    private String currentPokemonName;
 
     private enum ButtonType {
         MAIN,
@@ -35,13 +72,14 @@ public class PokemonScreen extends AbstractScreen {
         batch = new SpriteBatch();
         map = new Texture("main.png");
         enemie = new Texture("enemies/base/image/smallfiredragon.png");
-        pokemon = new Texture("enemies/base/image/Jolteon.png");
+        currentPokemonTexture = new Texture(pokemonList.pokemons.get(0).image); // Use the image of the first Pokemon
+        currentPokemonName = pokemonList.pokemons.get(0).name; // Or any default Pokémon name you desire
+
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         font = new BitmapFont();
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
         initializeButtons(game, ButtonType.MAIN);
-        handleInput();
     }
 
     private void initializeButtons(final Main game, ButtonType type) {
@@ -80,13 +118,41 @@ public class PokemonScreen extends AbstractScreen {
                         }
                 };
                 break;
-            case SKILL:
-                buttonLabels = new String[]{"雷電球", "十萬伏特", "電光一閃", "陽光烈焰", "Back"};
-                buttonListeners = createButtonListeners(game, "Skill");
+                case SKILL:
+                List<Skill> skills = getSkillsByPokemonName(currentPokemonName);
+                if (skills != null) {
+                    buttonLabels = new String[skills.size() + 1];
+                    for (int i = 0; i < skills.size(); i++) {
+                        buttonLabels[i] = skills.get(i).name;
+                    }
+                    buttonLabels[skills.size()] = "Back";
+                    buttonListeners = createDynamicButtonListeners(game, skills);
+                } else {
+                    buttonLabels = new String[]{"No Skills Available", "Back"};
+                    buttonListeners = new ClickListener[]{
+                            new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    // No action needed
+                                }
+                            },
+                            new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    initializeButtons(game, ButtonType.MAIN);
+                                }
+                            }
+                    };
+                }
                 break;
+            
             case POKEMON:
-                buttonLabels = new String[]{"Pokemon 1", "Pokemon 2", "Pokemon 3", "Pokemon 4", "Back"};
-                buttonListeners = createButtonListeners(game, "GO Pokemon");
+                buttonLabels = new String[pokemonList.pokemons.size() + 1];
+                for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+                    buttonLabels[i] = pokemonList.pokemons.get(i).name;
+                }
+                buttonLabels[pokemonList.pokemons.size()] = "Back";
+                buttonListeners = createPokemonButtonListeners(game);
                 break;
             case BACKPACK:
                 buttonLabels = new String[]{"Tool 1", "Tool 2", "Tool 3", "Tool 4", "Back"};
@@ -98,6 +164,51 @@ public class PokemonScreen extends AbstractScreen {
 
         addButtonsToStage(buttonLabels, buttonListeners);
     }
+
+    private ClickListener[] createDynamicButtonListeners(final Main game, List<Skill> skills) {
+        ClickListener[] listeners = new ClickListener[skills.size() + 1];
+        for (int i = 0; i < skills.size(); i++) {
+            final String skillName = skills.get(i).name;
+            listeners[i] = new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println(skillName + " button clicked!");
+                }
+            };
+        }
+        listeners[skills.size()] = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                initializeButtons(game, ButtonType.MAIN);
+            }
+        };
+        return listeners;
+    }
+
+    private ClickListener[] createPokemonButtonListeners(final Main game) {
+        ClickListener[] listeners = new ClickListener[pokemonList.pokemons.size() + 1];
+        for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+            final Pokemon pokemon = pokemonList.pokemons.get(i);
+            listeners[i] = new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    currentPokemonTexture.dispose(); // Dispose the old texture
+                    currentPokemonTexture = new Texture(pokemon.image);
+                    currentPokemonName = pokemon.name; // Update the currentPokemonName
+                    System.out.println(pokemon.name + " selected!");
+                    initializeButtons(game, ButtonType.SKILL); // Reinitialize buttons to show skills for the selected Pokemon
+                }
+            };
+        }
+        listeners[pokemonList.pokemons.size()] = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                initializeButtons(game, ButtonType.MAIN);
+            }
+        };
+        return listeners;
+    }
+    
 
     private ClickListener[] createButtonListeners(final Main game, String messagePrefix) {
         return new ClickListener[]{
@@ -147,18 +258,16 @@ public class PokemonScreen extends AbstractScreen {
             stage.addActor(button);
         }
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    
+
         batch.begin();
         batch.draw(map, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        
-        // Draw pokemon image with reduced size
-        float pokemonReducedWidth = pokemon.getWidth() / 4.0f;
-        float pokemonReducedHeight = pokemon.getHeight() / 4.0f;
-        batch.draw(pokemon, 50, 60, pokemonReducedWidth, pokemonReducedHeight);
+
+        batch.draw(currentPokemonTexture, 50, 60);
 
         // Draw enemy image with reduced size
         float enemyReducedWidth = enemie.getWidth() / 8.0f;
@@ -166,7 +275,7 @@ public class PokemonScreen extends AbstractScreen {
         batch.draw(enemie, 400, 60, enemyReducedWidth, enemyReducedHeight);
 
         batch.end();
-    
+
         stage.act(delta);
         stage.draw();
     }
@@ -180,6 +289,8 @@ public class PokemonScreen extends AbstractScreen {
     public void dispose() {
         batch.dispose();
         map.dispose();
+        currentPokemonTexture.dispose();
+        enemie.dispose();
         stage.dispose();
         font.dispose();
     }

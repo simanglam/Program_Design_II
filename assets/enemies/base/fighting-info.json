@@ -48,7 +48,7 @@
       },
       {
         "name": "Bulbasaur",
-        "image": "enemies/base/image/idle-0.png",
+        "image": "green.png",
         "health": 120,
         "skills": [
           {

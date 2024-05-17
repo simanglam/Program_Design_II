@@ -2,12 +2,11 @@ package com.simanglam.util;
 
 import java.util.ArrayList;
 
-import com.simanglam.fighting.Pokemon;
 
 public class GameStatus {
     static GameStatus gameStatus;
     private ArrayList<InventoryItem> playerInventory;
-    private ArrayList<Pokemon> pokemons;
+    
 
 
     private GameStatus(){
