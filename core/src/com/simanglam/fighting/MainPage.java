@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
@@ -28,26 +29,27 @@ public class MainPage extends AbstractScreen {
         font = new BitmapFont();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json")); 
 
-   
-        TextButton startButton = new TextButton("Start", skin);
+        // 加載按鈕圖片並將其添加到皮膚
+        skin.add("startButtonDrawable", new Texture("startbutton.png"));
 
+        // 使用新的Drawable創建按鈕
+        TextButton startButton = new TextButton("Start", skin, "default");
+        Drawable startButtonDrawable = skin.getDrawable("startButtonDrawable");
+        startButton.getStyle().up = startButtonDrawable; // 設置按鈕未按下時的樣式
+        startButton.getStyle().down = startButtonDrawable; // 設置按鈕按下時的樣式
 
         startButton.setPosition(Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2 - 155);
-
 
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //System.out.println("start the game");
                 game.setScreen(game.getGameScreen());
             }
         });
 
-        
         stage.addActor(startButton);
-
         
-        Gdx.input.setInputProcessor(stage);
+        
     }
 
     @Override
@@ -78,5 +80,6 @@ public class MainPage extends AbstractScreen {
 
     @Override
     public void handleInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 }
