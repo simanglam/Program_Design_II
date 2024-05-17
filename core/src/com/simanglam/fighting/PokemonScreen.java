@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,14 +19,13 @@ import com.simanglam.fighting.Pokemon;
 import com.simanglam.fighting.Skill;
 
 import java.util.List;
+
 class PokemonList {
     public List<Pokemon> pokemons;
 }
 
 public class PokemonScreen extends AbstractScreen {
     private static PokemonList pokemonList;
-    
-
 
     static {
         Json json = new Json();
@@ -49,6 +49,8 @@ public class PokemonScreen extends AbstractScreen {
     private BitmapFont font;
     private Skin skin;
     private String currentPokemonName;
+    private int currentPokemonHealth;
+    private int enemyHealth;
 
     private enum ButtonType {
         MAIN,
@@ -59,13 +61,21 @@ public class PokemonScreen extends AbstractScreen {
 
     public PokemonScreen(final Main game) {
         batch = new SpriteBatch();
-        map = new Texture("main.png");
+        map = new Texture("FTbg.jpg");
         enemie = new Texture("enemies/base/image/smallfiredragon.png");
         currentPokemonTexture = new Texture(pokemonList.pokemons.get(0).image); // Use the image of the first Pokemon
         currentPokemonName = pokemonList.pokemons.get(0).name; // Or any default Pokémon name you desire
-
+        currentPokemonHealth = pokemonList.pokemons.get(0).health; // Initialize health
+        enemyHealth=1000;
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
-        font = new BitmapFont();
+
+        // Load and generate larger font
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/font/pixel.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 36; // Set the font size to 36, you can adjust this value
+        font = generator.generateFont(parameter);
+        generator.dispose(); // Dispose the generator when done
+
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
         initializeButtons(game, ButtonType.MAIN);
@@ -107,7 +117,7 @@ public class PokemonScreen extends AbstractScreen {
                         }
                 };
                 break;
-                case SKILL:
+            case SKILL:
                 List<Skill> skills = getSkillsByPokemonName(currentPokemonName);
                 if (skills != null) {
                     buttonLabels = new String[skills.size() + 1];
@@ -134,7 +144,7 @@ public class PokemonScreen extends AbstractScreen {
                     };
                 }
                 break;
-            
+
             case POKEMON:
                 buttonLabels = new String[pokemonList.pokemons.size() + 1];
                 for (int i = 0; i < pokemonList.pokemons.size(); i++) {
@@ -184,6 +194,7 @@ public class PokemonScreen extends AbstractScreen {
                     currentPokemonTexture.dispose(); // Dispose the old texture
                     currentPokemonTexture = new Texture(pokemon.image);
                     currentPokemonName = pokemon.name; // Update the currentPokemonName
+                    currentPokemonHealth = pokemon.health; // Update the currentPokemonHealth
                     System.out.println(pokemon.name + " selected!");
                     initializeButtons(game, ButtonType.SKILL); // Reinitialize buttons to show skills for the selected Pokemon
                 }
@@ -197,7 +208,6 @@ public class PokemonScreen extends AbstractScreen {
         };
         return listeners;
     }
-    
 
     private ClickListener[] createButtonListeners(final Main game, String messagePrefix) {
         return new ClickListener[]{
@@ -256,13 +266,16 @@ public class PokemonScreen extends AbstractScreen {
         batch.begin();
         batch.draw(map, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        batch.draw(currentPokemonTexture, 50, 60);
+        batch.draw(currentPokemonTexture, 50, 110);
 
         // Draw enemy image with reduced size
         float enemyReducedWidth = enemie.getWidth() / 8.0f;
         float enemyReducedHeight = enemie.getHeight() / 8.0f;
-        batch.draw(enemie, 400, 60, enemyReducedWidth, enemyReducedHeight);
+        batch.draw(enemie, 400, 110, enemyReducedWidth, enemyReducedHeight);
 
+        // Draw current Pokémon health with larger font
+        font.draw(batch, "HP" + currentPokemonHealth, 70, 70); // Adjust position as needed
+        font.draw(batch, "HP" + enemyHealth, 400, 70);
         batch.end();
 
         stage.act(delta);
