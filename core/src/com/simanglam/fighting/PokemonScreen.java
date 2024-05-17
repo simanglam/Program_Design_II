@@ -177,7 +177,7 @@ public class PokemonScreen extends AbstractScreen {
                         stage.clear();
 
                         batch.begin();
-                        font.draw(batch, "Victory!", Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2);
+                        font.draw(batch, "Victory!", 180,180);
                         batch.end();
 
                         backButton = new TextButton("Back", skin);
@@ -304,26 +304,7 @@ public class PokemonScreen extends AbstractScreen {
 
         stage.act(delta);
         stage.draw();
-
-        if (!gameWon && enemyHealth <= 0) {
-            gameWon = true;
-    
-            stage.clear();
-    
-            batch.begin();
-            font.draw(batch, "Victory!", Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2);
-            batch.end();
-    
-            backButton = new TextButton("Back to Main Menu", skin);
-            backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 60);
-            backButton.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    game.setScreen(game.getGameScreen());
-                }
-            });
-            stage.addActor(backButton);
-        }
+        
     }
 
     @Override
