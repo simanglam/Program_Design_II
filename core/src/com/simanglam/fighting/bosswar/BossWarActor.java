@@ -109,7 +109,6 @@ public class BossWarActor {
     public void beingAttack(AttackInfo attackInfo) {
         if (Intersector.overlaps(position, attackInfo.demageRectangle)) {
             this.healtPoint -= attackInfo.damege;
-            System.out.printf("%d %d %d\n", direction, healtPoint, attackInfo.damege);
         }
     }
 
