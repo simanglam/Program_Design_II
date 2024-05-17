@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
@@ -22,6 +23,7 @@ public class MainPage extends AbstractScreen {
     private Stage stage;
     private BitmapFont font;
     private TextButton startButton;
+    private TextButton saveButton;
 
     public MainPage(final Main game) {
         batch = new SpriteBatch();
@@ -30,19 +32,16 @@ public class MainPage extends AbstractScreen {
         font = new BitmapFont();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-        skin.add("startButtonDrawable", new Texture("startbutton.png"));
-
-        startButton = new TextButton("", skin, "default");
-        Drawable startButtonDrawable = skin.getDrawable("startButtonDrawable");
-        startButton.getStyle().up = startButtonDrawable;
-        startButton.getStyle().down = startButtonDrawable;
-
-        float originalWidth = startButtonDrawable.getMinWidth();
-        float originalHeight = startButtonDrawable.getMinHeight();
-
-        startButton.setSize(originalWidth / 10.0f, originalHeight / 10.0f);
-
-        startButton.setPosition(Gdx.graphics.getWidth() / 2 - startButton.getWidth() / 2, Gdx.graphics.getHeight() / 2 - startButton.getHeight() / 2 - 110);
+        Texture startButtonTexture = new Texture(Gdx.files.internal("startbutton.png"));
+        Drawable startButtonDrawable = new TextureRegionDrawable(startButtonTexture);
+        TextButton.TextButtonStyle startButtonStyle = new TextButton.TextButtonStyle();
+        startButtonStyle.up = startButtonDrawable;
+        startButtonStyle.down = startButtonDrawable;
+        startButtonStyle.font = font;
+        
+        startButton = new TextButton("", startButtonStyle);
+        startButton.setSize(startButtonTexture.getWidth() / 10.0f, startButtonTexture.getHeight() / 10.0f);
+        startButton.setPosition(Gdx.graphics.getWidth() / 2 - startButton.getWidth() / 2+ 45, Gdx.graphics.getHeight() / 2 - startButton.getHeight() / 2 - 110);
 
         startButton.addListener(new ClickListener() {
             @Override
@@ -51,7 +50,26 @@ public class MainPage extends AbstractScreen {
             }
         });
 
+        Texture saveButtonTexture = new Texture(Gdx.files.internal("save.png"));
+        Drawable saveButtonDrawable = new TextureRegionDrawable(saveButtonTexture);
+        TextButton.TextButtonStyle saveButtonStyle = new TextButton.TextButtonStyle();
+        saveButtonStyle.up = saveButtonDrawable;
+        saveButtonStyle.down = saveButtonDrawable;
+        saveButtonStyle.font = font;
+        
+        saveButton = new TextButton("", saveButtonStyle);
+        saveButton.setSize(saveButtonTexture.getWidth() / 4.6f, saveButtonTexture.getHeight() / 4.6f);
+        saveButton.setPosition(Gdx.graphics.getWidth() / 2 - saveButton.getWidth() / 2 - 45, Gdx.graphics.getHeight() / 2 - saveButton.getHeight() / 2 -110);
+
+        saveButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Save button clicked!");
+            }
+        });
+
         stage.addActor(startButton);
+        stage.addActor(saveButton);
 
         Gdx.input.setInputProcessor(stage);
     }
