@@ -1,20 +1,20 @@
 {
     "pokemons": [
       {
-        "name": "Pikachu",
-        "image": "enemies/base/image/idle-0.png",
+        "name": "皮卡丘",
+        "image": "pika.png",
         "health": 150,
         "skills": [
           {
-            "name": "Thunder Shock",
+            "name": "Thunder",
             "power": 40
           },
           {
-            "name": "Electro Ball",
+            "name": "Electro",
             "power": 60
           },
           {
-            "name": "Quick Attack",
+            "name": "Attack",
             "power": 40
           },
           {
@@ -24,35 +24,35 @@
         ]
       },
       {
-        "name": "Charizard",
-        "image": "enemies/base/image/idle-0.png",
+        "name": "伊布",
+        "image": "yeeboo.png",
         "health": 260,
         "skills": [
           {
-            "name": "Flamethrower",
+            "name": "Flame",
             "power": 90
           },
           {
-            "name": "Fire Spin",
+            "name": "Spin",
             "power": 70
           },
           {
-            "name": "Dragon Breath",
+            "name": "Breath",
             "power": 60
           },
           {
-            "name": "Air Slash",
+            "name": "AirSlash",
             "power": 75
           }
         ]
       },
       {
-        "name": "Bulbasaur",
-        "image": "green.png",
+        "name": "球",
+        "image": "booboo.png",
         "health": 120,
         "skills": [
           {
-            "name": "Vine Whip",
+            "name": "Whip",
             "power": 45
           },
           {
@@ -60,22 +60,22 @@
             "power": 55
           },
           {
-            "name": "Seed Bomb",
+            "name": "bomb",
             "power": 80
           },
           {
-            "name": "Solar Beam",
+            "name": "Beam",
             "power": 120
           }
         ]
       },
       {
-        "name": "Squirtle",
-        "image": "enemies/base/image/idle-0.png",
+        "name": "水",
+        "image": "water.png",
         "health": 180,
         "skills": [
           {
-            "name": "Water Gun",
+            "name": "Water",
             "power": 40
           },
           {
@@ -83,11 +83,11 @@
             "power": 40
           },
           {
-            "name": "Water Pulse",
+            "name": "Water ",
             "power": 60
           },
           {
-            "name": "Hydro Pump",
+            "name": "Hydro",
             "power": 110
           }
         ]
