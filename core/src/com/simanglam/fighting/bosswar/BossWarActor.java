@@ -10,7 +10,7 @@ import com.simanglam.util.Const;
 
 public class BossWarActor {
     Texture textures[][];
-    int healtPoint, current, forward, movingSpeed, direction, attackCoolDown, ATK, animateLenth;
+    int healtPoint, current, forward, movingSpeed, direction, attackCoolDown, ATK, animateLenth, money, spawnCooldown;
     float animateAccu, attackAccu, animateCooldown;
     boolean attackable;
     Rectangle position;
@@ -40,6 +40,8 @@ public class BossWarActor {
         direction = (enemy) ? 1 : -1;
         movingSpeed = info.speed;
         ATK = info.ATK;
+        money = info.money;
+        spawnCooldown = info.spawnCooldown;
 
         position = new Rectangle(Const.maxViewportWidth, 120, info.size, info.size);
         if(enemy) position.x = 0;
@@ -63,6 +65,8 @@ public class BossWarActor {
         direction = bossWarActor.direction;
         movingSpeed = bossWarActor.movingSpeed;
         ATK = bossWarActor.ATK;
+        money = bossWarActor.money;
+        spawnCooldown = bossWarActor.spawnCooldown;
 
         position = new Rectangle(bossWarActor.position);
         attackableRange = new Rectangle(bossWarActor.attackableRange);
@@ -118,5 +122,5 @@ public class BossWarActor {
 }
 
 class CharacterInfo{
-    public int ATK, healthPoint, attackCooldown, speed, range, vision, image, size, animateCooldown;
+    public int ATK, healthPoint, attackCooldown, speed, range, vision, image, size, animateCooldown, money, spawnCooldown;
 }

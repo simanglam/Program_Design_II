@@ -1,26 +1,36 @@
 package com.simanglam.fighting.bosswar;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class BossWarScreen extends AbstractScreen {
     Main game;
     BossWarWorld world;
+    BossWarActor[] playerPokemons;
     Stage stage;
     Camera camera;
     Label label;
+    InputMultiplexer inputMultiplexer;
 
     public BossWarScreen(final Main game){
         this.game = game;
@@ -29,24 +39,60 @@ public class BossWarScreen extends AbstractScreen {
         this.camera = new OrthographicCamera();
         label = new Label("A" ,new Skin(Gdx.files.internal("data/uiskin.json")));
         label.setPosition(200, 300);
-        Button b1 = new Button(new Skin(Gdx.files.internal("data/uiskin.json")));
-        ImageButton i1 = new ImageButton(new TextureRegionDrawable(new Texture("enemies/base/image/idle-0.png")));
-        ImageButton i2 = new ImageButton(new TextureRegionDrawable(new Texture("enemies/base/image/idle-0.png")));
-        ImageButton i3 = new ImageButton(new TextureRegionDrawable(new Texture("enemies/base/image/idle-0.png")));
-        ImageButton i4 = new ImageButton(new TextureRegionDrawable(new Texture("enemies/base/image/idle-0.png")));
-        b1.add(i1);
-        b1.setColor(255, 255, 255, 255);
-        b1.setSize(100, 100);
-        i1.setSize(100, 100);
-        i1.setColor(255, 255, 255, 255);
+        this.inputMultiplexer = new InputMultiplexer();
+
+        String[] strings = {"base"};
+        playerPokemons = new BossWarActor[]{null, null, null, null};
+        Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        Table table = new Table(skin);
+        ProgressBar[] progressBars = new ProgressBar[4];
+        Button[] buttons = new Button[4];
+        ImageButton[] imageButtons = new ImageButton[4];
+        
+        for (int i = 0; i < 4; i++){
+            progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
+            buttons[i] = new Button(skin);
+            table.add(buttons[i]).prefSize(60).expandX();
+            if (i >= strings.length){
+                buttons[i].setDisabled(true);
+                continue;
+            }
+            playerPokemons[i] = new BossWarActor("enemies/" + strings[i], false);
+            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + strings[i] + "/image/idle-0.png")));
+            buttons[i].add(imageButtons[i]).row();
+            buttons[i].add(progressBars[i]).width(60).padTop(10);
+            final int j = i;
+            buttons[i].addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (world.money < playerPokemons[j].money) return;
+                    world.money -= playerPokemons[j].money;
+                    world.addPlayerPokemon(playerPokemons[j]);
+                    buttons[j].addAction(Actions.sequence(Actions.touchable(Touchable.disabled), Actions.delay(playerPokemons[j].spawnCooldown), Actions.touchable(Touchable.enabled)));
+                    progressBars[j].addAction(Actions.sequence(Actions.show(),
+                    Actions.run(() -> {progressBars[j].setAnimateDuration(playerPokemons[j].spawnCooldown); progressBars[j].setValue(10);}),
+                    Actions.delay(playerPokemons[j].spawnCooldown), Actions.hide(),
+                    Actions.run(() -> {progressBars[j].setAnimateDuration(0);progressBars[j].setValue(0);}))
+                    );
+                }
+            });
+        }
+
+        table.setBounds(0, 25, Const.maxViewportWidth, 75);
+        table.center();
         this.stage.addActor(label);
-        this.stage.addActor(b1);
+        this.stage.addActor(table);
+
+        this.inputMultiplexer.addProcessor(stage);
+        this.inputMultiplexer.addProcessor(world);
     }
 
+    @Override
     public void handleInput(){
-        Gdx.input.setInputProcessor(world);
+        Gdx.input.setInputProcessor(this.inputMultiplexer);
     }
 
+    @Override
     public void render(float delta){
         ScreenUtils.clear(0, 0, 0, 0);
         this.world.update(delta, game.getSpriteBatch());
@@ -56,14 +102,20 @@ public class BossWarScreen extends AbstractScreen {
         this.stage.draw();
     };
 
+    @Override
     public void resize(int x, int y){
         this.stage.getViewport().update(x, y);
         world.resize(x, y);
     }
 
+    @Override
     public void pause(){};
+    @Override
     public void show(){};
+    @Override
     public void hide(){};
+    @Override
     public void resume(){};
+    @Override
     public void dispose(){};
 }
