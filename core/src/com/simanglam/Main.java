@@ -24,7 +24,7 @@ public class Main extends Game {
 		batch = new SpriteBatch();
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
-		bossWarScreen = new BossWarScreen(this);
+		bossWarScreen = new BossWarScreen(this, new String[]{"base"});
 		this.setScreen(getBossWarScreen());
 	}
 

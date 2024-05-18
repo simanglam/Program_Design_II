@@ -32,16 +32,15 @@ public class BossWarScreen extends AbstractScreen {
     Label label;
     InputMultiplexer inputMultiplexer;
 
-    public BossWarScreen(final Main game){
+    public BossWarScreen(final Main game, String[] strings){
         this.game = game;
         this.world = new BossWarWorld();
         this.stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
         this.camera = new OrthographicCamera();
-        label = new Label("A" ,new Skin(Gdx.files.internal("data/uiskin.json")));
-        label.setPosition(200, 300);
+        label = new Label("16500/16500" ,new Skin(Gdx.files.internal("data/uiskin.json")));
+        label.setPosition(Const.maxViewportWidth - label.getWidth(), Const.maxViewportHeight - label.getHeight());
         this.inputMultiplexer = new InputMultiplexer();
 
-        String[] strings = {"base"};
         playerPokemons = new BossWarActor[]{null, null, null, null};
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         Table table = new Table(skin);
@@ -50,17 +49,20 @@ public class BossWarScreen extends AbstractScreen {
         ImageButton[] imageButtons = new ImageButton[4];
         
         for (int i = 0; i < 4; i++){
-            progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
             buttons[i] = new Button(skin);
             table.add(buttons[i]).prefSize(60).expandX();
             if (i >= strings.length){
                 buttons[i].setDisabled(true);
                 continue;
             }
+            progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
+            progressBars[i].setVisible(false);
             playerPokemons[i] = new BossWarActor("enemies/" + strings[i], false);
             imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + strings[i] + "/image/idle-0.png")));
             buttons[i].add(imageButtons[i]).row();
-            buttons[i].add(progressBars[i]).width(60).padTop(10);
+            buttons[i].add(progressBars[i]).width(60).row();
+            Label moneyLabel = new Label(String.valueOf(playerPokemons[i].money), skin);
+            buttons[i].add(moneyLabel).right();
             final int j = i;
             buttons[i].addListener(new ClickListener(){
                 @Override
@@ -97,7 +99,7 @@ public class BossWarScreen extends AbstractScreen {
         ScreenUtils.clear(0, 0, 0, 0);
         this.world.update(delta, game.getSpriteBatch());
         this.stage.act(delta);
-        label.setText(String.valueOf(world.getMoney()));
+        label.setText(String.valueOf(world.getMoney()) + "/16500");
         this.stage.getViewport().apply();
         this.stage.draw();
     };
