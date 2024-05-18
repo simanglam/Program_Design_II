@@ -3,7 +3,7 @@
       {
         "name": "皮卡丘",
         "image": "pika.png",
-        "health": 150,
+        "health": 500,
         "skills": [
           {
             "name": "Thunder",
