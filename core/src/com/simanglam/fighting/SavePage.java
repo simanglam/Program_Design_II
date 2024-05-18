@@ -23,7 +23,7 @@ public class SavePage extends AbstractScreen {
     private Stage stage;
     private BitmapFont font;
     private TextButton startButton;
-    private TextButton saveButton;
+    private TextButton backButton;
 
     public SavePage(final Main game) {
         batch = new SpriteBatch();
@@ -50,26 +50,26 @@ public class SavePage extends AbstractScreen {
             }
         });
 
-        Texture saveButtonTexture = new Texture(Gdx.files.internal("save.png"));
-        Drawable saveButtonDrawable = new TextureRegionDrawable(saveButtonTexture);
-        TextButton.TextButtonStyle saveButtonStyle = new TextButton.TextButtonStyle();
-        saveButtonStyle.up = saveButtonDrawable;
-        saveButtonStyle.down = saveButtonDrawable;
-        saveButtonStyle.font = font;
+        Texture backButtonTexture = new Texture(Gdx.files.internal("backbutton.png"));
+        Drawable backButtonDrawable = new TextureRegionDrawable(backButtonTexture);
+        TextButton.TextButtonStyle backButtonStyle = new TextButton.TextButtonStyle();
+        backButtonStyle.up = backButtonDrawable;
+        backButtonStyle.down = backButtonDrawable;
+        backButtonStyle.font = font;
         
-        saveButton = new TextButton("", saveButtonStyle);
-        saveButton.setSize(saveButtonTexture.getWidth() / 4.6f, saveButtonTexture.getHeight() / 4.6f);
-        saveButton.setPosition(Gdx.graphics.getWidth() / 2 - saveButton.getWidth() / 2 - 45, Gdx.graphics.getHeight() / 2 - saveButton.getHeight() / 2 -180);
+        backButton = new TextButton("", backButtonStyle);
+        backButton.setSize(backButtonTexture.getWidth() / 4.4f, backButtonTexture.getHeight() / 4.8f);
+        backButton.setPosition(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2 - 45, Gdx.graphics.getHeight() / 2 - backButton.getHeight() / 2 -180);
 
-        saveButton.addListener(new ClickListener() {
+        backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Save button clicked!");
+                game.setScreen(game.getMainPage());
             }
         });
 
         stage.addActor(startButton);
-        stage.addActor(saveButton);
+        stage.addActor(backButton);
 
         Gdx.input.setInputProcessor(stage);
     }
