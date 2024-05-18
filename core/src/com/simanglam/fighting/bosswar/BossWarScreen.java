@@ -102,7 +102,7 @@ public class BossWarScreen extends AbstractScreen {
         label.setText(String.valueOf(world.getMoney()) + "/16500");
         this.stage.getViewport().apply();
         this.stage.draw();
-    };
+    }
 
     @Override
     public void resize(int x, int y){
