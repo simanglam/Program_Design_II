@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -19,25 +20,14 @@ import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.map.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
-
-
-
 import java.util.List;
 import java.util.Arrays;
-
-class PokemonList {
-    public List<Pokemon> pokemons;
-}
-
-class Enemy {
-    public String name;
-    public String image;
-    public int health;
-    public List<Skill> skills;
-}
+import com.simanglam.fighting.PokemonList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PokemonScreen extends AbstractScreen {
+    private Map<String, Integer> previousPokemonHealthMap = new HashMap<>();
     private BattleState currentState;
     private static PokemonList pokemonList;
     private static Enemy enemy;
@@ -59,6 +49,7 @@ public class PokemonScreen extends AbstractScreen {
         return null;
     }
 
+    private Pokemon currentPokemon;
     private SpriteBatch batch;
     private Texture map;
     private Texture currentPokemonTexture;
@@ -84,6 +75,7 @@ public class PokemonScreen extends AbstractScreen {
         batch = new SpriteBatch();
         map = new Texture("FTbg.jpg");
         enemyTexture = new Texture(enemy.image);
+        previousPokemonHealthMap.put(currentPokemonName, currentPokemonHealth);
         currentPokemonTexture = new Texture(pokemonList.pokemons.get(0).image);
         currentPokemonName = pokemonList.pokemons.get(0).name;
         currentPokemonHealth = pokemonList.pokemons.get(0).health;
@@ -104,6 +96,7 @@ public class PokemonScreen extends AbstractScreen {
         gameWon = false;
         pokemonAlive = new boolean[pokemonList.pokemons.size()];
         Arrays.fill(pokemonAlive, true);
+
     }
 
     private void initializeButtons(final Main game, ButtonType type) {
@@ -119,7 +112,9 @@ public class PokemonScreen extends AbstractScreen {
                         new ClickListener() {
                             @Override
                             public void clicked(InputEvent event, float x, float y) {
+                                
                                 initializeButtons(game, ButtonType.BACKPACK);
+                                currentPokemonHealth = previousPokemonHealthMap.getOrDefault(currentPokemonName, 0);
                             }
                         },
                         new ClickListener() {
@@ -141,6 +136,15 @@ public class PokemonScreen extends AbstractScreen {
                             }
                         }
                 };
+                // 切換回主按鈕時，檢查並更新上一個寶可夢的血量
+                if (type == ButtonType.MAIN) {
+                    Integer previousHealth = previousPokemonHealthMap.get(currentPokemonName);
+                if (previousHealth != null) {
+                    currentPokemonHealth = previousHealth;
+    }
+                
+}
+
                 break;
             case SKILL:
                 List<Skill> skills = getSkillsByPokemonName(currentPokemonName);
@@ -154,31 +158,34 @@ public class PokemonScreen extends AbstractScreen {
                 } else {
                     buttonLabels = new String[]{"No Skills Available", "Back"};
                     buttonListeners = new ClickListener[]{
-                        new ClickListener(){
-                            @Override
-                            public void clicked(InputEvent event, float x, float y) {
-                                initializeButtons(game, ButtonType.MAIN);
+                            new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    initializeButtons(game, ButtonType.MAIN);
+                                }
                             }
-                        }
                     };
                 }
                 break;
 
                 case POKEMON:
-                buttonLabels = new String[pokemonList.pokemons.size() + 1];
-                for (int i = 0; i < pokemonList.pokemons.size(); i++) {
-                    buttonLabels[i] = pokemonList.pokemons.get(i).name;
-                }
-                buttonLabels[pokemonList.pokemons.size()] = "Back";
-                buttonListeners = createPokemonButtonListeners(game);
-            
-                // 檢查已死亡的寶可夢並禁用按鈕
-                for (int i = 0; i < pokemonList.pokemons.size(); i++) {
-                    if (!pokemonAlive[i]) {
-                        stage.getActors().get(i).setTouchable(Touchable.disabled);
+            buttonLabels = new String[pokemonList.pokemons.size() + 1];
+            for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+                buttonLabels[i] = pokemonList.pokemons.get(i).name;
+            }
+            buttonLabels[pokemonList.pokemons.size()] = "Back";
+            buttonListeners = createPokemonButtonListeners(game);
+
+            for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+                if (i < pokemonAlive.length && !pokemonAlive[i]) {
+                    // 禁用不活著的寶可夢的按鈕
+                    Actor actor = stage.getActors().get(i);
+                    if (actor != null) {
+                        actor.setTouchable(Touchable.disabled);
                     }
                 }
-                break;
+            }
+            break;
             case BACKPACK:
                 buttonLabels = new String[]{"Tool 1", "Tool 2", "Tool 3", "Tool 4", "Back"};
                 buttonListeners = createButtonListeners(game, "Tool");
@@ -244,23 +251,27 @@ public class PokemonScreen extends AbstractScreen {
         return skill.power;
     }
 
-    for (int j = 0; j < pokemonList.pokemons.size(); j++) {
-        final Pokemon pokemon = pokemonList.pokemons.get(i);
-        if (pokemonAlive[j]) {
-            listeners[j] = new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    currentPokemonName = pokemon.name;
-                    currentPokemonHealth = pokemon.health;
-                    currentPokemonTexture = new Texture(pokemon.image);
-                    System.out.println("Switched to " + currentPokemonName);
-                    initializeButtons(game, ButtonType.MAIN);
-                }
-            };
-        } else {
-
-            listeners[j] = null;
+    private ClickListener[] createPokemonButtonListeners(final Main game) {
+        ClickListener[] listeners = new ClickListener[pokemonList.pokemons.size() + 1];
+        for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+            final Pokemon pokemon = pokemonList.pokemons.get(i);
+            if (pokemonAlive[i]) {
+                listeners[i] = new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        currentPokemonName = pokemon.name;
+                        currentPokemonHealth = pokemon.health;
+                        currentPokemonTexture = new Texture(pokemon.image);
+                        System.out.println("Switched to " + currentPokemonName);
+                        initializeButtons(game, ButtonType.MAIN);
+                    }
+                };
+            } else {
+                // 如果寶可夢不活著，則設置監聽器為空
+                listeners[i] = null;
+            }
         }
+        return listeners;
     }
     
 
@@ -285,7 +296,14 @@ public class PokemonScreen extends AbstractScreen {
         return listeners;
     }
 
+    
+    
+
     private void addButtonsToStage(String[] labels, ClickListener[] listeners) {
+        if (labels.length != listeners.length) {
+            throw new IllegalArgumentException("Labels and listeners arrays must have the same length.");
+        }
+    
         float buttonWidth = 200f;
         float buttonHeight = 60f;
         float startX = 20f;
@@ -293,22 +311,38 @@ public class PokemonScreen extends AbstractScreen {
         float spacingX = 10f;
         float spacingY = 10f;
     
-        int buttonsPerRow = 2; 
+        int buttonsPerRow = 2;
     
         for (int i = 0; i < labels.length; i++) {
-            float row = i / buttonsPerRow; 
-            float col = i % buttonsPerRow; 
+            float row = i / buttonsPerRow;
+            float col = i % buttonsPerRow;
     
             float buttonX = startX + col * (buttonWidth + spacingX);
             float buttonY = startY - row * (buttonHeight + spacingY);
     
             TextButton button = new TextButton(labels[i], skin);
+    
+            if (listeners[i] != null) {
+                button.addListener(listeners[i]);
+            } else {
+                // 如果監聽器為空，則添加一個默認的點擊監聽器，以防止空指針異常
+                button.addListener(new ClickListener());
+            }
+    
             button.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-            button.addListener(listeners[i]);
             stage.addActor(button);
         }
     }
+    
 
+    private int getCurrentPokemonIndex() {
+        for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+            if (pokemonList.pokemons.get(i).name.equals(currentPokemonName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
     private void showSkillDialog() {
@@ -378,11 +412,18 @@ public class PokemonScreen extends AbstractScreen {
             currentPokemonHealth -= damage;
             showEnemySkillDialog();
             System.out.println("Enemy used " + randomSkill.name + " and dealt " + damage + " damage!");
-    
+            
+            
+            
             if (currentPokemonHealth <= 0) {
                 // 更新寶可夢的死亡狀態
-                pokemonAlive[currentPokemonIndex] = false;
-    
+                int currentPokemonIndex = getCurrentPokemonIndex();
+
+                if (currentPokemonIndex != -1) {
+                    pokemonAlive[currentPokemonIndex] = false; 
+                }
+
+                
                 // 檢查是否還有活著的寶可夢
                 boolean anyPokemonAlive = false;
                 for (boolean alive : pokemonAlive) {
@@ -396,13 +437,13 @@ public class PokemonScreen extends AbstractScreen {
                     currentState = BattleState.DEFEAT;
                     gameWon = false;
                     System.out.println("Defeat!");
-                    // 顯示失敗畫面或返回主畫面
+                    
                     stage.clear();
-    
+                
                     batch.begin();
                     font.draw(batch, "Defeat!", 180, 180);
                     batch.end();
-    
+                
                     TextButton backButton = new TextButton("Back", skin);
                     backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100, 200, 60);
                     backButton.addListener(new ClickListener() {
@@ -413,8 +454,17 @@ public class PokemonScreen extends AbstractScreen {
                     });
                     stage.addActor(backButton);
                 } else {
-                    // 切換回玩家回合
-                    currentState = BattleState.PLAYER_TURN;
+                    // 切換到下一隻活著的寶可夢
+                    for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+                        if (pokemonAlive[i]) {
+                            currentPokemonName = pokemonList.pokemons.get(i).name;
+                            currentPokemonHealth = pokemonList.pokemons.get(i).health;
+                            currentPokemonTexture = new Texture(pokemonList.pokemons.get(i).image);
+                            System.out.println("Switched to " + currentPokemonName);
+                            initializeButtons(game, ButtonType.MAIN);
+                            break; 
+                        }
+                    }
                 }
             }
         }
