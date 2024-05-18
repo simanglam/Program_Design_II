@@ -17,6 +17,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.math.MathUtils;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
+import com.simanglam.map.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
+
 
 
 import java.util.List;
@@ -181,6 +185,8 @@ public class PokemonScreen extends AbstractScreen {
             listeners[i] = new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    hideButtons();
+                    showSkillDialog();
                     int damage = calculateDamage(skill);
                     enemyHealth -= damage;
                     System.out.println(currentPokemonName + " used " + skill.name + " and dealt " + damage + " damage to the enemy!");
@@ -208,7 +214,7 @@ public class PokemonScreen extends AbstractScreen {
                     } else {
                         // 玩家攻擊結束後，切換狀態到敵人回合並且啟動敵人攻擊
                         currentState = BattleState.ENEMY_TURN;
-                        delayedEnemyAction(1.0f); // 調用 delayedEnemyAction() 方法，1.0 秒後觸發敵人的攻擊行動
+                        delayedEnemyAction(1.5f); // 調用 delayedEnemyAction() 方法，1.0 秒後觸發敵人的攻擊行動
                     }
                 }
             };
@@ -279,11 +285,11 @@ public class PokemonScreen extends AbstractScreen {
         float spacingX = 10f;
         float spacingY = 10f;
     
-        int buttonsPerRow = 2; // 每行按钮数量
+        int buttonsPerRow = 2; 
     
         for (int i = 0; i < labels.length; i++) {
-            float row = i / buttonsPerRow; // 行数
-            float col = i % buttonsPerRow; // 列数
+            float row = i / buttonsPerRow; 
+            float col = i % buttonsPerRow; 
     
             float buttonX = startX + col * (buttonWidth + spacingX);
             float buttonY = startY - row * (buttonHeight + spacingY);
@@ -294,7 +300,61 @@ public class PokemonScreen extends AbstractScreen {
             stage.addActor(button);
         }
     }
+
+
+
+    private void showSkillDialog() {
+        Dialog dialog = new Dialog(stage);
+        dialog.setDescription("Your Pokemon used a skill!");
+        dialog.setPosition(Gdx.graphics.getWidth() / 2 - dialog.getWidth() / 2, Gdx.graphics.getHeight() - dialog.getHeight() - 20); // 设置对话框的位置为屏幕顶部
+        stage.addActor(dialog);
+        
+       
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                dialog.setVisible(false); 
+            }
+        }, 2.0f);
+    }
     
+    private void showEnemySkillDialog() {
+        Dialog dialog = new Dialog(stage);
+        dialog.setDescription("Enemy Pokemon used a skill!");
+        dialog.setPosition(Gdx.graphics.getWidth() / 2 - dialog.getWidth() / 2, Gdx.graphics.getHeight() - dialog.getHeight() - 20); // 设置对话框的位置为屏幕顶部
+        stage.addActor(dialog);
+        
+        
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                dialog.setVisible(false); 
+                showButtons(); 
+            }
+        }, 2.0f);
+    }
+    
+    
+    
+    
+
+private void hideButtons() {
+    for (Actor actor : stage.getActors()) {
+        if (actor instanceof TextButton) {
+            actor.setVisible(false);
+        }
+    }
+}
+
+
+private void showButtons() {  
+    for (Actor actor : stage.getActors()) {
+        if (actor instanceof TextButton) {
+            actor.setVisible(true);
+        }
+    }
+}
+
 
     private void delayedEnemyAction(float delay) {
         Timer.schedule(new Timer.Task() {
@@ -311,6 +371,7 @@ public class PokemonScreen extends AbstractScreen {
             Skill randomSkill = enemy.skills.get(randomSkillIndex);
             int damage = randomSkill.power;
             currentPokemonHealth -= damage;
+            showEnemySkillDialog();
             System.out.println("Enemy used " + randomSkill.name + " and dealt " + damage + " damage!");
 
             if (currentPokemonHealth <= 0) {
