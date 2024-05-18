@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 
 import java.util.List;
+import java.util.Arrays;
 
 class PokemonList {
     public List<Pokemon> pokemons;
@@ -40,6 +41,8 @@ public class PokemonScreen extends AbstractScreen {
     private BattleState currentState;
     private static PokemonList pokemonList;
     private static Enemy enemy;
+    private boolean[] pokemonAlive;
+
 
     static {
         Json json = new Json();
@@ -99,6 +102,8 @@ public class PokemonScreen extends AbstractScreen {
 
         currentState = BattleState.PLAYER_TURN;
         gameWon = false;
+        pokemonAlive = new boolean[pokemonList.pokemons.size()];
+        Arrays.fill(pokemonAlive, true);
     }
 
     private void initializeButtons(final Main game, ButtonType type) {
@@ -149,23 +154,30 @@ public class PokemonScreen extends AbstractScreen {
                 } else {
                     buttonLabels = new String[]{"No Skills Available", "Back"};
                     buttonListeners = new ClickListener[]{
-                            new ClickListener() {
-                                @Override
-                                public void clicked(InputEvent event, float x, float y) {
-                                    initializeButtons(game, ButtonType.MAIN);
-                                }
+                        new ClickListener(){
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                initializeButtons(game, ButtonType.MAIN);
                             }
+                        }
                     };
                 }
                 break;
 
-            case POKEMON:
+                case POKEMON:
                 buttonLabels = new String[pokemonList.pokemons.size() + 1];
                 for (int i = 0; i < pokemonList.pokemons.size(); i++) {
                     buttonLabels[i] = pokemonList.pokemons.get(i).name;
                 }
                 buttonLabels[pokemonList.pokemons.size()] = "Back";
                 buttonListeners = createPokemonButtonListeners(game);
+            
+                // 檢查已死亡的寶可夢並禁用按鈕
+                for (int i = 0; i < pokemonList.pokemons.size(); i++) {
+                    if (!pokemonAlive[i]) {
+                        stage.getActors().get(i).setTouchable(Touchable.disabled);
+                    }
+                }
                 break;
             case BACKPACK:
                 buttonLabels = new String[]{"Tool 1", "Tool 2", "Tool 3", "Tool 4", "Back"};
@@ -232,11 +244,10 @@ public class PokemonScreen extends AbstractScreen {
         return skill.power;
     }
 
-    private ClickListener[] createPokemonButtonListeners(final Main game) {
-        ClickListener[] listeners = new ClickListener[pokemonList.pokemons.size() + 1];
-        for (int i = 0; i < pokemonList.pokemons.size(); i++) {
-            final Pokemon pokemon = pokemonList.pokemons.get(i);
-            listeners[i] = new ClickListener() {
+    for (int j = 0; j < pokemonList.pokemons.size(); j++) {
+        final Pokemon pokemon = pokemonList.pokemons.get(i);
+        if (pokemonAlive[j]) {
+            listeners[j] = new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     currentPokemonName = pokemon.name;
@@ -246,15 +257,12 @@ public class PokemonScreen extends AbstractScreen {
                     initializeButtons(game, ButtonType.MAIN);
                 }
             };
+        } else {
+
+            listeners[j] = null;
         }
-        listeners[pokemonList.pokemons.size()] = new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                initializeButtons(game, ButtonType.MAIN);
-            }
-        };
-        return listeners;
     }
+    
 
     private ClickListener[] createButtonListeners(final Main game, String buttonType) {
         ClickListener[] listeners = new ClickListener[5];
@@ -335,25 +343,22 @@ public class PokemonScreen extends AbstractScreen {
     }
     
     
-    
-    
-
-private void hideButtons() {
-    for (Actor actor : stage.getActors()) {
-        if (actor instanceof TextButton) {
+    private void hideButtons() {
+        for (Actor actor : stage.getActors()) {
+            if (actor instanceof TextButton) {
             actor.setVisible(false);
+            }
         }
     }
-}
 
 
-private void showButtons() {  
-    for (Actor actor : stage.getActors()) {
-        if (actor instanceof TextButton) {
-            actor.setVisible(true);
+    private void showButtons() {  
+        for (Actor actor : stage.getActors()) {
+            if (actor instanceof TextButton) {
+                actor.setVisible(true);
+            }
         }
     }
-}
 
 
     private void delayedEnemyAction(float delay) {
@@ -373,33 +378,48 @@ private void showButtons() {
             currentPokemonHealth -= damage;
             showEnemySkillDialog();
             System.out.println("Enemy used " + randomSkill.name + " and dealt " + damage + " damage!");
-
+    
             if (currentPokemonHealth <= 0) {
-                currentState = BattleState.DEFEAT;
-                gameWon = false;
-                System.out.println("Defeat!");
-                // 顯示失敗畫面或返回主畫面
-                stage.clear();
-
-                batch.begin();
-                font.draw(batch, "Defeat!", 180, 180);
-                batch.end();
-
-                TextButton backButton = new TextButton("Back", skin);
-                backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100, 200, 60);
-                backButton.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        game.setScreen(game.getGameScreen());
+                // 更新寶可夢的死亡狀態
+                pokemonAlive[currentPokemonIndex] = false;
+    
+                // 檢查是否還有活著的寶可夢
+                boolean anyPokemonAlive = false;
+                for (boolean alive : pokemonAlive) {
+                    if (alive) {
+                        anyPokemonAlive = true;
+                        break;
                     }
-                });
-                stage.addActor(backButton);
-            } else {
-                // 切換回玩家回合
-                currentState = BattleState.PLAYER_TURN;
+                }
+    
+                if (!anyPokemonAlive) {
+                    currentState = BattleState.DEFEAT;
+                    gameWon = false;
+                    System.out.println("Defeat!");
+                    // 顯示失敗畫面或返回主畫面
+                    stage.clear();
+    
+                    batch.begin();
+                    font.draw(batch, "Defeat!", 180, 180);
+                    batch.end();
+    
+                    TextButton backButton = new TextButton("Back", skin);
+                    backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100, 200, 60);
+                    backButton.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            game.setScreen(game.getGameScreen());
+                        }
+                    });
+                    stage.addActor(backButton);
+                } else {
+                    // 切換回玩家回合
+                    currentState = BattleState.PLAYER_TURN;
+                }
             }
         }
     }
+    
 
     @Override
     public void handleInput() {
