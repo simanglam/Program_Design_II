@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 
-public class MainPage extends AbstractScreen {
+public class SavePage extends AbstractScreen {
 
     private SpriteBatch batch;
     private Texture texture;
@@ -25,9 +25,9 @@ public class MainPage extends AbstractScreen {
     private TextButton startButton;
     private TextButton saveButton;
 
-    public MainPage(final Main game) {
+    public SavePage(final Main game) {
         batch = new SpriteBatch();
-        texture = new Texture("main.png");
+        texture = new Texture("savepage.png");
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         font = new BitmapFont();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
@@ -41,7 +41,7 @@ public class MainPage extends AbstractScreen {
         
         startButton = new TextButton("", startButtonStyle);
         startButton.setSize(startButtonTexture.getWidth() / 10.0f, startButtonTexture.getHeight() / 10.0f);
-        startButton.setPosition(Gdx.graphics.getWidth() / 2 - startButton.getWidth() / 2+ 45, Gdx.graphics.getHeight() / 2 - startButton.getHeight() / 2 - 110);
+        startButton.setPosition(Gdx.graphics.getWidth() / 2 - startButton.getWidth() / 2+ 45, Gdx.graphics.getHeight() / 2 - startButton.getHeight() / 2 - 180);
 
         startButton.addListener(new ClickListener() {
             @Override
@@ -59,15 +59,14 @@ public class MainPage extends AbstractScreen {
         
         saveButton = new TextButton("", saveButtonStyle);
         saveButton.setSize(saveButtonTexture.getWidth() / 4.6f, saveButtonTexture.getHeight() / 4.6f);
-        saveButton.setPosition(Gdx.graphics.getWidth() / 2 - saveButton.getWidth() / 2 - 45, Gdx.graphics.getHeight() / 2 - saveButton.getHeight() / 2 -110);
+        saveButton.setPosition(Gdx.graphics.getWidth() / 2 - saveButton.getWidth() / 2 - 45, Gdx.graphics.getHeight() / 2 - saveButton.getHeight() / 2 -180);
 
         saveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.getSavePage());
+                System.out.println("Save button clicked!");
             }
         });
-
 
         stage.addActor(startButton);
         stage.addActor(saveButton);
