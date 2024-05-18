@@ -11,12 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.math.MathUtils;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
-import com.badlogic.gdx.utils.Json;
-import com.simanglam.fighting.Pokemon;
-import com.simanglam.fighting.Skill;
+
 
 import java.util.List;
 
@@ -24,12 +25,22 @@ class PokemonList {
     public List<Pokemon> pokemons;
 }
 
+class Enemy {
+    public String name;
+    public String image;
+    public int health;
+    public List<Skill> skills;
+}
+
 public class PokemonScreen extends AbstractScreen {
+    private BattleState currentState;
     private static PokemonList pokemonList;
+    private static Enemy enemy;
 
     static {
         Json json = new Json();
         pokemonList = json.fromJson(PokemonList.class, Gdx.files.internal("enemies/base/fighting-info.json"));
+        enemy = json.fromJson(Enemy.class, Gdx.files.internal("enemies/base/enemy-info.json"));
     }
 
     public static List<Skill> getSkillsByPokemonName(String pokemonName) {
@@ -52,6 +63,7 @@ public class PokemonScreen extends AbstractScreen {
     private int currentPokemonHealth;
     private int enemyHealth;
     private Main game;
+    private boolean gameWon;
 
     private enum ButtonType {
         MAIN,
@@ -60,16 +72,15 @@ public class PokemonScreen extends AbstractScreen {
         BACKPACK
     }
 
-
     public PokemonScreen(final Main game) {
         this.game = game;
         batch = new SpriteBatch();
         map = new Texture("FTbg.jpg");
-        enemyTexture = new Texture("enemies/base/image/smallfiredragon.png");
+        enemyTexture = new Texture(enemy.image);
         currentPokemonTexture = new Texture(pokemonList.pokemons.get(0).image);
         currentPokemonName = pokemonList.pokemons.get(0).name;
         currentPokemonHealth = pokemonList.pokemons.get(0).health;
-        enemyHealth = 1000;
+        enemyHealth = enemy.health;
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/font/pixel.ttf"));
@@ -81,6 +92,9 @@ public class PokemonScreen extends AbstractScreen {
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
         initializeButtons(game, ButtonType.MAIN);
+
+        currentState = BattleState.PLAYER_TURN;
+        gameWon = false;
     }
 
     private void initializeButtons(final Main game, ButtonType type) {
@@ -172,16 +186,18 @@ public class PokemonScreen extends AbstractScreen {
                     System.out.println(currentPokemonName + " used " + skill.name + " and dealt " + damage + " damage to the enemy!");
 
                     if (enemyHealth <= 0) {
+                        currentState = BattleState.VICTORY;
                         gameWon = true;
-
+                        System.out.println("Victory!");
+                        // 顯示勝利畫面或返回主畫面
                         stage.clear();
 
                         batch.begin();
-                        font.draw(batch, "Victory!", 180,180);
+                        font.draw(batch, "Victory!", 180, 180);
                         batch.end();
 
-                        backButton = new TextButton("Back", skin);
-                        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 +100, 200, 60);
+                        TextButton backButton = new TextButton("Back", skin);
+                        backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100, 200, 60);
                         backButton.addListener(new ClickListener() {
                             @Override
                             public void clicked(InputEvent event, float x, float y) {
@@ -189,6 +205,10 @@ public class PokemonScreen extends AbstractScreen {
                             }
                         });
                         stage.addActor(backButton);
+                    } else {
+                        // 玩家攻擊結束後，切換狀態到敵人回合並且啟動敵人攻擊
+                        currentState = BattleState.ENEMY_TURN;
+                        delayedEnemyAction(1.0f); // 調用 delayedEnemyAction() 方法，1.0 秒後觸發敵人的攻擊行動
                     }
                 }
             };
@@ -213,12 +233,11 @@ public class PokemonScreen extends AbstractScreen {
             listeners[i] = new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    currentPokemonTexture.dispose();
-                    currentPokemonTexture = new Texture(pokemon.image);
                     currentPokemonName = pokemon.name;
                     currentPokemonHealth = pokemon.health;
-                    System.out.println(pokemon.name + " selected!");
-                    initializeButtons(game, ButtonType.SKILL);
+                    currentPokemonTexture = new Texture(pokemon.image);
+                    System.out.println("Switched to " + currentPokemonName);
+                    initializeButtons(game, ButtonType.MAIN);
                 }
             };
         }
@@ -231,86 +250,126 @@ public class PokemonScreen extends AbstractScreen {
         return listeners;
     }
 
-    private ClickListener[] createButtonListeners(final Main game, String messagePrefix) {
-        return new ClickListener[]{
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        System.out.println(messagePrefix + " 1 button clicked!");
-                    }
-                },
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        System.out.println(messagePrefix + " 2 button clicked!");
-                    }
-                },
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        System.out.println(messagePrefix + " 3 button clicked!");
-                    }
-                },
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        System.out.println(messagePrefix + " 4 button clicked!");
-                    }
-                },
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        initializeButtons(game, ButtonType.MAIN);
-                    }
+    private ClickListener[] createButtonListeners(final Main game, String buttonType) {
+        ClickListener[] listeners = new ClickListener[5];
+        for (int i = 0; i < 4; i++) {
+            final String tool = buttonType + " " + (i + 1);
+            listeners[i] = new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println(tool + " selected.");
+                    initializeButtons(game, ButtonType.MAIN);
                 }
+            };
+        }
+        listeners[4] = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                initializeButtons(game, ButtonType.MAIN);
+            }
         };
+        return listeners;
     }
 
     private void addButtonsToStage(String[] labels, ClickListener[] listeners) {
         float buttonWidth = 200f;
         float buttonHeight = 60f;
-        float buttonX = 10f;
-        float buttonY = Gdx.graphics.getHeight() - buttonHeight - 10f;
-
+        float startX = 20f;
+        float startY = Gdx.graphics.getHeight() - 80f;
+        float spacingX = 10f;
+        float spacingY = 10f;
+    
+        int buttonsPerRow = 2; // 每行按钮数量
+    
         for (int i = 0; i < labels.length; i++) {
+            float row = i / buttonsPerRow; // 行数
+            float col = i % buttonsPerRow; // 列数
+    
+            float buttonX = startX + col * (buttonWidth + spacingX);
+            float buttonY = startY - row * (buttonHeight + spacingY);
+    
             TextButton button = new TextButton(labels[i], skin);
-            button.setBounds(buttonX + (i % 2) * (buttonWidth + 10f), buttonY - (i / 2) * (buttonHeight + 10f), buttonWidth, buttonHeight);
+            button.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
             button.addListener(listeners[i]);
             stage.addActor(button);
         }
     }
+    
 
-    private boolean gameWon = false;
-    private TextButton backButton;
+    private void delayedEnemyAction(float delay) {
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                enemyTurn();
+            }
+        }, delay);
+    }
+
+    private void enemyTurn() {
+        if (currentState == BattleState.ENEMY_TURN && !gameWon && enemyHealth > 0) {
+            int randomSkillIndex = MathUtils.random(enemy.skills.size() - 1);
+            Skill randomSkill = enemy.skills.get(randomSkillIndex);
+            int damage = randomSkill.power;
+            currentPokemonHealth -= damage;
+            System.out.println("Enemy used " + randomSkill.name + " and dealt " + damage + " damage!");
+
+            if (currentPokemonHealth <= 0) {
+                currentState = BattleState.DEFEAT;
+                gameWon = false;
+                System.out.println("Defeat!");
+                // 顯示失敗畫面或返回主畫面
+                stage.clear();
+
+                batch.begin();
+                font.draw(batch, "Defeat!", 180, 180);
+                batch.end();
+
+                TextButton backButton = new TextButton("Back", skin);
+                backButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 100, 200, 60);
+                backButton.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        game.setScreen(game.getGameScreen());
+                    }
+                });
+                stage.addActor(backButton);
+            } else {
+                // 切換回玩家回合
+                currentState = BattleState.PLAYER_TURN;
+            }
+        }
+    }
+
+    @Override
+    public void handleInput() {
+        Gdx.input.setInputProcessor(stage);
+    }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(map, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        batch.draw(map, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(currentPokemonTexture, 50, 110);
-
         float enemyReducedWidth = enemyTexture.getWidth() / 8.0f;
         float enemyReducedHeight = enemyTexture.getHeight() / 8.0f;
         batch.draw(enemyTexture, 400, 110, enemyReducedWidth, enemyReducedHeight);
-
         font.draw(batch, "HP" + currentPokemonHealth, 70, 70);
         font.draw(batch, "HP" + enemyHealth, 400, 70);
-
         batch.end();
 
         stage.act(delta);
         stage.draw();
-        
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
+
+   
 
     @Override
     public void dispose() {
@@ -320,11 +379,6 @@ public class PokemonScreen extends AbstractScreen {
         enemyTexture.dispose();
         stage.dispose();
         font.dispose();
-    }
-
-    @Override
-    public void handleInput() {
-        Gdx.input.setInputProcessor(stage);
+        skin.dispose();
     }
 }
-
