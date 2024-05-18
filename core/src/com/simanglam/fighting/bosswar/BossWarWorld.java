@@ -40,9 +40,6 @@ public class BossWarWorld extends InputAdapter {
         this.viewport = new FitViewport(Const.maxViewportWidth / 2f, Const.maxViewportHeight / 2f, camera);
         this.viewport.getCamera().position.set(Const.maxViewportWidth / 4f, Const.maxViewportHeight / 4f, 0);
         this.viewport.apply();
-        this.enemyTower = new BossWarActor("enemies/base/", true);
-        enemyTower.setPosition(0, 120);
-        this.playerTower = new BossWarActor("enemies/base/", false);
         lastTouchDown = new Vector3(0, 0, 0);
         this.money = 0;
         Json json = new Json();
@@ -60,6 +57,10 @@ public class BossWarWorld extends InputAdapter {
             maxEnemy = (maxEnemy < info.spawnCoolDown) ? info.spawnCoolDown : maxEnemy;
         }
         map = new Texture(bs.image);
+        this.enemyTower = new BossWarActor("enemies/" + bs.enemyTower + "/", true);
+        enemyTower.setPosition(0, 120);
+        this.playerTower = new BossWarActor("enemies/" + bs.playerTower + "/", false);
+        this.playerTower.setPosition(map.getWidth() - playerTower.position.width, 120);
     }
 
     public void centerCamera(){
@@ -77,8 +78,8 @@ public class BossWarWorld extends InputAdapter {
     public boolean scrolled(float x, float y){
         if (viewport.getWorldWidth() + 10 * y <= map.getWidth() && viewport.getWorldHeight() + 10 * y <= map.getHeight() && viewport.getWorldWidth() + 10 * y > Const.maxViewportWidth / 2f&& viewport.getWorldHeight() + 10 * y > Const.maxViewportHeight / 2f){
             viewport.setWorldSize(viewport.getWorldWidth() + 10 * y, viewport.getWorldHeight() + 10 * y);
-            if (this.camera.position.y - viewport.getWorldHeight() / 2 != 0)
-                this.camera.position.y -= this.camera.position.y - viewport.getWorldHeight() / 2;
+            if (this.camera.position.y - viewport.getWorldHeight() / 2 != 30)
+                this.camera.position.y -= -30 + this.camera.position.y - viewport.getWorldHeight() / 2;
         }
         viewport.apply();
         viewport.getCamera().update();
@@ -108,7 +109,7 @@ public class BossWarWorld extends InputAdapter {
 
     public void resize(int x, int y){
         this.viewport.setScreenSize(x, y);
-        if (this.camera.position.y - viewport.getWorldHeight() / 2 != 0)
+        if (this.camera.position.y - viewport.getWorldHeight() / 2 + 120 != 0)
             this.camera.position.y -= this.camera.position.y - viewport.getWorldHeight() / 2;
         this.viewport.apply();
         lastTouchDown.x = 0;
@@ -165,6 +166,13 @@ public class BossWarWorld extends InputAdapter {
         batch.end();
     }
 
+    public void addPlayerPokemon(BossWarActor actor){
+        if (actor == null) return;
+        BossWarActor newActor = new BossWarActor(actor);
+        newActor.setPosition(playerTower.position.x, playerTower.position.y);
+        pokemonArray.add(newActor);
+    }
+
     public boolean detectEnemy(boolean enemy, Rectangle rectangle){
         if (Intersector.overlaps((enemy) ? playerTower.position :enemyTower.position, rectangle)){
             return true;
@@ -178,7 +186,7 @@ public class BossWarWorld extends InputAdapter {
 }
 
 class BossWarInfo {
-    public String image;
+    public String image, enemyTower, playerTower;
     public ArrayList<SpawnInfo> onstage;
     public ArrayList<SpawnInfo> enemies;
 }

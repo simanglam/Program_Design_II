@@ -1,5 +1,7 @@
 {
     "image": "bosswar.png",
+    "enemyTower": "tower",
+    "playerTower": "tower",
     "onstage":[
         {
             "name": "base",
