@@ -1,0 +1,17 @@
+{
+    "image": "bosswar.png",
+    "enemyTower": "tower",
+    "playerTower": "tower",
+    "onstage":[
+        {
+            "name": "base",
+            "spawnCoolDown": 1
+        }
+    ],
+    "enemies": [
+        {
+            "name": "base",
+            "spawnCoolDown": 12
+        }
+    ]
+}

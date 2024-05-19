@@ -34,6 +34,7 @@ public class Main extends Game {
 		pokemonScreen = new PokemonScreen(this);
         mainPage = new MainPage(this);
 		this.setScreen(pokemonScreen);
+		bossWarScreen = new BossWarScreen(this, new String[]{"base"});
 	}
 
     @Override
