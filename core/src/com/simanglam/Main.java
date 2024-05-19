@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.simanglam.fighting.bosswar.BossWarScreen;
+import com.simanglam.fighting.bosswar.SelectScreen;
 import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.InfoScreen;
@@ -25,7 +26,7 @@ public class Main extends Game {
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
 		bossWarScreen = new BossWarScreen(this, new String[]{"base"});
-		this.setScreen(getBossWarScreen());
+		this.setScreen(new SelectScreen(this));
 	}
 
 	@Override
