@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -29,12 +32,17 @@ public class BossWarWorld extends InputAdapter {
     int money;
     int maxEnemy;
     float spawnAccu;
+    Label enemyLabel;
+    Label playerLabel;
+    Stage stage;
 
     public BossWarWorld(){
         pokemonArray = new ArrayList<>();
         enemyArray = new ArrayList<>();
         pendingAttack = new ArrayList<>();
         enemySpawnInfos = new ArrayList<>();
+        enemyLabel = new Label("a", new Skin(Gdx.files.internal("data/uiskin.json")));
+        playerLabel = new Label("a", new Skin(Gdx.files.internal("data/uiskin.json")));
         this.camera = new OrthographicCamera();
         camera.setToOrtho(false);
         this.viewport = new FitViewport(Const.maxViewportWidth / 2f, Const.maxViewportHeight / 2f, camera);
@@ -61,6 +69,11 @@ public class BossWarWorld extends InputAdapter {
         enemyTower.setPosition(0, 120);
         this.playerTower = new BossWarActor("enemies/" + bs.playerTower + "/", false);
         this.playerTower.setPosition(map.getWidth() - playerTower.position.width, 120);
+        stage = new Stage(viewport);
+        playerLabel.setPosition(playerTower.position.x - playerLabel.getWidth(), playerTower.position.y + playerLabel.getHeight());
+        enemyLabel.setPosition(enemyTower.position.x, enemyTower.position.y + enemyLabel.getHeight());
+        stage.addActor(enemyLabel);
+        stage.addActor(playerLabel);
     }
 
     public void centerCamera(){
@@ -117,17 +130,18 @@ public class BossWarWorld extends InputAdapter {
 
     public void update(float delta, SpriteBatch batch){
         this.money += Math.max((int)delta, 1);
-        spawnAccu += delta;
-        for (EnemySpawnInfo info: enemySpawnInfos){
-            if ((int)spawnAccu != 0 && (int)spawnAccu % info.spawnCoolDown == 0){
-                enemyArray.add(new BossWarActor(info.enemy));
+        if (enemyTower.healtPoint > 0 && playerTower.healtPoint > 0){
+            spawnAccu += delta;
+            for (EnemySpawnInfo info: enemySpawnInfos){
+                if ((int)spawnAccu != 0 && (int)spawnAccu % info.spawnCoolDown == 0){
+                    enemyArray.add(new BossWarActor(info.enemy));
+                }
+            }
+            if (spawnAccu >= maxEnemy){
+                spawnAccu -= maxEnemy;
+                System.out.println(spawnAccu);
             }
         }
-        if (spawnAccu >= maxEnemy){
-            spawnAccu -= maxEnemy;
-            System.out.println(spawnAccu);
-        }
-
         this.viewport.getCamera().update();
         batch.setProjectionMatrix(this.viewport.getCamera().combined);
         batch.begin();
@@ -149,6 +163,8 @@ public class BossWarWorld extends InputAdapter {
         for (AttackInfo attackInfo: pendingAttack){
             for (BossWarActor actor : (attackInfo.from.equals("enemy")) ? pokemonArray : enemyArray)
                 actor.beingAttack(attackInfo);
+            ((attackInfo.from.equals("enemy")) ? playerTower : enemyTower).beingAttack(attackInfo);
+            System.out.println(enemyTower.healtPoint);
         }
         for (int i = 0; i < pokemonArray.size(); i++){
                 BossWarActor actor = pokemonArray.get(i);
@@ -164,6 +180,10 @@ public class BossWarWorld extends InputAdapter {
         }
         pendingAttack.clear();
         batch.end();
+        enemyLabel.setText((enemyTower.healtPoint <= 0) ? 0 : enemyTower.healtPoint);
+        playerLabel.setText((playerTower.healtPoint <= 0) ? 0 : playerTower.healtPoint);
+        stage.act();
+        stage.draw();
     }
 
     public void addPlayerPokemon(BossWarActor actor){
@@ -183,6 +203,9 @@ public class BossWarWorld extends InputAdapter {
         }
         return false;
     }
+
+    public boolean win(){return enemyTower.healtPoint <= 0;}
+    public boolean lose(){return playerTower.healtPoint <= 0;}
 }
 
 class BossWarInfo {

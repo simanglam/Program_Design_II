@@ -2,7 +2,6 @@ package com.simanglam.fighting.bosswar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
@@ -27,17 +27,19 @@ public class BossWarScreen extends AbstractScreen {
     Main game;
     BossWarWorld world;
     BossWarActor[] playerPokemons;
-    Stage stage;
-    Camera camera;
+    Stage currentStage;
+    Stage fightStage;
+    Stage winStage;
+    Stage loseStage;
     Label label;
     InputMultiplexer inputMultiplexer;
 
     public BossWarScreen(final Main game, String[] strings){
         this.game = game;
         this.world = new BossWarWorld();
-        this.stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
-        this.camera = new OrthographicCamera();
-        label = new Label("16500/16500" ,new Skin(Gdx.files.internal("data/uiskin.json")));
+        Viewport viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera());
+        this.fightStage = new Stage(viewport);
+        label = new Label("16500/16500", new Skin(Gdx.files.internal("data/uiskin.json")));
         label.setPosition(Const.maxViewportWidth - label.getWidth(), Const.maxViewportHeight - label.getHeight());
         this.inputMultiplexer = new InputMultiplexer();
 
@@ -80,12 +82,43 @@ public class BossWarScreen extends AbstractScreen {
             });
         }
 
+
         table.setBounds(0, 25, Const.maxViewportWidth, 75);
         table.center();
-        this.stage.addActor(label);
-        this.stage.addActor(table);
+        this.fightStage.addActor(label);
+        this.fightStage.addActor(table);
+        currentStage = fightStage;
 
-        this.inputMultiplexer.addProcessor(stage);
+        winStage = new Stage(viewport);
+        Table winTable = new Table(skin);
+        Button winButton = new Button(skin);
+        winButton.add("你贏了");
+        winButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.setScreen(game.getGameScreen());
+            }
+        });
+        winTable.add(winButton).center();
+        winTable.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
+        winStage.addActor(winTable);
+        loseStage = winStage;
+
+        loseStage = new Stage(viewport);
+        Table loseTable = new Table(skin);
+        Button loseButton = new Button(skin);
+        loseButton.add("你輸了");
+        loseButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.setScreen(game.getGameScreen());
+            }
+        });
+        loseTable.add(loseButton).center();
+        loseTable.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
+        loseStage.addActor(loseTable);
+
+        this.inputMultiplexer.addProcessor(currentStage);
         this.inputMultiplexer.addProcessor(world);
     }
 
@@ -98,15 +131,25 @@ public class BossWarScreen extends AbstractScreen {
     public void render(float delta){
         ScreenUtils.clear(0, 0, 0, 0);
         this.world.update(delta, game.getSpriteBatch());
-        this.stage.act(delta);
+        this.currentStage.act(delta);
         label.setText(String.valueOf(world.getMoney()) + "/16500");
-        this.stage.getViewport().apply();
-        this.stage.draw();
+        this.currentStage.getViewport().apply();
+        this.currentStage.draw();
+        if (world.win() && currentStage != winStage){
+            currentStage = winStage;
+            inputMultiplexer.clear();
+            inputMultiplexer.addProcessor(winStage);
+        }
+        else if (world.lose() && currentStage != loseStage){
+            currentStage = loseStage;
+            inputMultiplexer.clear();
+            inputMultiplexer.addProcessor(loseStage);
+        }
     }
 
     @Override
     public void resize(int x, int y){
-        this.stage.getViewport().update(x, y);
+        this.currentStage.getViewport().update(x, y);
         world.resize(x, y);
     }
 
