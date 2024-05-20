@@ -17,13 +17,16 @@ import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 
 public class SavePage extends AbstractScreen {
-
     private SpriteBatch batch;
     private Texture texture;
     private Stage stage;
     private BitmapFont font;
     private TextButton startButton;
     private TextButton backButton;
+    private TextButton deleteButton;
+    private TextButton chooseButton;
+    
+
 
     public SavePage(final Main game) {
         batch = new SpriteBatch();
@@ -32,6 +35,41 @@ public class SavePage extends AbstractScreen {
         font = new BitmapFont();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
+        Texture deleteButtonTexture = new Texture(Gdx.files.internal("deletebutton.png"));
+        Drawable deleteButtonDrawable = new TextureRegionDrawable(deleteButtonTexture);
+        TextButton.TextButtonStyle deleteButtonStyle = new TextButton.TextButtonStyle();
+        deleteButtonStyle.up = deleteButtonDrawable;
+        deleteButtonStyle.down = deleteButtonDrawable;
+        deleteButtonStyle.font = font;
+        
+        deleteButton = new TextButton("", deleteButtonStyle);
+        deleteButton.setSize(deleteButtonTexture.getWidth() / 8.4f, deleteButtonTexture.getHeight() / 6.5f);
+        deleteButton.setPosition(Gdx.graphics.getWidth() / 2 - deleteButton.getWidth() / 2- 149, Gdx.graphics.getHeight() / 2 - deleteButton.getHeight() / 2 - 120);
+
+        deleteButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.getGameScreen());
+            }
+        });
+        Texture chooseButtonTexture = new Texture(Gdx.files.internal("choosebutton.png"));
+        Drawable chooseButtonDrawable = new TextureRegionDrawable(chooseButtonTexture);
+        TextButton.TextButtonStyle chooseButtonStyle = new TextButton.TextButtonStyle();
+        chooseButtonStyle.up = chooseButtonDrawable;
+        chooseButtonStyle.down = chooseButtonDrawable;
+        chooseButtonStyle.font = font;
+
+                
+        chooseButton = new TextButton("", chooseButtonStyle);
+        chooseButton.setSize(chooseButtonTexture.getWidth() / 14.5f, chooseButtonTexture.getHeight() / 12f);
+        chooseButton.setPosition(Gdx.graphics.getWidth() / 2 - chooseButton.getWidth() / 2- 149, Gdx.graphics.getHeight() / 2 - chooseButton.getHeight() / 2 - 60);
+        
+        chooseButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.getGameScreen());
+            }
+        });
         Texture startButtonTexture = new Texture(Gdx.files.internal("startbutton.png"));
         Drawable startButtonDrawable = new TextureRegionDrawable(startButtonTexture);
         TextButton.TextButtonStyle startButtonStyle = new TextButton.TextButtonStyle();
@@ -70,8 +108,10 @@ public class SavePage extends AbstractScreen {
 
         stage.addActor(startButton);
         stage.addActor(backButton);
+        stage.addActor(deleteButton);
+        stage.addActor(chooseButton);
 
-        Gdx.input.setInputProcessor(stage);
+        
     }
 
     @Override
@@ -104,4 +144,5 @@ public class SavePage extends AbstractScreen {
     public void handleInput() {
         Gdx.input.setInputProcessor(stage);
     }
+   
 }
