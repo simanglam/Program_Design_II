@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -57,14 +58,16 @@ public class BossWarScreen extends AbstractScreen {
                 buttons[i].setDisabled(true);
                 continue;
             }
+            Stack stack = new Stack();
             progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
             progressBars[i].setVisible(false);
             playerPokemons[i] = new BossWarActor("enemies/" + strings[i], false);
             imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + strings[i] + "/image/idle-0.png")));
             buttons[i].add(imageButtons[i]).row();
-            buttons[i].add(progressBars[i]).width(60).row();
             Label moneyLabel = new Label(String.valueOf(playerPokemons[i].money), skin);
-            buttons[i].add(moneyLabel).right();
+            buttons[i].add(stack).width(60);
+            stack.add(progressBars[i]);
+            stack.add(moneyLabel);
             final int j = i;
             buttons[i].addListener(new ClickListener(){
                 @Override
@@ -73,11 +76,12 @@ public class BossWarScreen extends AbstractScreen {
                     world.money -= playerPokemons[j].money;
                     world.addPlayerPokemon(playerPokemons[j]);
                     buttons[j].addAction(Actions.sequence(Actions.touchable(Touchable.disabled), Actions.delay(playerPokemons[j].spawnCooldown), Actions.touchable(Touchable.enabled)));
-                    progressBars[j].addAction(Actions.sequence(Actions.show(),
-                    Actions.run(() -> {progressBars[j].setAnimateDuration(playerPokemons[j].spawnCooldown); progressBars[j].setValue(10);}),
+                    progressBars[j].addAction(Actions.sequence(
+                    Actions.show(),
+                    Actions.run(() -> {progressBars[j].setAnimateDuration(playerPokemons[j].spawnCooldown); progressBars[j].setValue(10); moneyLabel.setVisible(false);}),
                     Actions.delay(playerPokemons[j].spawnCooldown), Actions.hide(),
-                    Actions.run(() -> {progressBars[j].setAnimateDuration(0);progressBars[j].setValue(0);}))
-                    );
+                    Actions.run(() -> {progressBars[j].setAnimateDuration(0); progressBars[j].setValue(0); moneyLabel.setVisible(true);})
+                    ));
                 }
             });
         }
