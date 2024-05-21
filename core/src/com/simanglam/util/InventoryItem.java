@@ -1,6 +1,5 @@
 package com.simanglam.util;
 
-public interface InventoryItem {
-
+public class InventoryItem {
     
 }

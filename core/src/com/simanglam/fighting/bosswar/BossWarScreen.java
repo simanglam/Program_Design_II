@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
+import com.simanglam.util.GameStatus;
 
 public class BossWarScreen extends AbstractScreen {
     Main game;
@@ -35,7 +36,7 @@ public class BossWarScreen extends AbstractScreen {
     Label label;
     InputMultiplexer inputMultiplexer;
 
-    public BossWarScreen(final Main game, String[] strings){
+    public BossWarScreen(final Main game){
         this.game = game;
         this.world = new BossWarWorld();
         Viewport viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera());
@@ -50,19 +51,20 @@ public class BossWarScreen extends AbstractScreen {
         ProgressBar[] progressBars = new ProgressBar[4];
         Button[] buttons = new Button[4];
         ImageButton[] imageButtons = new ImageButton[4];
-        
+        GameStatus gameStatus = GameStatus.getGameStatus();
+
         for (int i = 0; i < 4; i++){
             buttons[i] = new Button(skin);
             table.add(buttons[i]).prefSize(60).expandX();
-            if (i >= strings.length){
+            if (i >= gameStatus.selectedPokemon.size()){
                 buttons[i].setDisabled(true);
                 continue;
             }
             Stack stack = new Stack();
             progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
             progressBars[i].setVisible(false);
-            playerPokemons[i] = new BossWarActor("enemies/" + strings[i], false);
-            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + strings[i] + "/image/idle-0.png")));
+            playerPokemons[i] = new BossWarActor("enemies/" + gameStatus.selectedPokemon.get(i).getName(), false);
+            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + gameStatus.selectedPokemon.get(i).getName() + "/image/idle-0.png")));
             buttons[i].add(imageButtons[i]).row();
             Label moneyLabel = new Label(String.valueOf(playerPokemons[i].money), skin);
             buttons[i].add(stack).width(60);
