@@ -168,5 +168,10 @@ public class BossWarScreen extends AbstractScreen {
     @Override
     public void resume(){};
     @Override
-    public void dispose(){};
+    public void dispose(){
+        fightStage.dispose();
+        winStage.dispose();
+        loseStage.dispose();
+        world.dispose();
+    };
 }

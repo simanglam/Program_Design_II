@@ -13,12 +13,13 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.util.Const;
 
-public class BossWarWorld extends InputAdapter {
+public class BossWarWorld extends InputAdapter implements Disposable {
     ArrayList<BossWarActor> pokemonArray;
     ArrayList<BossWarActor> enemyArray;
     ArrayList<EnemySpawnInfo> enemySpawnInfos;
@@ -206,6 +207,11 @@ public class BossWarWorld extends InputAdapter {
 
     public boolean win(){return enemyTower.healtPoint <= 0;}
     public boolean lose(){return playerTower.healtPoint <= 0;}
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 }
 
 class BossWarInfo {
