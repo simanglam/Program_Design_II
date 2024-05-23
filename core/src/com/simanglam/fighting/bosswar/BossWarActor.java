@@ -16,6 +16,7 @@ public class BossWarActor {
     Rectangle position;
     Rectangle attackableRange;
     Rectangle visionRange;
+    AttackInfo attackInfo;
 
     public BossWarActor(String path, boolean enemy) {
         Json json = new Json();
@@ -49,6 +50,7 @@ public class BossWarActor {
         attackableRange.width = info.range;
         visionRange = new Rectangle(position);
         visionRange.width = info.vision;
+        this.attackInfo = new AttackInfo((direction < 0) ? "player" : "enemy", attackableRange, ATK);
     }
 
     public BossWarActor(BossWarActor bossWarActor) {
@@ -71,6 +73,7 @@ public class BossWarActor {
         position = new Rectangle(bossWarActor.position);
         attackableRange = new Rectangle(bossWarActor.attackableRange);
         visionRange = new Rectangle(bossWarActor.visionRange);
+        attackInfo = new AttackInfo((direction < 0) ? "player" : "enemy", attackableRange, ATK);
     }
 
     public void update(float delta, boolean enemyInSight) {
@@ -107,13 +110,15 @@ public class BossWarActor {
         attackAccu = 0;
         attackableRange.x = (direction > 0) ? position.x + position.width : position.x - attackableRange.width;
         attackableRange.y = position.y;
-        return new AttackInfo((direction < 0) ? "player" : "enemy", attackableRange, ATK);
+        return attackInfo;
     }
 
-    public void beingAttack(AttackInfo attackInfo) {
+    public boolean beingAttack(AttackInfo attackInfo) {
         if (Intersector.overlaps(position, attackInfo.demageRectangle)) {
             this.healtPoint -= attackInfo.damege;
+            return true;
         }
+        return false;
     }
 
     public void setPosition(float x, float y) {

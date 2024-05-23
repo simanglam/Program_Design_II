@@ -163,7 +163,8 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         }
         for (AttackInfo attackInfo: pendingAttack){
             for (BossWarActor actor : (attackInfo.from.equals("enemy")) ? pokemonArray : enemyArray)
-                actor.beingAttack(attackInfo);
+                if(actor.beingAttack(attackInfo))
+                    break;
             ((attackInfo.from.equals("enemy")) ? playerTower : enemyTower).beingAttack(attackInfo);
             System.out.println(enemyTower.healtPoint);
         }
