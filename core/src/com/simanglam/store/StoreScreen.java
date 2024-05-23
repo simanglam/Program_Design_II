@@ -39,7 +39,7 @@ public class StoreScreen extends AbstractScreen {
         storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + "test" + ".json"));
         gameStatus = GameStatus.getGameStatus();
 
-        stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportWidth));
+        stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         Skin skin = game.assetManager.get("data/uiskin.json", Skin.class);
 
         Table rightTable = new Table(skin);
