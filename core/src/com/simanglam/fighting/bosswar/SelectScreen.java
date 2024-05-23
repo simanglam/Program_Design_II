@@ -37,7 +37,7 @@ public class SelectScreen extends AbstractScreen {
         strings = new ArrayList<>();
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         Table leftTable = new Table(skin);
-        leftTable.left();
+        leftTable.left().top();
         gameStatus = GameStatus.getGameStatus();
 
         Table rightTable = new Table(skin);
@@ -100,7 +100,7 @@ public class SelectScreen extends AbstractScreen {
             b.add(stack);
             stack.add(ib1);
             stack.add(ib2);
-            Cell<Button> c = leftTable.add(b).expandX().padBottom(20).prefSize(50);
+            Cell<Button> c = leftTable.add(b).expandX().padBottom(20).prefSize(50).left();
             if (i % 4 == 0){
                 i = 0;
                 c.row();
