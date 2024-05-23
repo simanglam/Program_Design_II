@@ -1,6 +1,5 @@
 package com.simanglam.util;
 
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,8 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
+import com.simanglam.store.StoreScreen;
 
 public class LoadingScreen extends AbstractScreen{
     Main game;
@@ -52,8 +53,8 @@ public class LoadingScreen extends AbstractScreen{
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
-        if (game.assetManager.update()){
-            game.setScreen(game.getMainPage());
+        if (game.assetManager.update(17)){
+            game.setScreen(new StoreScreen(game));
         }
         progressBar.setValue(game.assetManager.getProgress());
         stage.act();

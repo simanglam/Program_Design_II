@@ -12,6 +12,7 @@ public class GameStatus {
     ArrayList<InventoryItem> playerInventory;
     public ArrayList<InventoryPokemon> playerInventoryPokemons;
     public ArrayList<InventoryPokemon> selectedPokemon;
+    public int money;
     HashMap<String, Boolean> statusHashMap;
 
 
@@ -28,19 +29,34 @@ public class GameStatus {
         playerInventoryPokemons.add(i);
         playerInventoryPokemons.add(i2);
         statusHashMap = new HashMap<>();
+        this.money = 1000;
     }
 
-    public void addItem(InventoryItem inventoryItem){
-        if (playerInventory.contains(inventoryItem)){
-
+    public void addItem(String name){
+        for (InventoryItem i: playerInventory) {
+            if (i.getName().equals(name)){
+                i.add();
+                return ;
+            }
         }
-        else {
-            playerInventory.add(inventoryItem);
-        }
+        InventoryItem i = InventoryItem.generateInventoryItem(name);
+        i.add();
+        playerInventory.add(i);
     }
+
+    /*
+    public void consumeItem(String name){
+        for (int i = 0; i < playerInventory.size(); i++){
+            playerInventory.get(i)
+        }
+        playerInventory.add(i);
+    }
+    */
 
     public void save(){
-        String save = new Json().toJson(this);
+        if (gameStatus == null) return;
+        String save = new Json().prettyPrint(this);
+        System.out.println(this.money);
 
         Gdx.files.local("save.txt").writeString(save, false);
 

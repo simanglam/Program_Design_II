@@ -10,7 +10,9 @@ public class JsonLoaders {
     static {
         JsonLoaders.normalLoader = new Json();
         JsonLoaders.BossWarInfoLoader = new Json();
+
         JsonLoaders.BossWarInfoLoader.setElementType(BossWarInfo.class, "onstage", SpawnInfo.class);
         JsonLoaders.BossWarInfoLoader.setElementType(BossWarInfo.class, "enemies", SpawnInfo.class);
+
     }
 }
