@@ -41,6 +41,7 @@ public class StoreScreen extends AbstractScreen {
 
         stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportWidth));
         Skin skin = game.assetManager.get("data/uiskin.json", Skin.class);
+
         Table rightTable = new Table(skin);
         TextField pokemonNameLabel = new TextField("", skin);
         TextArea pokemonDescriptionLabel = new TextArea("", skin);
@@ -78,7 +79,7 @@ public class StoreScreen extends AbstractScreen {
                     gameStatus.money -= item.getPrice();
                 }
             });
-            b.add(ib1);
+            b.add(ib1).expand();
             b.row();
             b.add(String.valueOf(item.getPrice())).right();
             Cell<Button> c = leftTable.add(b).expandX().padBottom(20).prefSize(50).left();
@@ -88,6 +89,7 @@ public class StoreScreen extends AbstractScreen {
             }
             i++;
         });
+
         startButton.add(new Label("Start!", skin));
         rightTable.add(pokemonNameLabel).row();
         rightTable.add(pokemonDescriptionLabel).prefHeight(Const.maxViewportHeight).row();

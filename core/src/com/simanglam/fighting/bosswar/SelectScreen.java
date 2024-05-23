@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
@@ -35,7 +36,7 @@ public class SelectScreen extends AbstractScreen {
         this.game = game;
         stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         strings = new ArrayList<>();
-        Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        Skin skin = game.assetManager.get("data/uiskin.json", Skin.class);
         Table leftTable = new Table(skin);
         leftTable.left().top();
         gameStatus = GameStatus.getGameStatus();
@@ -122,7 +123,7 @@ public class SelectScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        ScreenUtils.clear(0, 0, 0, 1);
         stage.act();
         stage.draw();
     }
