@@ -14,10 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.util.Const;
+import com.simanglam.util.JsonLoaders;
 
 public class BossWarWorld extends InputAdapter implements Disposable {
     ArrayList<BossWarActor> pokemonArray;
@@ -51,10 +51,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         this.viewport.apply();
         lastTouchDown = new Vector3(0, 0, 0);
         this.money = 0;
-        Json json = new Json();
-        json.setElementType(BossWarInfo.class, "onstage", SpawnInfo.class);
-        json.setElementType(BossWarInfo.class, "enemies", SpawnInfo.class);
-        BossWarInfo bs = json.fromJson(BossWarInfo.class, Gdx.files.internal("bosswar/ex1.json"));
+        BossWarInfo bs = JsonLoaders.BossWarInfoLoader.fromJson(BossWarInfo.class, Gdx.files.internal("bosswar/ex1.json"));
         for (SpawnInfo info: bs.onstage){
             for (int i = 0; i < info.spawnCoolDown; i++)
                 enemyArray.add(new BossWarActor("enemies/" + info.name + "/", true));
@@ -213,26 +210,4 @@ public class BossWarWorld extends InputAdapter implements Disposable {
     public void dispose() {
         stage.dispose();
     }
-}
-
-class BossWarInfo {
-    public String image, enemyTower, playerTower;
-    public ArrayList<SpawnInfo> onstage;
-    public ArrayList<SpawnInfo> enemies;
-}
-
-class SpawnInfo {
-    public String name;
-    int spawnCoolDown;
-}
-
-class EnemySpawnInfo {
-    BossWarActor enemy;
-    int spawnCoolDown;
-
-    public EnemySpawnInfo(BossWarActor proto, int coolDown) {
-        this.enemy = proto;
-        spawnCoolDown = coolDown;
-    }
-    
 }
