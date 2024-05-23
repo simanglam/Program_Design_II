@@ -22,7 +22,11 @@ public class GameStatus {
         InventoryPokemon i = new InventoryPokemon();
         i.name = "base";
         i.description = "Just for test";
+        InventoryPokemon i2 = new InventoryPokemon();
+        i2.name = "base";
+        i2.description = "Just for test";
         playerInventoryPokemons.add(i);
+        playerInventoryPokemons.add(i2);
         statusHashMap = new HashMap<>();
     }
 

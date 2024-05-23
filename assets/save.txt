@@ -1,1 +1,1 @@
-{playerInventoryPokemons:[{name:base,description:Just for test}]}
+{playerInventoryPokemons:[{name:base,description:Just for test},{name:base,description:Just for test}]}
