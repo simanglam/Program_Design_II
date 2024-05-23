@@ -36,7 +36,6 @@ public class StoreScreen extends AbstractScreen {
         this.game = game;
         Json loader = new Json();
 
-        loader.setElementType(StoreList.class, "items", StoreItem.class);
         storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + "test" + ".json"));
         gameStatus = GameStatus.getGameStatus();
 
