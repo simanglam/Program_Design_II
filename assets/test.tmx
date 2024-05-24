@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="80" tilewidth="16" tileheight="16" infinite="0" parallaxoriginx="16" parallaxoriginy="16" nextlayerid="9" nextobjectid="36">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="80" tilewidth="16" tileheight="16" infinite="0" parallaxoriginx="16" parallaxoriginy="16" nextlayerid="10" nextobjectid="37">
  <tileset firstgid="1" name="CuteRPG_Field_Tiles" tilewidth="16" tileheight="16" tilecount="384" columns="24">
   <image source="Cute RPG World/Tilesets/CuteRPG_Field_Tiles.png" width="384" height="256"/>
  </tileset>
@@ -430,6 +430,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="9" name="生怪區">
+  <object id="36" x="582.528" y="520.716" width="1007.72" height="726.755"/>
+ </objectgroup>
  <objectgroup id="2" name="物件層 1">
   <object id="1" type="Rectangle" x="880" y="480" width="16.0398" height="16"/>
   <object id="2" type="Rectangle" x="894.897" y="479.909" width="17.2299" height="16.1353"/>

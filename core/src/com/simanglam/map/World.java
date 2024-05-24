@@ -21,6 +21,8 @@ public class World {
     public OrthographicCamera camera;
     public Player player;
     public Viewport viewport;
+    float accu;
+    double ecounterPossibility;
 
     public World(){
         this.tiledMap = new TmxMapLoader().load("test.tmx");
@@ -47,8 +49,9 @@ public class World {
         this.camera.update();
     }
 
-    public RectangleMapObject getCollideObject(Rectangle rectangle){
-        MapLayer collisionObjectLayer = this.tiledMap.getLayers().get("物件層 1");
+    public RectangleMapObject getCollideObject(Rectangle rectangle, String layer){
+        MapLayer collisionObjectLayer = this.tiledMap.getLayers().get(layer);
+        if (collisionObjectLayer == null) return null;
         MapObjects objects = collisionObjectLayer.getObjects();
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
             Rectangle mapRectangle = rectangleObject.getRectangle();
@@ -59,8 +62,9 @@ public class World {
         return null;
     }
 
-    public MapObjects getCollideObjects(Rectangle rectangle){
-        MapLayer collisionObjectLayer = this.tiledMap.getLayers().get("物件層 1");
+    public MapObjects getCollideObjects(Rectangle rectangle, String layer){
+        MapLayer collisionObjectLayer = this.tiledMap.getLayers().get(layer);
+        if (collisionObjectLayer == null) return null;
         MapObjects objects = collisionObjectLayer.getObjects();
         MapObjects collideObjects = new MapObjects();
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
@@ -74,7 +78,7 @@ public class World {
 
     private void playerCollideUpdate(boolean x){
         Rectangle playerRectangle = player.getRectangle();
-        MapObjects rectangleMapObjects = getCollideObjects(playerRectangle);
+        MapObjects rectangleMapObjects = getCollideObjects(playerRectangle, "物件層 1");
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             if (rObject.getProperties().get("portal") != null){
                 this.tiledMap.dispose();
@@ -107,6 +111,25 @@ public class World {
                 }
             }
         }
+    }
+
+    public boolean ecounterUpdate(float deltaT){
+        if (getCollideObject(player.getRectangle(), "生怪區") == null){
+            accu = 0;
+            ecounterPossibility = 0;
+            return false;
+        }
+        accu += deltaT;
+        if ((int)accu >= 1){
+            accu -= 1;
+            ecounterPossibility += 1.0 / (int)((Math.random() * 50) + 1);
+            System.out.println(ecounterPossibility);
+            if (ecounterPossibility >= (int)(Math.random() * 50 + 1)){
+                ecounterPossibility = 0;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void resize(int x, int y){

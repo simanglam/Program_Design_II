@@ -39,7 +39,6 @@ public class MapScreen extends AbstractScreen{
         this.inputMultiplexer.addProcessor(this.world.player);
         this.inputMultiplexer.addProcessor(this);
         this.dialog = new Dialog(this.stage);
-        this.handleInput();
     }
 
     @Override
@@ -52,8 +51,9 @@ public class MapScreen extends AbstractScreen{
     public void render(float deltaT){
         ScreenUtils.clear(0, 0, 0, 0);
         SpriteBatch batch = game.getSpriteBatch();
+        if (world.ecounterUpdate(deltaT))
+            game.setScreen(game.getInfoScreen());
         this.world.update(deltaT);
-
         batch.setProjectionMatrix(this.world.camera.combined);
         this.stage.act();
         this.world.render(batch);
@@ -72,10 +72,12 @@ public class MapScreen extends AbstractScreen{
     public boolean keyDown(int keycode) {
         if (keycode == Keys.Z){
             Rectangle iRectangle = this.world.player.creatInvestgateRectangle();
-            RectangleMapObject collMapObject = world.getCollideObject(iRectangle);
-            if (collMapObject != null && collMapObject.getProperties().get("description") != null){
-                dialog.setDescription(((String)collMapObject.getProperties().get("description")).concat("你好"));
-                stage.addActor(dialog);
+            RectangleMapObject collMapObject = world.getCollideObject(iRectangle, "物件層 1");
+            if (collMapObject != null){
+                if (collMapObject.getProperties().get("description") != null){
+                    dialog.setDescription(((String)collMapObject.getProperties().get("description")));
+                    stage.addActor(dialog);
+                }
             }
             return true;
         }
