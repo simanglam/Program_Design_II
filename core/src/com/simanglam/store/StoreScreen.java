@@ -32,11 +32,11 @@ public class StoreScreen extends AbstractScreen {
     Stage stage;
     ArrayList<StoreItem> storeItems;
 
-    public StoreScreen(final Main game){
+    public StoreScreen(final Main game, String path){
         this.game = game;
         Json loader = new Json();
 
-        storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + "test" + ".json"));
+        storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + path + ".json"));
         gameStatus = GameStatus.getGameStatus();
 
         stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight));

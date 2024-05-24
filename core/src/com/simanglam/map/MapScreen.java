@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
+import com.simanglam.store.StoreScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
@@ -86,6 +87,9 @@ public class MapScreen extends AbstractScreen{
             if (collMapObject != null){
                 if (collMapObject.getProperties().get("description") != null){
                     addDialog(((String)collMapObject.getProperties().get("description")));
+                }
+                if (collMapObject.getProperties().get("store") != null){
+                    game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
                 }
             }
             return true;
