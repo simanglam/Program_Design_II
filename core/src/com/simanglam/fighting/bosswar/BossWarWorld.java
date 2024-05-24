@@ -37,7 +37,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
     Label playerLabel;
     Stage stage;
 
-    public BossWarWorld(){
+    public BossWarWorld(String path){
         pokemonArray = new ArrayList<>();
         enemyArray = new ArrayList<>();
         pendingAttack = new ArrayList<>();
@@ -51,7 +51,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         this.viewport.apply();
         lastTouchDown = new Vector3(0, 0, 0);
         this.money = 0;
-        BossWarInfo bs = JsonLoaders.BossWarInfoLoader.fromJson(BossWarInfo.class, Gdx.files.internal("bosswar/ex1.json"));
+        BossWarInfo bs = JsonLoaders.BossWarInfoLoader.fromJson(BossWarInfo.class, Gdx.files.internal("bosswar/" + path));
         for (SpawnInfo info: bs.onstage){
             for (int i = 0; i < info.spawnCoolDown; i++)
                 enemyArray.add(new BossWarActor("enemies/" + info.name + "/", true));

@@ -36,9 +36,9 @@ public class BossWarScreen extends AbstractScreen {
     Label label;
     InputMultiplexer inputMultiplexer;
 
-    public BossWarScreen(final Main game){
+    public BossWarScreen(final Main game, String path){
         this.game = game;
-        this.world = new BossWarWorld();
+        this.world = new BossWarWorld(path);
         Viewport viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera());
         this.fightStage = new Stage(viewport);
         label = new Label("16500/16500", new Skin(Gdx.files.internal("data/uiskin.json")));
