@@ -10,10 +10,10 @@ import com.badlogic.gdx.utils.Json;
 public class GameStatus {
     static GameStatus gameStatus;
     ArrayList<InventoryItem> playerInventory;
-    public ArrayList<InventoryPokemon> playerInventoryPokemons;
-    public ArrayList<InventoryPokemon> selectedPokemon;
+    public final ArrayList<InventoryPokemon> playerInventoryPokemons;
+    public final ArrayList<InventoryPokemon> selectedPokemon;
     public int money;
-    HashMap<String, Boolean> statusHashMap;
+    public final HashMap<String, Boolean> statusHashMap;
 
 
     private GameStatus(){
@@ -30,6 +30,10 @@ public class GameStatus {
         playerInventoryPokemons.add(i2);
         statusHashMap = new HashMap<>();
         this.money = 1000;
+    }
+
+    public HashMap<String, Boolean> getStatusHashMap(){
+        return statusHashMap;
     }
 
     public void addItem(String name){
