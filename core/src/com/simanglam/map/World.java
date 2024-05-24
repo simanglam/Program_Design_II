@@ -3,6 +3,7 @@ package com.simanglam.map;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.simanglam.fighting.bosswar.BossWarScreen;
 import com.simanglam.util.Const;
 
 public class World {
@@ -37,11 +39,27 @@ public class World {
         this.renderer.setView(camera);
     }
 
-    public void update(float deltaT){
+    public void update(float deltaT, MapScreen screen){
+        if (ecounterUpdate(deltaT))
+            screen.game.setScreen(screen.game.getInfoScreen());
+        MapObject currentCollide = getCollideObject(player.getRectangle(), "其他");
+        if (currentCollide != null){
+            if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty()&& screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) != false)
+                screen.game.setScreen(new BossWarScreen(screen.game, (String)currentCollide.getProperties().get("bosswar")));
+            else if(currentCollide.getProperties().get("bosswar") != null && screen.gameStatus.selectedPokemon.isEmpty()){
+                screen.addDialog("You Must select pokemon to continue");
+                player.updateX(deltaT);
+                playerCollideUpdate(true, "其他");
+
+                player.updateY(deltaT);
+                playerCollideUpdate(false, "其他");
+                player.freeze();
+            }
+        }
         player.updateX(deltaT);
-        playerCollideUpdate(true);
+        playerCollideUpdate(true, "物件層 1");
         player.updateY(deltaT);
-        playerCollideUpdate(false);
+        playerCollideUpdate(false, "物件層 1");
         float[] tempView = {0, 0, 0};
         tempView[0] = Math.max(Math.min(player.getPosition().x, ((int)tiledMap.getProperties().get("width") * (int)tiledMap.getProperties().get("tilewidth")) - (this.viewport.getWorldWidth() / 2)), 0 + (this.viewport.getWorldWidth() / 2));
         tempView[1] = Math.max(Math.min(player.getPosition().y, ((int)tiledMap.getProperties().get("height") * (int)tiledMap.getProperties().get("tileheight")) - (this.viewport.getWorldHeight() / 2)), 0 + (this.viewport.getWorldHeight() / 2));
@@ -76,15 +94,15 @@ public class World {
         return collideObjects;
     }
 
-    private void playerCollideUpdate(boolean x){
+    public void playerCollideUpdate(boolean x, String layer){
         Rectangle playerRectangle = player.getRectangle();
-        MapObjects rectangleMapObjects = getCollideObjects(playerRectangle, "物件層 1");
+        MapObjects rectangleMapObjects = getCollideObjects(playerRectangle, layer);
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             if (rObject.getProperties().get("portal") != null){
                 this.tiledMap.dispose();
                 this.tiledMap = new TmxMapLoader().load((String)rObject.getProperties().get("next"));
                 this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
-                for (RectangleMapObject rectangleObject : tiledMap.getLayers().get("物件層 1").getObjects().getByType(RectangleMapObject.class)) {
+                for (RectangleMapObject rectangleObject : tiledMap.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {
                     if (rectangleObject.getProperties().get("portal") != null && ((String)rectangleObject.getProperties().get("entry")).equals((String)rObject.getProperties().get("exit"))){
                         player.setPosition(rectangleObject.getRectangle().x - (float)rectangleObject.getProperties().get("entryX"), rectangleObject.getRectangle().y - (float)rectangleObject.getProperties().get("entryY"));
                         System.out.println(rectangleObject.getRectangle());

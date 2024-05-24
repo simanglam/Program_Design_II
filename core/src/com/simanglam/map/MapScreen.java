@@ -18,6 +18,7 @@ import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
+import com.simanglam.util.GameStatus;
 
 public class MapScreen extends AbstractScreen{
     Main game;
@@ -26,6 +27,7 @@ public class MapScreen extends AbstractScreen{
     InputMultiplexer inputMultiplexer;
     Logger logger;
     Dialog dialog;
+    GameStatus gameStatus;
 
     public MapScreen(final Main game){
         this.game = game;
@@ -39,6 +41,7 @@ public class MapScreen extends AbstractScreen{
         this.inputMultiplexer.addProcessor(this.world.player);
         this.inputMultiplexer.addProcessor(this);
         this.dialog = new Dialog(this.stage);
+        gameStatus = GameStatus.getGameStatus();
     }
 
     @Override
@@ -51,14 +54,21 @@ public class MapScreen extends AbstractScreen{
     public void render(float deltaT){
         ScreenUtils.clear(0, 0, 0, 0);
         SpriteBatch batch = game.getSpriteBatch();
+
         if (world.ecounterUpdate(deltaT))
             game.setScreen(game.getInfoScreen());
-        this.world.update(deltaT);
+        
+        this.world.update(deltaT, this);
         batch.setProjectionMatrix(this.world.camera.combined);
         this.stage.act();
         this.world.render(batch);
         stage.getViewport().apply();
         this.stage.draw();
+    }
+
+    public void addDialog(String description){
+        dialog.setDescription(description);
+        stage.addActor(dialog);
     }
 
     @Override
@@ -75,8 +85,7 @@ public class MapScreen extends AbstractScreen{
             RectangleMapObject collMapObject = world.getCollideObject(iRectangle, "物件層 1");
             if (collMapObject != null){
                 if (collMapObject.getProperties().get("description") != null){
-                    dialog.setDescription(((String)collMapObject.getProperties().get("description")));
-                    stage.addActor(dialog);
+                    addDialog(((String)collMapObject.getProperties().get("description")));
                 }
             }
             return true;
