@@ -10,12 +10,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.util.Const;
+import com.simanglam.util.JsonLoaders;
 
-public class BossWarWorld extends InputAdapter {
+public class BossWarWorld extends InputAdapter implements Disposable {
     ArrayList<BossWarActor> pokemonArray;
     ArrayList<BossWarActor> enemyArray;
     ArrayList<EnemySpawnInfo> enemySpawnInfos;
@@ -29,12 +33,17 @@ public class BossWarWorld extends InputAdapter {
     int money;
     int maxEnemy;
     float spawnAccu;
+    Label enemyLabel;
+    Label playerLabel;
+    Stage stage;
 
     public BossWarWorld(){
         pokemonArray = new ArrayList<>();
         enemyArray = new ArrayList<>();
         pendingAttack = new ArrayList<>();
         enemySpawnInfos = new ArrayList<>();
+        enemyLabel = new Label("a", new Skin(Gdx.files.internal("data/uiskin.json")));
+        playerLabel = new Label("a", new Skin(Gdx.files.internal("data/uiskin.json")));
         this.camera = new OrthographicCamera();
         camera.setToOrtho(false);
         this.viewport = new FitViewport(Const.maxViewportWidth / 2f, Const.maxViewportHeight / 2f, camera);
@@ -42,10 +51,7 @@ public class BossWarWorld extends InputAdapter {
         this.viewport.apply();
         lastTouchDown = new Vector3(0, 0, 0);
         this.money = 0;
-        Json json = new Json();
-        json.setElementType(BossWarInfo.class, "onstage", SpawnInfo.class);
-        json.setElementType(BossWarInfo.class, "enemies", SpawnInfo.class);
-        BossWarInfo bs = json.fromJson(BossWarInfo.class, Gdx.files.internal("bosswar/ex1.json"));
+        BossWarInfo bs = JsonLoaders.BossWarInfoLoader.fromJson(BossWarInfo.class, Gdx.files.internal("bosswar/ex1.json"));
         for (SpawnInfo info: bs.onstage){
             for (int i = 0; i < info.spawnCoolDown; i++)
                 enemyArray.add(new BossWarActor("enemies/" + info.name + "/", true));
@@ -61,6 +67,11 @@ public class BossWarWorld extends InputAdapter {
         enemyTower.setPosition(0, 120);
         this.playerTower = new BossWarActor("enemies/" + bs.playerTower + "/", false);
         this.playerTower.setPosition(map.getWidth() - playerTower.position.width, 120);
+        stage = new Stage(viewport);
+        playerLabel.setPosition(playerTower.position.x - playerLabel.getWidth(), playerTower.position.y + playerLabel.getHeight());
+        enemyLabel.setPosition(enemyTower.position.x, enemyTower.position.y + enemyLabel.getHeight());
+        stage.addActor(enemyLabel);
+        stage.addActor(playerLabel);
     }
 
     public void centerCamera(){
@@ -117,17 +128,18 @@ public class BossWarWorld extends InputAdapter {
 
     public void update(float delta, SpriteBatch batch){
         this.money += Math.max((int)delta, 1);
-        spawnAccu += delta;
-        for (EnemySpawnInfo info: enemySpawnInfos){
-            if ((int)spawnAccu != 0 && (int)spawnAccu % info.spawnCoolDown == 0){
-                enemyArray.add(new BossWarActor(info.enemy));
+        if (enemyTower.healtPoint > 0 && playerTower.healtPoint > 0){
+            spawnAccu += delta;
+            for (EnemySpawnInfo info: enemySpawnInfos){
+                if ((int)spawnAccu != 0 && (int)spawnAccu % info.spawnCoolDown == 0){
+                    enemyArray.add(new BossWarActor(info.enemy));
+                }
+            }
+            if (spawnAccu >= maxEnemy){
+                spawnAccu -= maxEnemy;
+                System.out.println(spawnAccu);
             }
         }
-        if (spawnAccu >= maxEnemy){
-            spawnAccu -= maxEnemy;
-            System.out.println(spawnAccu);
-        }
-
         this.viewport.getCamera().update();
         batch.setProjectionMatrix(this.viewport.getCamera().combined);
         batch.begin();
@@ -148,7 +160,10 @@ public class BossWarWorld extends InputAdapter {
         }
         for (AttackInfo attackInfo: pendingAttack){
             for (BossWarActor actor : (attackInfo.from.equals("enemy")) ? pokemonArray : enemyArray)
-                actor.beingAttack(attackInfo);
+                if(actor.beingAttack(attackInfo))
+                    break;
+            ((attackInfo.from.equals("enemy")) ? playerTower : enemyTower).beingAttack(attackInfo);
+            System.out.println(enemyTower.healtPoint);
         }
         for (int i = 0; i < pokemonArray.size(); i++){
                 BossWarActor actor = pokemonArray.get(i);
@@ -164,6 +179,10 @@ public class BossWarWorld extends InputAdapter {
         }
         pendingAttack.clear();
         batch.end();
+        enemyLabel.setText((enemyTower.healtPoint <= 0) ? 0 : enemyTower.healtPoint);
+        playerLabel.setText((playerTower.healtPoint <= 0) ? 0 : playerTower.healtPoint);
+        stage.act();
+        stage.draw();
     }
 
     public void addPlayerPokemon(BossWarActor actor){
@@ -183,26 +202,12 @@ public class BossWarWorld extends InputAdapter {
         }
         return false;
     }
-}
 
-class BossWarInfo {
-    public String image, enemyTower, playerTower;
-    public ArrayList<SpawnInfo> onstage;
-    public ArrayList<SpawnInfo> enemies;
-}
+    public boolean win(){return enemyTower.healtPoint <= 0;}
+    public boolean lose(){return playerTower.healtPoint <= 0;}
 
-class SpawnInfo {
-    public String name;
-    int spawnCoolDown;
-}
-
-class EnemySpawnInfo {
-    BossWarActor enemy;
-    int spawnCoolDown;
-
-    public EnemySpawnInfo(BossWarActor proto, int coolDown) {
-        this.enemy = proto;
-        spawnCoolDown = coolDown;
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
-    
 }

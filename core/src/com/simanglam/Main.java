@@ -2,13 +2,16 @@ package com.simanglam;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.simanglam.fighting.MainPage;
+import com.simanglam.fighting.PokemonScreen;
 import com.simanglam.fighting.bosswar.BossWarScreen;
+import com.simanglam.fighting.bosswar.SelectScreen;
 import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
+import com.simanglam.util.GameStatus;
 import com.simanglam.util.InfoScreen;
-import com.simanglam.fighting.PokemonScreen;
-import com.simanglam.fighting.MainPage;
 
 public class Main extends Game {
 	private SpriteBatch batch;
@@ -17,6 +20,8 @@ public class Main extends Game {
 	private Screen bossWarScreen;
 	private Screen pokemonScreen;
     private Screen mainPage;
+
+	public AssetManager assetManager;
 
 	public SpriteBatch getSpriteBatch(){return this.batch;}
 	public Screen getGameScreen(){return gameScreen;}
@@ -27,14 +32,15 @@ public class Main extends Game {
 
 	@Override
 	public void create () {
+		assetManager = new AssetManager();
+		GameStatus gameStatus = GameStatus.getGameStatus();
 		batch = new SpriteBatch();
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
-		bossWarScreen = new BossWarScreen(this);
 		pokemonScreen = new PokemonScreen(this);
         mainPage = new MainPage(this);
-		this.setScreen(pokemonScreen);
-		bossWarScreen = new BossWarScreen(this, new String[]{"base"});
+		bossWarScreen = new BossWarScreen(this);
+		this.setScreen(new SelectScreen(this));
 	}
 
     @Override
