@@ -1,8 +1,8 @@
 package com.simanglam.fighting;
+
 import java.util.List;
 
-
-public class Pokemon {
+class Enemy {
     public String name;
     public String image;
     public int health;

@@ -1,0 +1,18 @@
+
+[
+    {
+        "name": "test",
+        "description": "for testing only",
+        "price": 200
+    },
+    {
+        "name": "test",
+        "description": "for testing only",
+        "price": 300
+    },
+    {
+        "name": "test",
+        "description": "for testing only",
+        "price": 500
+    }
+]
