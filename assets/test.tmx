@@ -437,7 +437,12 @@
   <object id="1" type="Rectangle" x="880" y="480" width="16.0398" height="16"/>
   <object id="2" type="Rectangle" x="894.897" y="479.909" width="17.2299" height="16.1353"/>
   <object id="3" type="Rectangle" x="896.127" y="463.936" width="16" height="16.3748"/>
-  <object id="4" type="Rectangle" x="896.127" y="431.805" width="16" height="32.4283"/>
+  <object id="4" type="Rectangle" x="896.127" y="431.805" width="16" height="32.4283">
+   <properties>
+    <property name="give" value="test"/>
+    <property name="once" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="5" type="Rectangle" x="872.168" y="431.991" width="23.6149" height="16">
    <properties>
     <property name="store" value="test"/>
