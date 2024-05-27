@@ -28,7 +28,7 @@ public class World {
     double ecounterPossibility;
 
     public World(){
-        this.tiledMap = new TmxMapLoader().load("test.tmx");
+        this.tiledMap = new TmxMapLoader().load("library.tmx");
         this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.camera = new OrthographicCamera();
         this.player = new Player();

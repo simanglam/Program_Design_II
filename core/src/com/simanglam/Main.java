@@ -20,23 +20,23 @@ public class Main extends Game {
     private Screen mainPage;
     private Screen savePage;
 
-    public SpriteBatch getSpriteBatch(){return this.batch;}
-    public Screen getGameScreen(){return gameScreen;}
-    public Screen getInfoScreen(){return infoScreen;}
-    public Screen getBossWarScreen(){return bossWarScreen;}
-    public Screen getPokemonScreen(){return pokemonScreen;}
+	public SpriteBatch getSpriteBatch(){return this.batch;}
+	public Screen getGameScreen(){return gameScreen;}
+	public Screen getInfoScreen(){return infoScreen;}
+	public Screen getBossWarScreen(){return bossWarScreen;}
+	public Screen getPokemonScreen(){return pokemonScreen;}
     public Screen getMainPage(){return mainPage;}
-    public Screen getSavePage(){return savePage;}
-    @Override
-    public void create () {
-        GameStatus gameStatus = GameStatus.getGameStatus();
-        batch = new SpriteBatch();
-        infoScreen = new InfoScreen(this);
-        gameScreen = new MapScreen(this);
-        mainPage = new MainPage(this);
-        savePage = new SavePage(this);
-        this.setScreen(new LoadingScreen(this));
-    }
+	public Screen getSavePage(){return savePage;}
+	@Override
+	public void create () {
+		GameStatus gameStatus = GameStatus.getGameStatus();
+		batch = new SpriteBatch();
+		infoScreen = new InfoScreen(this);
+		gameScreen = new MapScreen(this);
+    	mainPage = new MainPage(this);
+		savePage = new SavePage(this);
+		this.setScreen(new LoadingScreen(this));
+	}
 
     @Override
     public void setScreen(Screen screen) {
