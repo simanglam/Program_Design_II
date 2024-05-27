@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
+import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 
@@ -31,12 +32,14 @@ public class SelectScreen extends AbstractScreen {
     Stage stage;
     ArrayList<String> strings;
     GameStatus gameStatus;
+    AssetsManagerWrapper assetsManagerWrapper;
 
     public SelectScreen(final Main game){
         this.game = game;
+        assetsManagerWrapper = AssetsManagerWrapper.getAssetsManagerWrapper();
         stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         strings = new ArrayList<>();
-        Skin skin = game.assetManager.get("data/uiskin.json", Skin.class);
+        Skin skin = assetsManagerWrapper.assetManager.get("data/uiskin.json", Skin.class);
         Table leftTable = new Table(skin);
         leftTable.left().top();
         gameStatus = GameStatus.getGameStatus();
@@ -57,15 +60,15 @@ public class SelectScreen extends AbstractScreen {
                 gameStatus.playerInventoryPokemons.forEach((Pokemon) -> {
                     System.out.println(Pokemon.getName());
                 });
-                game.setScreen(new BossWarScreen(game));
+                game.setScreen(game.getGameScreen());
             }
         });
 
         gameStatus.playerInventoryPokemons.forEach((pokemon) -> {
             int i = 1;
             Button b = new Button(skin);
-            ImageButton ib1 = new ImageButton(new TextureRegionDrawable(new Texture(Gdx.files.internal("enemies/" + pokemon.getName() + "/image/idle-0.png"))));
-            ImageButton ib2 = new ImageButton(new TextureRegionDrawable(new Texture(Gdx.files.internal("character.png"))));
+            ImageButton ib1 = new ImageButton(new TextureRegionDrawable(assetsManagerWrapper.assetManager.get("enemies/" + pokemon.getName() + "/image/idle-0.png", Texture.class)));
+            ImageButton ib2 = new ImageButton(new TextureRegionDrawable(assetsManagerWrapper.assetManager.get("character.png", Texture.class)));
             ib1.setVisible(!gameStatus.selectedPokemon.contains(pokemon));
             ib2.setVisible(gameStatus.selectedPokemon.contains(pokemon));
             Stack stack = new Stack();
