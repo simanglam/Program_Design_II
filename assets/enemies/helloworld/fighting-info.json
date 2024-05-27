@@ -1,0 +1,96 @@
+{
+    "pokemons": [
+      {
+        "name": "皮卡丘",
+        "image": "pika.png",
+        "health": 500,
+        "skills": [
+          {
+            "name": "Thunder",
+            "power": 400
+          },
+          {
+            "name": "Electro",
+            "power": 60
+          },
+          {
+            "name": "Attack",
+            "power": 40
+          },
+          {
+            "name": "Thunderbolt",
+            "power": 90
+          }
+        ]
+      },
+      {
+        "name": "伊布",
+        "image": "yeeboo.png",
+        "health": 260,
+        "skills": [
+          {
+            "name": "Flame",
+            "power": 90
+          },
+          {
+            "name": "Spin",
+            "power": 70
+          },
+          {
+            "name": "Breath",
+            "power": 60
+          },
+          {
+            "name": "AirSlash",
+            "power": 75
+          }
+        ]
+      },
+      {
+        "name": "球",
+        "image": "booboo.png",
+        "health": 120,
+        "skills": [
+          {
+            "name": "Whip",
+            "power": 45
+          },
+          {
+            "name": "Razor Leaf",
+            "power": 55
+          },
+          {
+            "name": "bomb",
+            "power": 80
+          },
+          {
+            "name": "Beam",
+            "power": 120
+          }
+        ]
+      },
+      {
+        "name": "水",
+        "image": "water.png",
+        "health": 180,
+        "skills": [
+          {
+            "name": "Water",
+            "power": 40
+          },
+          {
+            "name": "Bubble",
+            "power": 40
+          },
+          {
+            "name": "Water ",
+            "power": 60
+          },
+          {
+            "name": "Hydro",
+            "power": 110
+          }
+        ]
+      }
+    ]
+  }
