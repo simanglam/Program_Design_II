@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Json;
 
 
@@ -14,6 +15,8 @@ public class GameStatus {
     public final ArrayList<InventoryPokemon> selectedPokemon;
     public int money;
     public final HashMap<String, Boolean> statusHashMap;
+    public String currentMap;
+    public Rectangle currentPosition;
 
 
     private GameStatus(){
@@ -30,6 +33,8 @@ public class GameStatus {
         playerInventoryPokemons.add(i2);
         statusHashMap = new HashMap<>();
         this.money = 1000;
+        currentMap = "test.tmx";
+        currentPosition = new Rectangle();
     }
 
     public HashMap<String, Boolean> getStatusHashMap(){

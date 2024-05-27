@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.fighting.bosswar.BossWarScreen;
 import com.simanglam.util.Const;
+import com.simanglam.util.GameStatus;
 
 public class World {
     public TiledMap tiledMap;
@@ -101,12 +102,12 @@ public class World {
             if (rObject.getProperties().get("portal") != null){
                 this.tiledMap.dispose();
                 this.tiledMap = new TmxMapLoader().load((String)rObject.getProperties().get("next"));
+                GameStatus.getGameStatus().currentMap = (String)rObject.getProperties().get("next");
                 this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {
                     if (rectangleObject.getProperties().get("portal") != null && ((String)rectangleObject.getProperties().get("entry")).equals((String)rObject.getProperties().get("exit"))){
                         player.setPosition(rectangleObject.getRectangle().x - (float)rectangleObject.getProperties().get("entryX"), rectangleObject.getRectangle().y - (float)rectangleObject.getProperties().get("entryY"));
-                        System.out.println(rectangleObject.getRectangle());
-                        System.out.println(player.getPosition());
+                        GameStatus.getGameStatus().currentPosition.set(playerRectangle);
                         return ;
                     }
                 }

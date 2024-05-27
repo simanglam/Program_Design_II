@@ -12,6 +12,9 @@ import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.GameStatus;
 import com.simanglam.util.InfoScreen;
+import com.simanglam.fighting.PokemonScreen;
+import com.simanglam.fighting.MainPage;
+import com.simanglam.fighting.SavePage;
 
 public class Main extends Game {
 	private SpriteBatch batch;
@@ -20,6 +23,7 @@ public class Main extends Game {
 	private Screen bossWarScreen;
 	private Screen pokemonScreen;
     private Screen mainPage;
+	private Screen savePage;
 
 	public AssetManager assetManager;
 
@@ -29,7 +33,7 @@ public class Main extends Game {
 	public Screen getBossWarScreen(){return bossWarScreen;}
 	public Screen getPokemonScreen(){return pokemonScreen;}
     public Screen getMainPage(){return mainPage;}
-
+	public Screen getSavePage(){return savePage;}
 	@Override
 	public void create () {
 		assetManager = new AssetManager();
@@ -38,7 +42,9 @@ public class Main extends Game {
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
 		pokemonScreen = new PokemonScreen(this);
-        mainPage = new MainPage(this);
+    mainPage = new MainPage(this);
+		savePage = new SavePage(this);
+		this.setScreen(mainPage);
 		bossWarScreen = new BossWarScreen(this);
 		this.setScreen(new SelectScreen(this));
 	}

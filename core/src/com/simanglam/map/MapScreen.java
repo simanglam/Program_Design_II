@@ -1,9 +1,6 @@
 
 package com.simanglam.map;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
@@ -20,13 +17,13 @@ import com.simanglam.store.StoreScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
+import com.simanglam.util.JsonLoaders;
 
 public class MapScreen extends AbstractScreen{
     Main game;
     Stage stage;
     World world;
     InputMultiplexer inputMultiplexer;
-    Logger logger;
     Dialog dialog;
     GameStatus gameStatus;
 
@@ -35,8 +32,6 @@ public class MapScreen extends AbstractScreen{
         this.world = new World();
         this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
         this.stage.getCamera().position.set(0, 480, 0);
-        this.logger = Logger.getLogger("Main");
-        this.logger.setLevel(Level.ALL);
         this.inputMultiplexer = new InputMultiplexer();
         this.inputMultiplexer.addProcessor(this.stage);
         this.inputMultiplexer.addProcessor(this.world.player);
@@ -85,17 +80,26 @@ public class MapScreen extends AbstractScreen{
             Rectangle iRectangle = this.world.player.creatInvestgateRectangle();
             RectangleMapObject collMapObject = world.getCollideObject(iRectangle, "物件層 1");
             if (collMapObject != null){
+                if (collMapObject.getProperties().get("give") != null){
+                    if (gameStatus.getStatusHashMap().get(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give")) == null)
+                        gameStatus.addItem((String)collMapObject.getProperties().get("give"));
+                    if (collMapObject.getProperties().get("once") == null)
+                        gameStatus.getStatusHashMap().put(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give"), true);
+                        
+                }
                 if (collMapObject.getProperties().get("description") != null){
                     addDialog(((String)collMapObject.getProperties().get("description")));
                 }
                 if (collMapObject.getProperties().get("store") != null){
                     game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
                 }
+                gameStatus.save();
             }
             return true;
         }
         else if(keycode == Keys.ESCAPE){
             this.world.player.freeze();
+            gameStatus.currentPosition = world.player.getRectangle();
             game.setScreen(game.getInfoScreen());
         }
         return false;
