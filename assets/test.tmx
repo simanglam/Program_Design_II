@@ -477,6 +477,8 @@
   <object id="42" x="439.602" y="503.928">
    <properties>
     <property name="puzzle" value="0234"/>
+    <property name="reward" value="test"/>
+    <property name="word" value="Haha"/>
    </properties>
   </object>
  </objectgroup>
