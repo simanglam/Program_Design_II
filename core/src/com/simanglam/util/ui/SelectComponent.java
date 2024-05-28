@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.simanglam.Main;
 import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
@@ -27,7 +25,7 @@ public class SelectComponent extends Table {
     GameStatus gameStatus;
     AssetsManagerWrapper assetsManagerWrapper;
 
-    public SelectComponent(final Main game){
+    public SelectComponent(){
         super(AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class));
         assetsManagerWrapper = AssetsManagerWrapper.getAssetsManagerWrapper();
         strings = new ArrayList<>();
@@ -39,22 +37,6 @@ public class SelectComponent extends Table {
         Table rightTable = new Table(skin);
         TextField pokemonNameLabel = new TextField("", skin);
         TextArea pokemonDescriptionLabel = new TextArea("", skin);
-        Button startButton = new Button(skin);
-
-        startButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                if (gameStatus.selectedPokemon.size() <= 0){
-                    System.out.println("No enogh room");
-                    return;
-                }
-                System.out.println(gameStatus.selectedPokemon.size());
-                gameStatus.playerInventoryPokemons.forEach((Pokemon) -> {
-                    System.out.println(Pokemon.getName());
-                });
-                game.setScreen(game.getGameScreen());
-            }
-        });
 
         gameStatus.playerInventoryPokemons.forEach((pokemon) -> {
             int i = 1;
@@ -103,10 +85,8 @@ public class SelectComponent extends Table {
             }
             i++;
         });
-        startButton.add(new Label("Start!", skin));
         rightTable.add(pokemonNameLabel).row();
         rightTable.add(pokemonDescriptionLabel).prefHeight(Const.maxViewportHeight).row();
-        rightTable.add(startButton).expandX();
 
         Table outterTable = new Table(skin);
         outterTable.setSize(Const.maxViewportWidth, Const.maxViewportHeight);

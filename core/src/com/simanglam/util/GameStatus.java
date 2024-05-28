@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Json;
 
 public class GameStatus {
     static GameStatus gameStatus;
-    ArrayList<InventoryItem> playerInventory;
+    public final ArrayList<InventoryItem> playerInventory;
     public final ArrayList<InventoryPokemon> playerInventoryPokemons;
     public final ArrayList<InventoryPokemon> selectedPokemon;
     public int money;
@@ -32,6 +32,7 @@ public class GameStatus {
         playerInventoryPokemons.add(i);
         playerInventoryPokemons.add(i2);
         statusHashMap = new HashMap<>();
+        this.addItem("test");
         this.money = 1000;
         currentMap = "test.tmx";
         currentPosition = new Rectangle();
