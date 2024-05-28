@@ -7,9 +7,11 @@ import com.simanglam.fighting.MainPage;
 import com.simanglam.fighting.SavePage;
 import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
+import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.GameStatus;
-import com.simanglam.util.InfoScreen;
 import com.simanglam.util.LoadingScreen;
+import com.simanglam.util.ui.InfoScreen;
+import com.simanglam.util.ui.PackageScreen;
 
 public class Main extends Game {
 	private SpriteBatch batch;
@@ -30,12 +32,14 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		GameStatus gameStatus = GameStatus.getGameStatus();
+		Screen loading = new LoadingScreen(this);
+		AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.finishLoading();
+		this.setScreen(new PackageScreen(this));
 		batch = new SpriteBatch();
 		infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
     	mainPage = new MainPage(this);
 		savePage = new SavePage(this);
-		this.setScreen(new LoadingScreen(this));
 	}
 
     @Override

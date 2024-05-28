@@ -11,17 +11,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 
 public class PackageScreen extends AbstractScreen {
-
     Stage stage;
     Table t;
     
 
-    public PackageScreen(){
+    public PackageScreen(final Main game){
         stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
 
@@ -31,7 +31,7 @@ public class PackageScreen extends AbstractScreen {
         Stack stack = new Stack();
         stack.setSize(Const.maxViewportWidth, 7 * Const.maxViewportHeight / 8);
 
-        OptionComponent optionComponent = new OptionComponent();
+        OptionComponent optionComponent = new OptionComponent(game);
         optionComponent.setVisible(false);
         PackageComponent packageComponent = new PackageComponent();
         packageComponent.setVisible(false);
