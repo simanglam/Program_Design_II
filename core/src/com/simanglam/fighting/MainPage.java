@@ -71,8 +71,6 @@ public class MainPage extends AbstractScreen {
 
         stage.addActor(startButton);
         stage.addActor(saveButton);
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

@@ -20,7 +20,6 @@ public class InfoScreen extends AbstractScreen {
         this.game = game;
         this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight));
         this.inputMultiplexer = new InputMultiplexer(this, stage);
-        Gdx.input.setInputProcessor(this.inputMultiplexer);
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         Window window = new Window("Info", skin);
         window.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
