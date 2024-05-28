@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
+import com.simanglam.map.ui.PuzzleDialog;
 import com.simanglam.store.StoreScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
@@ -92,6 +93,9 @@ public class MapScreen extends AbstractScreen{
                 }
                 if (collMapObject.getProperties().get("store") != null){
                     game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
+                }
+                if (collMapObject.getProperties().get("puzzle") != null){
+                    stage.addActor(new PuzzleDialog(this, (String)collMapObject.getProperties().get("puzzle"), (String)collMapObject.getProperties().get("reward"), (String)collMapObject.getProperties().get("word")));
                 }
                 gameStatus.save();
             }

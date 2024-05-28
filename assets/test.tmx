@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="80" tilewidth="16" tileheight="16" infinite="0" parallaxoriginx="16" parallaxoriginy="16" nextlayerid="12" nextobjectid="42">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="80" tilewidth="16" tileheight="16" infinite="0" parallaxoriginx="16" parallaxoriginy="16" nextlayerid="12" nextobjectid="43">
  <tileset firstgid="1" name="CuteRPG_Field_Tiles" tilewidth="16" tileheight="16" tilecount="384" columns="24">
   <image source="Cute RPG World/Tilesets/CuteRPG_Field_Tiles.png" width="384" height="256"/>
  </tileset>
@@ -474,6 +474,11 @@
   <object id="27" x="-19.4522" y="610.995" width="25.2588" height="674.758"/>
   <object id="28" x="1904.59" y="3.76246" width="25.2588" height="638.37"/>
   <object id="29" x="1906.86" y="622.366" width="25.2588" height="665.661"/>
+  <object id="42" x="439.602" y="503.928">
+   <properties>
+    <property name="puzzle" value="0234"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="10" name="其他"/>
 </map>
