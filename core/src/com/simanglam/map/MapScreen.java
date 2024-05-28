@@ -88,16 +88,19 @@ public class MapScreen extends AbstractScreen{
                         gameStatus.getStatusHashMap().put(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give"), true);
                         
                 }
-                if (collMapObject.getProperties().get("description") != null){
+                else if (collMapObject.getProperties().get("description") != null){
                     addDialog(((String)collMapObject.getProperties().get("description")));
                 }
-                if (collMapObject.getProperties().get("store") != null){
-                    game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
+                else if (collMapObject.getProperties().get("earthquack") != null){
+                    world.setMap((String)collMapObject.getProperties().get("next"));
                 }
-                if (collMapObject.getProperties().get("puzzle") != null){
+                else if (collMapObject.getProperties().get("puzzle") != null){
                     PuzzleDialog p = new PuzzleDialog(this, (String)collMapObject.getProperties().get("puzzle"), (String)collMapObject.getProperties().get("reward"), (String)collMapObject.getProperties().get("word"));
                     p.setSize(stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight() / 5);
                     stage.addActor(p);
+                }
+                else if (collMapObject.getProperties().get("store") != null){
+                    game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
                 }
                 gameStatus.save();
             }
