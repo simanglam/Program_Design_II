@@ -95,7 +95,9 @@ public class MapScreen extends AbstractScreen{
                     game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
                 }
                 if (collMapObject.getProperties().get("puzzle") != null){
-                    stage.addActor(new PuzzleDialog(this, (String)collMapObject.getProperties().get("puzzle"), (String)collMapObject.getProperties().get("reward"), (String)collMapObject.getProperties().get("word")));
+                    PuzzleDialog p = new PuzzleDialog(this, (String)collMapObject.getProperties().get("puzzle"), (String)collMapObject.getProperties().get("reward"), (String)collMapObject.getProperties().get("word"));
+                    p.setSize(stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight() / 5);
+                    stage.addActor(p);
                 }
                 gameStatus.save();
             }
