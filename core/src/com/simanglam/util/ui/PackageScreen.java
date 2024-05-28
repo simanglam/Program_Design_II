@@ -37,6 +37,8 @@ public class PackageScreen extends AbstractScreen {
         packageComponent.setVisible(false);
         SelectComponent selectComponent = new SelectComponent();
         selectComponent.setVisible(false);
+        InfoComponent infoComponent = new InfoComponent();
+        infoComponent.setVisible(true);
 
         Button pokemonButton = new Button(new Label("Select pokemon", skin), skin);
         Button backpackButton = new Button(new Label("背包", skin), skin);
@@ -49,6 +51,17 @@ public class PackageScreen extends AbstractScreen {
                     selectComponent.setVisible(true);
                     packageComponent.setVisible(false);
                     optionComponent.setVisible(false);
+                    infoComponent.setVisible(false);
+                }
+        });
+
+        infoButton.addListener(new ClickListener(){
+            @Override
+                public void clicked(InputEvent event, float x, float y){
+                    selectComponent.setVisible(false);
+                    packageComponent.setVisible(false);
+                    optionComponent.setVisible(false);
+                    infoComponent.setVisible(true);
                 }
         });
 
@@ -58,6 +71,7 @@ public class PackageScreen extends AbstractScreen {
                     selectComponent.setVisible(false);
                     packageComponent.setVisible(true);
                     optionComponent.setVisible(false);
+                    infoComponent.setVisible(false);
                 }
         });
 
@@ -67,6 +81,7 @@ public class PackageScreen extends AbstractScreen {
                     selectComponent.setVisible(false);
                     packageComponent.setVisible(false);
                     optionComponent.setVisible(true);
+                    infoComponent.setVisible(false);
                 }
         });
 
@@ -77,6 +92,7 @@ public class PackageScreen extends AbstractScreen {
         stack.add(optionComponent);
         stack.add(packageComponent);
         stack.add(selectComponent);
+        stack.add(infoComponent);
 
         t.add(stack).center().expand();
         stage.addActor(t);
