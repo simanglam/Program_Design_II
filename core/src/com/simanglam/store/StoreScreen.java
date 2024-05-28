@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
+import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 
@@ -32,15 +33,15 @@ public class StoreScreen extends AbstractScreen {
     Stage stage;
     ArrayList<StoreItem> storeItems;
 
-    public StoreScreen(final Main game){
+    public StoreScreen(final Main game, String path){
         this.game = game;
         Json loader = new Json();
 
-        storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + "test" + ".json"));
+        storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + path + ".json"));
         gameStatus = GameStatus.getGameStatus();
 
         stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight));
-        Skin skin = game.assetManager.get("data/uiskin.json", Skin.class);
+        Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
 
         Table rightTable = new Table(skin);
         TextField pokemonNameLabel = new TextField("", skin);
@@ -58,7 +59,7 @@ public class StoreScreen extends AbstractScreen {
         storeItems.forEach((item) -> {
             int i = 1;
             Button b = new Button(skin);
-            ImageButton ib1 = new ImageButton(new TextureRegionDrawable(game.assetManager.get("items/" + item.getName() + "/icon.png", Texture.class)));
+            ImageButton ib1 = new ImageButton(new TextureRegionDrawable(AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("items/" + item.getName() + "/icon.png", Texture.class)));
             b.addListener(new ClickListener(){
                 @Override
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
