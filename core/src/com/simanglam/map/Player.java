@@ -19,8 +19,8 @@ public class Player implements InputProcessor{
     int count = 0;
     float accu;
     public Player(){
-        invesgateRectangle = new Rectangle();
         this.rectangle = new Rectangle(16, 16, 16, 16);
+        invesgateRectangle = new Rectangle(rectangle);
         this.heading = new Vector2(0, 0);
         this.lastHeading = this.heading.cpy();
         accu = 0f;
@@ -34,7 +34,7 @@ public class Player implements InputProcessor{
 
     public void draw(SpriteBatch batch){
         int direction = 0;
-        Vector2 currentHeading = null;
+        Vector2 currentHeading;
         if (heading.y != 0 || heading.x != 0)
             currentHeading = heading;
         else
@@ -79,7 +79,7 @@ public class Player implements InputProcessor{
 
     public Vector2 getPosition(){return new Vector2(rectangle.x, rectangle.y);}
     public Rectangle creatInvestgateRectangle(){
-        invesgateRectangle.setPosition(this.rectangle.x + lastHeading.x * 8, this.rectangle.y + lastHeading.y * 8);
+        invesgateRectangle.setPosition(this.rectangle.x + lastHeading.x * 16, this.rectangle.y + lastHeading.y * 16);
         return invesgateRectangle;
     }
 
