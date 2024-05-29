@@ -23,9 +23,8 @@ public class Dialog extends Window {
     Stage stage;
     boolean show;
     Label label;
-    public Dialog(final Stage stage){
+    public Dialog(){
         super("Dialog", new Skin(Gdx.files.internal("data/uiskin.json")));
-        this.stage = stage;
         deltaT = 0.0f;
         this.descriptions = new ArrayList<String>();
         descriptions.add("A");
@@ -34,8 +33,6 @@ public class Dialog extends Window {
         label = new Label(descriptions.get(current) , getSkin());
         setPosition(0, 120);
         setColor(new Color(255, 255, 255, 255));
-        setWidth(stage.getWidth());
-        setHeight(stage.getHeight() / 5);
         this.add(label);
         this.addListener(new DialogListener(this));
     }
