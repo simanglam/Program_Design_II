@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.simanglam.fighting.bosswar.BossWarScreen;
+import com.simanglam.bosswar.BossWarScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 

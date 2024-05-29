@@ -1,8 +1,8 @@
 package com.simanglam.util;
 
 import com.badlogic.gdx.utils.Json;
-import com.simanglam.fighting.bosswar.BossWarInfo;
-import com.simanglam.fighting.bosswar.SpawnInfo;
+import com.simanglam.bosswar.BossWarInfo;
+import com.simanglam.bosswar.SpawnInfo;
 
 public class JsonLoaders {
     public static Json normalLoader;
