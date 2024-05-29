@@ -60,7 +60,8 @@ public class GameStatus {
                 return ;
             }
         }
-        InventoryPokemon i = JsonLoaders.normalLoader.fromJson(InventoryPokemon.class, "enemies/" + name + "/info.json");
+        InventoryPokemon i = JsonLoaders.normalLoader.fromJson(InventoryPokemon.class, Gdx.files.internal("enemies/" + name + "/info.json"));
+        playerInventoryPokemons.add(i);
     }
 
     /*
@@ -75,6 +76,7 @@ public class GameStatus {
     public void save(){
         if (gameStatus == null) return;
         String save = new Json().prettyPrint(this);
+        System.out.println(save);
 
         Gdx.files.local("save.txt").writeString(save, false);
 

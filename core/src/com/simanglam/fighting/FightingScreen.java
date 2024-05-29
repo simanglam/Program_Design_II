@@ -55,7 +55,7 @@ public class FightingScreen extends AbstractScreen {
         resultButton.add("你輸了");
         resultButton.setSize(72, 20);
         resultButton.setPosition((Const.maxViewportWidth - resultButton.getWidth()) / 2f, (Const.maxViewportHeight - resultButton.getHeight()) / 2f);
-        this.enemy = PokemonFactory.buildPokemon("test");
+        this.enemy = PokemonFactory.buildPokemon("tower");
         Table finalTable = new Table();
         skillTable = new Table();
         switchTable = new Table();
@@ -202,6 +202,20 @@ public class FightingScreen extends AbstractScreen {
     }
 
     void enemyTurn(){
+        if (!enemy.alive()){
+            stage.clear();
+            resultButton.clear();
+            resultButton.add("你贏了");
+            stage.addActor(resultButton);
+            resultButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    GameStatus.getGameStatus().addPokemon(enemy.getName());
+                    GameStatus.getGameStatus().save();
+                }
+            });
+            return;
+        }
         currentPokemon.beingAttack(Math.max((int)(enemy.getATK() * 0.2f), 1));
         System.out.printf("Pokemon: %d, Enemy: %d\n", currentPokemon.getHP(), enemy.getHP());
         dialog.setVisible(true);
