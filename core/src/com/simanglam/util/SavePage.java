@@ -1,4 +1,4 @@
-package com.simanglam.fighting;
+package com.simanglam.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
-import com.simanglam.util.AbstractScreen;
 
 public class SavePage extends AbstractScreen {
     private SpriteBatch batch;
