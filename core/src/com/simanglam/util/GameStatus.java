@@ -54,6 +54,15 @@ public class GameStatus {
         playerInventory.add(i);
     }
 
+    public void addPokemon(String name){
+        for (InventoryPokemon i: playerInventoryPokemons) {
+            if (i.getName().equals(name)){
+                return ;
+            }
+        }
+        InventoryPokemon i = JsonLoaders.normalLoader.fromJson(InventoryPokemon.class, "enemies/" + name + "/info.json");
+    }
+
     /*
     public void consumeItem(String name){
         for (int i = 0; i < playerInventory.size(); i++){
@@ -66,7 +75,6 @@ public class GameStatus {
     public void save(){
         if (gameStatus == null) return;
         String save = new Json().prettyPrint(this);
-        System.out.println(this.money);
 
         Gdx.files.local("save.txt").writeString(save, false);
 

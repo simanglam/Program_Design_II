@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.simanglam.fighting.skillbehavior.SkillBehavior;
+import com.simanglam.util.AssetsManagerWrapper;
 
 public class Pokemon {
     String name;
@@ -14,16 +15,16 @@ public class Pokemon {
     private ArrayList<SkillBehavior> skills;
     public Texture texture;
 
-    public Pokemon(int healthPoint, SkillBehavior a1, SkillBehavior a2, SkillBehavior a3, SkillBehavior a4) {
+    public Pokemon(int healthPoint, int ATK, String name, String image, SkillBehavior a1, SkillBehavior a2, SkillBehavior a3, SkillBehavior a4) {
         this.healthPoint = healthPoint;
-        texture = new Texture("booboo.png");
+        texture = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get(image);
         skills = new ArrayList<>();
         skills.add(a1);
         skills.add(a2);
         skills.add(a3);
         skills.add(a4);
-        atk = 20;
-        name = "我不知道";
+        atk = ATK;
+        this.name = name;
     }
 
     public void beingAttack(int atk){
