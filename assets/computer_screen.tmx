@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="7">
  <tileset firstgid="1" source="windows xp.tsx"/>
  <tileset firstgid="1541" source="vscode_icon.tsx"/>
  <tileset firstgid="1709" source="chrome_icon.tsx"/>
@@ -69,4 +69,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="3" name="物件層 1">
+  <object id="1" x="227.667" y="245.292" width="76.6667" height="93.4167"/>
+  <object id="2" x="1.66665" y="228.292" width="876.667" height="203.417"/>
+  <object id="3" x="4" y="-0.333333" width="877" height="1.66667"/>
+  <object id="4" x="0.333333" y="429.833" width="877" height="2"/>
+  <object id="5" x="875.5" y="1.5" width="5" height="432"/>
+  <object id="6" x="0.5" y="3" width="5" height="432"/>
+ </objectgroup>
+ <objectgroup id="4" name="生怪區"/>
 </map>

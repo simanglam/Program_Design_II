@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="124">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="125">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
@@ -235,10 +235,11 @@
   <object id="113" x="145.542" y="320" width="42.9167" height="21.3333"/>
   <object id="114" x="0.5" y="3" width="7" height="638"/>
   <object id="115" x="10" y="1.5" width="950" height="5"/>
-  <object id="116" x="954.167" y="8.83333" width="7" height="638"/>
+  <object id="116" x="954.167" y="8.83333" width="7" height="631"/>
   <object id="121" x="935" y="447.36" width="19" height="31"/>
   <object id="122" x="934.23" y="511.95" width="19" height="31"/>
   <object id="123" x="935.05" y="577.955" width="19" height="31"/>
+  <object id="124" x="1" y="635.5" width="950" height="5"/>
  </objectgroup>
  <objectgroup id="5" name="生怪區">
   <object id="33" x="292.5" y="389.5" width="377" height="165"/>
