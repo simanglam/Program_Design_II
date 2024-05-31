@@ -20,6 +20,7 @@ import com.simanglam.util.GameStatus;
 
 public class World {
     public TiledMap tiledMap;
+    TmxMapLoader mapLoader;
     TiledMapRenderer renderer;
     public OrthographicCamera camera;
     public Player player;
@@ -28,7 +29,7 @@ public class World {
     double ecounterPossibility;
 
     public World(){
-        this.tiledMap = new TmxMapLoader().load("classroom.tmx");
+        this.tiledMap = new TmxMapLoader().load("library.tmx");
         this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.camera = new OrthographicCamera();
         this.player = new Player();
@@ -38,6 +39,12 @@ public class World {
 
     public void setView(OrthographicCamera camera){
         this.renderer.setView(camera);
+    }
+
+    public void setMap(String map){
+        tiledMap.dispose();
+        tiledMap = mapLoader.load(map);
+        this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
 
     public void update(float deltaT, MapScreen screen){
@@ -101,7 +108,7 @@ public class World {
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             if (rObject.getProperties().get("portal") != null){
                 this.tiledMap.dispose();
-                this.tiledMap = new TmxMapLoader().load((String)rObject.getProperties().get("next"));
+                this.tiledMap = mapLoader.load((String)rObject.getProperties().get("next"));
                 GameStatus.getGameStatus().currentMap = (String)rObject.getProperties().get("next");
                 this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {

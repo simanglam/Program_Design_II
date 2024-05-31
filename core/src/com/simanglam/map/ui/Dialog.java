@@ -41,6 +41,7 @@ public class Dialog extends Window {
     }
 
     public void act(float deltaT){
+        super.act(deltaT);
         this.deltaT += deltaT;
         if (this.deltaT > a){
             cursor = (cursor++ >= descriptions.get(current).length()) ? descriptions.get(current).length() : cursor;

@@ -1,4 +1,4 @@
-package com.simanglam.fighting.bosswar;
+package com.simanglam.util.ui;
 
 import java.util.ArrayList;
 
