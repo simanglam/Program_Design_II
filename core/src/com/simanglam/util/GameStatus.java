@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Json;
 
 public class GameStatus {
     static GameStatus gameStatus;
-    ArrayList<InventoryItem> playerInventory;
+    public final ArrayList<InventoryItem> playerInventory;
     public final ArrayList<InventoryPokemon> playerInventoryPokemons;
     public final ArrayList<InventoryPokemon> selectedPokemon;
     public int money;
@@ -32,6 +32,7 @@ public class GameStatus {
         playerInventoryPokemons.add(i);
         playerInventoryPokemons.add(i2);
         statusHashMap = new HashMap<>();
+        this.addItem("test");
         this.money = 1000;
         currentMap = "test.tmx";
         currentPosition = new Rectangle();
@@ -53,6 +54,16 @@ public class GameStatus {
         playerInventory.add(i);
     }
 
+    public void addPokemon(String name){
+        for (InventoryPokemon i: playerInventoryPokemons) {
+            if (i.getName().equals(name)){
+                return ;
+            }
+        }
+        InventoryPokemon i = JsonLoaders.normalLoader.fromJson(InventoryPokemon.class, Gdx.files.internal("enemies/" + name + "/info.json"));
+        playerInventoryPokemons.add(i);
+    }
+
     /*
     public void consumeItem(String name){
         for (int i = 0; i < playerInventory.size(); i++){
@@ -65,7 +76,7 @@ public class GameStatus {
     public void save(){
         if (gameStatus == null) return;
         String save = new Json().prettyPrint(this);
-        System.out.println(this.money);
+        System.out.println(save);
 
         Gdx.files.local("save.txt").writeString(save, false);
 

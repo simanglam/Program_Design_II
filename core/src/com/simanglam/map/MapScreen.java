@@ -37,7 +37,7 @@ public class MapScreen extends AbstractScreen{
         this.inputMultiplexer.addProcessor(this.stage);
         this.inputMultiplexer.addProcessor(this.world.player);
         this.inputMultiplexer.addProcessor(this);
-        this.dialog = new Dialog(this.stage);
+        this.dialog = new Dialog();
         gameStatus = GameStatus.getGameStatus();
     }
 
