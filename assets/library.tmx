@@ -259,7 +259,11 @@
   <object id="45" x="754" y="231" width="60" height="30"/>
   <object id="46" x="754" y="295.67" width="60" height="30"/>
   <object id="47" x="849.33" y="167" width="62" height="30"/>
-  <object id="49" x="833.5" y="231" width="77" height="90"/>
+  <object id="49" x="833.5" y="231" width="77" height="90">
+   <properties>
+    <property name="store" value="這是在圖書館裡的商店!"/>
+   </properties>
+  </object>
   <object id="50" x="818" y="361" width="90" height="29"/>
   <object id="52" x="184.82" y="363.27" width="15" height="26"/>
   <object id="53" x="184.75" y="428.25" width="15" height="26"/>

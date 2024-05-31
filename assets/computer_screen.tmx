@@ -163,13 +163,17 @@
 </data>
  </layer>
  <objectgroup id="3" name="物件層 1">
-  <object id="1" x="227.667" y="245.292" width="76.6667" height="93.4167"/>
+  <object id="1" x="227.667" y="245.292" width="76.6667" height="93.4167">
+   <properties>
+    <property name="store" value="這是在電腦螢幕上的商店!"/>
+   </properties>
+  </object>
   <object id="3" x="4" y="-0.333333" width="877" height="1.66667"/>
   <object id="4" x="0.333333" y="429.833" width="877" height="2"/>
   <object id="5" x="875.5" y="1.5" width="5" height="432"/>
   <object id="6" x="0.5" y="3" width="5" height="432"/>
  </objectgroup>
- <objectgroup id="4" name="生怪區">
+ <objectgroup id="4" name="生怪區" visible="0">
   <object id="2" x="1.66665" y="228.292" width="876.667" height="203.417"/>
  </objectgroup>
 </map>

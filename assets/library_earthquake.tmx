@@ -272,7 +272,11 @@
   <object id="42" x="816.582" y="501.835" width="5" height="57"/>
   <object id="43" x="821.582" y="497.085" width="42" height="5"/>
   <object id="44" x="-0.5" y="0.5" width="7" height="638"/>
-  <object id="45" x="833.833" y="278" width="77" height="90"/>
+  <object id="45" x="833.833" y="278" width="77" height="90">
+   <properties>
+    <property name="store" value="這是在地震後圖書館裡的商店!"/>
+   </properties>
+  </object>
   <object id="53" x="48.8333" y="212.667" width="109.25" height="36.25"/>
   <object id="54" x="48.25" y="320.5" width="47.5833" height="91.5"/>
   <object id="55" x="143.5" y="341.167" width="78.25" height="71.3333"/>
