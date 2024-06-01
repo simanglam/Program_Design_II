@@ -274,7 +274,7 @@
   <object id="21" x="754.33" y="40.33" width="156" height="28">
    <properties>
     <property name="description" value="這是密碼學書籍區!"/>
-    <property name="give" value="modern cryptography book"/>
+    <property name="once" value="modern cryptography book"/>
    </properties>
   </object>
   <object id="23" x="577.33" y="40.33" width="125" height="28">
