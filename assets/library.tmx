@@ -238,7 +238,7 @@
   </object>
   <object id="6" x="113.5" y="103.75" width="93" height="27">
    <properties>
-    <property name="descrption" value="這是人類學書籍區!"/>
+    <property name="description" value="這是人類學書籍區!"/>
    </properties>
   </object>
   <object id="8" x="114" y="167" width="93" height="28">
@@ -510,7 +510,7 @@
   <object id="146" x="376.5" y="520.667" width="15" height="10"/>
   <object id="147" x="312.875" y="521.625" width="15" height="10"/>
  </objectgroup>
- <objectgroup id="10" name="生怪區" visible="0">
+ <objectgroup id="10" name="生怪區">
   <object id="150" x="291" y="390" width="377" height="165"/>
  </objectgroup>
 </map>
