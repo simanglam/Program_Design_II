@@ -1,4 +1,4 @@
-package com.simanglam.fighting.bosswar;
+package com.simanglam.bosswar;
 
 public class SpawnInfo {
     public String name;
