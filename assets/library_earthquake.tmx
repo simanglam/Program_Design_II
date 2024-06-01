@@ -226,27 +226,91 @@
 </data>
  </layer>
  <objectgroup id="4" name="物件層 1">
-  <object id="1" x="259.67" y="112.584" width="118" height="36"/>
-  <object id="2" x="259.17" y="176.414" width="119" height="36"/>
-  <object id="3" x="259.5" y="240.084" width="119" height="37"/>
-  <object id="4" x="419.17" y="112.084" width="118" height="36"/>
-  <object id="5" x="421.17" y="174.584" width="118" height="38"/>
-  <object id="6" x="419.17" y="239.084" width="118" height="38"/>
-  <object id="7" x="578.67" y="110.417" width="120" height="38"/>
-  <object id="8" x="578.42" y="176.584" width="120" height="36"/>
-  <object id="9" x="578.84" y="240.584" width="119" height="36"/>
-  <object id="10" x="578.17" y="304.254" width="46" height="36"/>
-  <object id="11" x="657" y="303.584" width="46" height="37"/>
-  <object id="12" x="418.17" y="303.584" width="46" height="36"/>
-  <object id="13" x="496.17" y="304.084" width="47" height="36"/>
-  <object id="14" x="258" y="303.913" width="46" height="36"/>
-  <object id="15" x="336.34" y="304.254" width="47" height="36"/>
+  <object id="1" x="259.67" y="112.584" width="118" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="2" x="259.17" y="176.414" width="119" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="3" x="259.5" y="240.084" width="119" height="37">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="4" x="419.17" y="112.084" width="118" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="5" x="421.17" y="174.584" width="118" height="38">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="6" x="419.17" y="239.084" width="118" height="38">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="7" x="578.67" y="110.417" width="120" height="38">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="8" x="578.42" y="176.584" width="120" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="9" x="578.84" y="240.584" width="119" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="10" x="578.17" y="304.254" width="46" height="36">
+   <properties>
+    <property name="桌子" value="任性桌子"/>
+   </properties>
+  </object>
+  <object id="11" x="657" y="303.584" width="46" height="37">
+   <properties>
+    <property name="description" value="任性桌子"/>
+   </properties>
+  </object>
+  <object id="12" x="418.17" y="303.584" width="46" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="13" x="496.17" y="304.084" width="47" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="14" x="258" y="303.913" width="46" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
+  <object id="15" x="336.34" y="304.254" width="47" height="36">
+   <properties>
+    <property name="description" value="桌子"/>
+   </properties>
+  </object>
   <object id="16" name="行李箱" x="421.5" y="449.5" width="48" height="46">
    <properties>
     <property name="description" value="行李箱//這是一個行李箱!"/>
    </properties>
   </object>
-  <object id="17" x="313.5" y="393.5" width="15" height="10"/>
+  <object id="17" x="313.5" y="393.5" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
   <object id="18" x="378" y="392.5" width="15" height="10"/>
   <object id="19" x="442" y="392.25" width="15" height="10"/>
   <object id="20" x="506" y="392.5" width="15" height="10"/>
@@ -279,7 +343,11 @@
   </object>
   <object id="53" x="48.8333" y="212.667" width="109.25" height="36.25"/>
   <object id="54" x="48.25" y="320.5" width="47.5833" height="91.5"/>
-  <object id="55" x="143.5" y="341.167" width="78.25" height="71.3333"/>
+  <object id="55" x="143.5" y="341.167" width="78.25" height="71.3333">
+   <properties>
+    <property name="description" value="我們是經不起搖的櫃子!"/>
+   </properties>
+  </object>
   <object id="56" x="72.8182" y="249.341" width="22.1818" height="28.5455"/>
   <object id="57" x="109.864" y="249.182" width="31.3636" height="31.6364"/>
   <object id="58" x="142.591" y="245" width="17" height="20"/>
@@ -287,8 +355,16 @@
   <object id="60" x="113.5" y="318.667" width="12.3333" height="15.6667"/>
   <object id="65" x="817.5" y="358.136" width="14.1818" height="18.3636"/>
   <object id="66" x="768.409" y="290.273" width="46.4545" height="87.8182"/>
-  <object id="67" x="769" y="64.25" width="159" height="94"/>
-  <object id="68" x="768.833" y="209.667" width="135.667" height="24.3333"/>
+  <object id="67" x="769" y="64.25" width="159" height="94">
+   <properties>
+    <property name="description" value="我們是破銅爛鐵!"/>
+   </properties>
+  </object>
+  <object id="68" x="768.833" y="209.667" width="135.667" height="24.3333">
+   <properties>
+    <property name="description" value="雖然剛剛搖超大，但我們的感情不碎!"/>
+   </properties>
+  </object>
   <object id="69" x="880.5" y="190.75" width="30.75" height="17.25"/>
   <object id="70" x="850.25" y="199.25" width="29.75" height="10.25"/>
   <object id="71" x="768.75" y="196.5" width="30" height="13"/>
@@ -300,7 +376,11 @@
   <object id="77" x="706.773" y="169.182" width="11.1818" height="16.1818"/>
   <object id="78" x="706.045" y="313.727" width="11.1818" height="16.1818"/>
   <object id="79" x="466.409" y="313.182" width="11.1818" height="16.1818"/>
-  <object id="80" x="386.652" y="182.606" width="10.8182" height="14.1818"/>
+  <object id="80" x="386.652" y="182.606" width="10.8182" height="14.1818">
+   <properties>
+    <property name="description" value="這是盆栽"/>
+   </properties>
+  </object>
   <object id="81" x="386.955" y="247.455" width="10.8182" height="14.1818"/>
   <object id="82" x="546.591" y="231.455" width="10.0909" height="11.8182"/>
   <object id="83" x="546.227" y="137.455" width="12.0909" height="17.0909"/>
@@ -343,7 +423,7 @@
   <object id="47" x="416.75" y="40" width="126.5" height="31"/>
   <object id="48" x="576.75" y="39.5" width="126" height="31"/>
  </objectgroup>
- <objectgroup id="5" name="生怪區">
+ <objectgroup id="5" name="生怪區" visible="0">
   <object id="33" x="292.5" y="389.5" width="377" height="165"/>
  </objectgroup>
 </map>

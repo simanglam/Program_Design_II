@@ -124,6 +124,9 @@
 </data>
  </layer>
  <objectgroup id="4" name="物件層 1">
+  <properties>
+   <property name="description" value="這是教室裡的商店!"/>
+  </properties>
   <object id="1" x="1.5" y="0" width="5" height="319"/>
   <object id="2" x="474.5" y="0" width="5" height="319"/>
   <object id="3" x="5" y="1" width="470" height="4"/>
@@ -131,40 +134,168 @@
   <object id="7" x="48.5833" y="24.5" width="94" height="11.5"/>
   <object id="8" x="176.917" y="26.3333" width="31" height="12.75"/>
   <object id="9" x="272.25" y="25.875" width="158.5" height="12.75"/>
-  <object id="10" x="59.9394" y="62.7614" width="22.2348" height="14.7576"/>
-  <object id="17" x="146.167" y="105.125" width="27.6667" height="30.4167"/>
-  <object id="18" x="209.5" y="105.792" width="27.6667" height="13.0834"/>
-  <object id="19" x="208.5" y="120.125" width="14.6667" height="16.75"/>
-  <object id="22" x="82.6666" y="105.125" width="27.6667" height="13.0834"/>
-  <object id="23" x="81.6666" y="119.458" width="14.6667" height="16.75"/>
-  <object id="24" x="338.333" y="105.459" width="27.6667" height="13.0834"/>
-  <object id="25" x="337.333" y="119.791" width="14.6667" height="16.75"/>
-  <object id="26" x="273.833" y="106.125" width="27.6667" height="30.4167"/>
-  <object id="27" x="402.5" y="106.125" width="27.6667" height="30.4167"/>
-  <object id="28" x="57.1666" y="155.125" width="27.6667" height="20.4167"/>
-  <object id="29" x="121.167" y="155.458" width="27.6667" height="20.4167"/>
-  <object id="30" x="185" y="155.792" width="27.6667" height="20.4167"/>
-  <object id="31" x="250.333" y="155.125" width="27.6667" height="20.4167"/>
-  <object id="32" x="313.667" y="155.792" width="27.6667" height="20.4167"/>
-  <object id="33" x="378" y="155.792" width="27.6667" height="20.4167"/>
-  <object id="38" x="226.5" y="16.4583" width="27.6667" height="20.4167"/>
-  <object id="39" x="273.167" y="202.459" width="27.6667" height="13.0834"/>
-  <object id="40" x="272.167" y="216.791" width="14.6667" height="16.75"/>
-  <object id="43" x="337.667" y="201.959" width="27.6667" height="13.0834"/>
-  <object id="44" x="336.667" y="216.291" width="14.6667" height="16.75"/>
-  <object id="45" x="402.417" y="201.709" width="27.6667" height="13.0834"/>
-  <object id="46" x="401.417" y="216.041" width="14.6667" height="16.75"/>
-  <object id="47" x="210.167" y="201.125" width="27.6667" height="30.4167"/>
-  <object id="48" x="145.833" y="201.458" width="27.6667" height="30.4167"/>
-  <object id="49" x="177.167" y="216.125" width="31.3334" height="16.75"/>
+  <object id="10" x="59.9394" y="62.7614" width="22.2348" height="14.7576">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="17" x="146.167" y="105.125" width="27.6667" height="30.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="18" x="209.5" y="105.792" width="27.6667" height="13.0834">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="19" x="208.5" y="120.125" width="14.6667" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="22" x="82.6666" y="105.125" width="27.6667" height="13.0834">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="23" x="81.6666" y="119.458" width="14.6667" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="24" x="338.333" y="105.459" width="27.6667" height="13.0834">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="25" x="337.333" y="119.791" width="14.6667" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="26" x="273.833" y="106.125" width="27.6667" height="30.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="27" x="402.5" y="106.125" width="27.6667" height="30.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="28" x="57.1666" y="155.125" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="29" x="121.167" y="155.458" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="30" x="185" y="155.792" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="31" x="250.333" y="155.125" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="32" x="313.667" y="155.792" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="33" x="378" y="155.792" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="38" x="226.5" y="16.4583" width="27.6667" height="20.4167">
+   <properties>
+    <property name="description" value="黑板"/>
+   </properties>
+  </object>
+  <object id="39" x="273.167" y="202.459" width="27.6667" height="13.0834">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="40" x="272.167" y="216.791" width="14.6667" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="43" x="337.667" y="201.959" width="27.6667" height="13.0834">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="44" x="336.667" y="216.291" width="14.6667" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="45" x="402.417" y="201.709" width="27.6667" height="13.0834">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="46" x="401.417" y="216.041" width="14.6667" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="47" x="210.167" y="201.125" width="27.6667" height="30.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="48" x="145.833" y="201.458" width="27.6667" height="30.4167">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="49" x="177.167" y="216.125" width="31.3334" height="16.75">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
   <object id="50" x="264.667" y="272.292" width="47.6667" height="21.9167"/>
-  <object id="51" x="34.6667" y="181.292" width="76.6667" height="93.4167"/>
+  <object id="51" x="34.6667" y="181.292" width="76.6667" height="93.4167">
+   <properties>
+    <property name="description" value="這是教室裡的商店!"/>
+   </properties>
+  </object>
   <object id="52" x="418.667" y="256.792" width="27.6667" height="30.4167"/>
-  <object id="55" x="123.633" y="61.6212" width="22.2348" height="14.7576"/>
-  <object id="60" x="188.286" y="61.6913" width="22.2348" height="14.7576"/>
-  <object id="61" x="251.979" y="62.3011" width="22.2348" height="14.7576"/>
-  <object id="62" x="315.383" y="61.8712" width="22.2348" height="14.7576"/>
-  <object id="63" x="380.133" y="62.1212" width="22.2348" height="14.7576"/>
+  <object id="55" x="123.633" y="61.6212" width="22.2348" height="14.7576">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="60" x="188.286" y="61.6913" width="22.2348" height="14.7576">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="61" x="251.979" y="62.3011" width="22.2348" height="14.7576">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="62" x="315.383" y="61.8712" width="22.2348" height="14.7576">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
+  <object id="63" x="380.133" y="62.1212" width="22.2348" height="14.7576">
+   <properties>
+    <property name="description" value="課桌椅"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="生怪區" visible="0">
   <object id="53" x="57" y="59.5" width="350" height="117"/>

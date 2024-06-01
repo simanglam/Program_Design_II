@@ -3,14 +3,14 @@ package com.simanglam;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.simanglam.fighting.FightingScreen;
 import com.simanglam.fighting.MainPage;
-import com.simanglam.fighting.SavePage;
 import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.GameStatus;
 import com.simanglam.util.LoadingScreen;
-import com.simanglam.util.ui.InfoScreen;
+import com.simanglam.util.SavePage;
 import com.simanglam.util.ui.PackageScreen;
 
 public class Main extends Game {
