@@ -265,7 +265,7 @@
    </properties>
   </object>
   <object id="50" x="264.667" y="272.292" width="47.6667" height="21.9167"/>
-  <object id="51" x="34.6667" y="181.292" width="76.6667" height="93.4167">
+  <object id="51" x="34.6667" y="181.292" width="76.6667" height="99.6667">
    <properties>
     <property name="description" value="這是教室裡的商店!"/>
    </properties>

@@ -231,179 +231,179 @@
     <property name="description" value="行李箱//這是一個行李箱!"/>
    </properties>
   </object>
-  <object id="5" x="50" y="40" width="157" height="26">
+  <object id="5" x="50" y="40" width="157" height="20.3333">
    <properties>
     <property name="description" value="這是麻瓜研究書籍區!"/>
    </properties>
   </object>
-  <object id="6" x="113.5" y="103.75" width="93" height="27">
+  <object id="6" x="113.5" y="103.75" width="93" height="20.25">
    <properties>
     <property name="description" value="這是人類學書籍區!"/>
    </properties>
   </object>
-  <object id="8" x="114" y="167" width="93" height="28">
+  <object id="8" x="114" y="167" width="93" height="21.25">
    <properties>
     <property name="descrption" value="這是歷史書籍區!"/>
    </properties>
   </object>
-  <object id="9" x="48.5" y="231" width="159" height="29">
+  <object id="9" x="48.5" y="231" width="159" height="21.5">
    <properties>
     <property name="description" value="這是哲學書籍區!"/>
    </properties>
   </object>
-  <object id="11" x="49" y="296" width="157" height="28">
+  <object id="11" x="49" y="296" width="157" height="20.75">
    <properties>
     <property name="description" value="這是世界文學書籍區!"/>
    </properties>
   </object>
-  <object id="16" x="48.67" y="361.33" width="124" height="29">
+  <object id="16" x="48.67" y="361.33" width="124" height="18.1591">
    <properties>
     <property name="description" value="這是暢銷書區!"/>
    </properties>
   </object>
-  <object id="17" x="258.33" y="40" width="124" height="31">
+  <object id="17" x="258.33" y="40" width="124" height="19">
    <properties>
     <property name="description" value="這是世界音樂書籍區!"/>
    </properties>
   </object>
-  <object id="19" x="417.33" y="39.67" width="124" height="31">
+  <object id="19" x="417.33" y="39.67" width="124" height="21">
    <properties>
     <property name="description" value="這是武俠書籍區!"/>
    </properties>
   </object>
-  <object id="21" x="754.33" y="40.33" width="156" height="28">
+  <object id="21" x="754.33" y="40.33" width="156" height="20">
    <properties>
     <property name="description" value="這是密碼學書籍區!"/>
     <property name="once" value="modern cryptography book"/>
    </properties>
   </object>
-  <object id="23" x="577.33" y="40.33" width="125" height="28">
+  <object id="23" x="577.33" y="40.33" width="125" height="19.6667">
    <properties>
     <property name="description" value="這是漫畫區!"/>
    </properties>
   </object>
-  <object id="25" x="754" y="104" width="60" height="29">
+  <object id="25" x="754" y="104" width="60" height="20.6667">
    <properties>
     <property name="description" value="這是量子力學區!"/>
    </properties>
   </object>
-  <object id="26" x="850" y="103.67" width="60" height="29">
+  <object id="26" x="850" y="103.67" width="60" height="20.3333">
    <properties>
     <property name="description" value="這是天文學區!"/>
    </properties>
   </object>
-  <object id="28" x="259" y="114" width="118" height="36">
+  <object id="28" x="259" y="117" width="118" height="21.6667">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="31" x="258.5" y="177.83" width="119" height="36">
+  <object id="31" x="258.5" y="177.83" width="119" height="24.6136">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="32" x="258.83" y="241.5" width="119" height="37">
+  <object id="32" x="258.83" y="241.5" width="119" height="26.75">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="34" x="48" y="423.833" width="124" height="29">
+  <object id="34" x="48" y="423.833" width="124" height="20.2727">
    <properties>
     <property name="description" value="這是暢銷書區!"/>
    </properties>
   </object>
-  <object id="35" x="48" y="489.167" width="124" height="29">
+  <object id="35" x="48" y="489.167" width="124" height="18">
    <properties>
     <property name="descrption" value="這是觘銷書區!"/>
    </properties>
   </object>
-  <object id="36" x="418.5" y="113.5" width="118" height="36">
+  <object id="36" x="418.5" y="113.5" width="118" height="26">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="37" x="420.5" y="176" width="118" height="38">
+  <object id="37" x="420.5" y="176" width="118" height="27.1818">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="38" x="418.5" y="240.5" width="118" height="38">
+  <object id="38" x="418.5" y="240.5" width="118" height="28">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="40" x="578" y="111.833" width="120" height="38">
+  <object id="40" x="578" y="111.833" width="120" height="28">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="41" x="577.75" y="178" width="120" height="36">
+  <object id="41" x="577.75" y="178" width="120" height="25.8182">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="42" x="578.17" y="242" width="119" height="36">
+  <object id="42" x="578.17" y="242" width="119" height="25.25">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="43" x="577.5" y="305.67" width="46" height="36">
+  <object id="43" x="577.5" y="305.67" width="46" height="25.5">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="44" x="754.333" y="168.5" width="60" height="30">
+  <object id="44" x="754.333" y="168.5" width="60" height="20.6667">
    <properties>
     <property name="description" value="這是黑魔法防禦術書籍區!"/>
    </properties>
   </object>
-  <object id="45" x="754" y="231" width="60" height="30">
+  <object id="45" x="754" y="231" width="60" height="20.6667">
    <properties>
     <property name="description" value="這是藥草學書籍區!"/>
    </properties>
   </object>
-  <object id="46" x="754" y="295.67" width="60" height="30">
+  <object id="46" x="754" y="295.67" width="60" height="21.3333">
    <properties>
     <property name="descriptioin" value="這是摩藥學書籍區!"/>
    </properties>
   </object>
-  <object id="47" x="849.33" y="167" width="62" height="30">
+  <object id="47" x="849.33" y="167" width="62" height="21.6667">
    <properties>
     <property name="description" value="這是符咒學書籍區!"/>
    </properties>
   </object>
-  <object id="49" x="833.5" y="231" width="77" height="90">
+  <object id="49" x="833.5" y="231" width="77" height="97.3333">
    <properties>
     <property name="description" value="這是在圖書館裡的商店!"/>
     <property name="store" value=""/>
    </properties>
   </object>
-  <object id="50" x="818" y="361" width="90" height="29">
+  <object id="50" x="818" y="361" width="90" height="19.6667">
    <properties>
     <property name="description" value="這是暢銷書區!"/>
    </properties>
   </object>
-  <object id="52" x="184.82" y="363.27" width="15" height="26">
+  <object id="52" x="184.82" y="363.27" width="15" height="14.9394">
    <properties>
     <property name="description" value="這是報紙區!"/>
    </properties>
   </object>
-  <object id="53" x="184.75" y="428.25" width="15" height="26">
+  <object id="53" x="184.75" y="428.25" width="15" height="18.3333">
    <properties>
     <property name="description" value="這是報紙區!"/>
    </properties>
   </object>
-  <object id="54" x="185" y="492.5" width="15" height="26">
+  <object id="54" x="185" y="492.5" width="15" height="15">
    <properties>
     <property name="description" value="這是報紙區!"/>
    </properties>
   </object>
-  <object id="55" x="792.75" y="364" width="15" height="26">
+  <object id="55" x="792.75" y="364" width="15" height="15.5">
    <properties>
     <property name="description" value="這是報紙區!"/>
    </properties>
   </object>
-  <object id="56" x="760.5" y="364" width="15" height="26">
+  <object id="56" x="760.5" y="364" width="15" height="15.75">
    <properties>
     <property name="description" value="這是報紙區!"/>
    </properties>
@@ -431,7 +431,7 @@
     <property name="description" value="火爐"/>
    </properties>
   </object>
-  <object id="68" x="273.5" y="81.5" width="93" height="13"/>
+  <object id="68" x="273.5" y="81.75" width="93" height="12.75"/>
   <object id="70" x="593.5" y="81" width="93" height="13"/>
   <object id="71" x="67.33" y="27" width="10" height="13"/>
   <object id="72" x="83.5455" y="26.68" width="10" height="13"/>
@@ -469,27 +469,27 @@
   <object id="124" x="832.5" y="485.75" width="5" height="57"/>
   <object id="125" x="837.5" y="481" width="42" height="5"/>
   <object id="127" x="5" y="638.5" width="950" height="1"/>
-  <object id="128" x="656.33" y="305" width="46" height="37">
+  <object id="128" x="656.33" y="305" width="46" height="27">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="129" x="417.5" y="305" width="46" height="36">
+  <object id="129" x="417.5" y="305" width="46" height="25">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="130" x="495.5" y="305.5" width="47" height="36">
+  <object id="130" x="495.5" y="305.5" width="47" height="25.25">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="131" x="257.33" y="305.33" width="46" height="36">
+  <object id="131" x="257.33" y="305.33" width="46" height="23.75">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="132" x="335.67" y="305.67" width="47" height="36">
+  <object id="132" x="335.67" y="305.67" width="47" height="23.25">
    <properties>
     <property name="description" value="桌子"/>
    </properties>

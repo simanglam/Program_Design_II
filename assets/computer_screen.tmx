@@ -164,7 +164,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="物件層 1">
-  <object id="1" x="227.667" y="245.292" width="76.6667" height="93.4167">
+  <object id="1" x="227.667" y="245.292" width="76.6667" height="97.0834">
    <properties>
     <property name="store" value="這是在電腦螢幕上的商店!"/>
    </properties>
