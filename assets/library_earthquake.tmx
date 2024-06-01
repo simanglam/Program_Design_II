@@ -226,7 +226,7 @@
 </data>
  </layer>
  <objectgroup id="4" name="物件層 1">
-  <object id="1" x="259.67" y="112.584" width="118" height="36">
+  <object id="1" x="259.67" y="112.584" width="118" height="27.6364">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
@@ -236,12 +236,12 @@
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="3" x="259.5" y="240.084" width="119" height="37">
+  <object id="3" x="259.5" y="240.084" width="119" height="28.4545">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="4" x="419.17" y="112.084" width="118" height="36">
+  <object id="4" x="419.17" y="112.084" width="118" height="27.0909">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
@@ -251,12 +251,12 @@
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="6" x="419.17" y="239.084" width="118" height="38">
+  <object id="6" x="419.17" y="239.084" width="118" height="28.5455">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="7" x="578.67" y="110.417" width="120" height="38">
+  <object id="7" x="578.67" y="110.417" width="120" height="29.2727">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
@@ -266,37 +266,37 @@
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="9" x="578.84" y="240.584" width="119" height="36">
+  <object id="9" x="578.84" y="240.584" width="119" height="27.6364">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="10" x="578.17" y="304.254" width="46" height="36">
+  <object id="10" x="578.17" y="304.254" width="46" height="28.5455">
    <properties>
     <property name="桌子" value="任性桌子"/>
    </properties>
   </object>
-  <object id="11" x="657" y="303.584" width="46" height="37">
+  <object id="11" x="657" y="303.584" width="46" height="27">
    <properties>
     <property name="description" value="任性桌子"/>
    </properties>
   </object>
-  <object id="12" x="418.17" y="303.584" width="46" height="36">
+  <object id="12" x="418.17" y="303.584" width="46" height="27.8182">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="13" x="496.17" y="304.084" width="47" height="36">
+  <object id="13" x="496.17" y="304.084" width="47" height="27.6364">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="14" x="258" y="303.913" width="46" height="36">
+  <object id="14" x="258" y="303.913" width="46" height="27.2727">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="15" x="336.34" y="304.254" width="47" height="36">
+  <object id="15" x="336.34" y="304.254" width="47" height="28.3636">
    <properties>
     <property name="description" value="桌子"/>
    </properties>
@@ -336,14 +336,14 @@
   <object id="42" x="816.582" y="501.835" width="5" height="57"/>
   <object id="43" x="821.582" y="497.085" width="42" height="5"/>
   <object id="44" x="-0.5" y="0.5" width="7" height="638"/>
-  <object id="45" x="833.833" y="278" width="77" height="90">
+  <object id="45" x="833.833" y="278" width="77" height="97.3333">
    <properties>
     <property name="store" value="這是在地震後圖書館裡的商店!"/>
    </properties>
   </object>
   <object id="53" x="48.8333" y="212.667" width="109.25" height="36.25"/>
-  <object id="54" x="48.25" y="320.5" width="47.5833" height="91.5"/>
-  <object id="55" x="143.5" y="341.167" width="78.25" height="71.3333">
+  <object id="54" x="48.25" y="320.5" width="47.5833" height="84"/>
+  <object id="55" x="143.5" y="341.167" width="78.25" height="58.3333">
    <properties>
     <property name="description" value="我們是經不起搖的櫃子!"/>
    </properties>
@@ -351,11 +351,11 @@
   <object id="56" x="72.8182" y="249.341" width="22.1818" height="28.5455"/>
   <object id="57" x="109.864" y="249.182" width="31.3636" height="31.6364"/>
   <object id="58" x="142.591" y="245" width="17" height="20"/>
-  <object id="59" x="95.8333" y="386" width="26" height="26"/>
+  <object id="59" x="95.8333" y="386" width="26" height="19"/>
   <object id="60" x="113.5" y="318.667" width="12.3333" height="15.6667"/>
   <object id="65" x="817.5" y="358.136" width="14.1818" height="18.3636"/>
   <object id="66" x="768.409" y="290.273" width="46.4545" height="87.8182"/>
-  <object id="67" x="769" y="64.25" width="159" height="94">
+  <object id="67" x="769" y="64.25" width="159" height="73">
    <properties>
     <property name="description" value="我們是破銅爛鐵!"/>
    </properties>
@@ -412,16 +412,16 @@
   <object id="122" x="934.23" y="511.95" width="19" height="31"/>
   <object id="123" x="935.05" y="577.955" width="19" height="31"/>
   <object id="124" x="1" y="635.5" width="950" height="5"/>
-  <object id="61" x="51.3636" y="448.182" width="128.636" height="27.6364"/>
-  <object id="49" x="48" y="505.5" width="124" height="29"/>
-  <object id="50" x="48" y="568.5" width="124" height="29"/>
-  <object id="51" x="185.5" y="508.5" width="15" height="26"/>
-  <object id="52" x="185" y="572" width="15" height="26"/>
+  <object id="61" x="51.3636" y="448.182" width="128.636" height="21.9697"/>
+  <object id="49" x="48" y="505.5" width="124" height="20.3333"/>
+  <object id="50" x="48" y="568.5" width="124" height="19"/>
+  <object id="51" x="185.5" y="508.5" width="15" height="16.6667"/>
+  <object id="52" x="185" y="572" width="15" height="16.3333"/>
   <object id="62" x="49.9545" y="436.727" width="29.7273" height="10.7273"/>
   <object id="63" x="131.591" y="439.364" width="26" height="8.09091"/>
-  <object id="46" x="257.5" y="39.25" width="125.25" height="31"/>
-  <object id="47" x="416.75" y="40" width="126.5" height="31"/>
-  <object id="48" x="576.75" y="39.5" width="126" height="31"/>
+  <object id="46" x="257.5" y="39.25" width="125.25" height="21.7273"/>
+  <object id="47" x="416.75" y="40" width="126.5" height="21.3636"/>
+  <object id="48" x="576.75" y="39.5" width="126" height="21.3636"/>
  </objectgroup>
  <objectgroup id="5" name="生怪區" visible="0">
   <object id="33" x="292.5" y="389.5" width="377" height="165"/>
