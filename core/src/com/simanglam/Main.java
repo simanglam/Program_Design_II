@@ -3,7 +3,6 @@ package com.simanglam;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.simanglam.fighting.FightingScreen;
 import com.simanglam.fighting.MainPage;
 import com.simanglam.map.MapScreen;
 import com.simanglam.util.AbstractScreen;
