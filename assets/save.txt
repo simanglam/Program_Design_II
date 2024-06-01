@@ -1,1 +1,43 @@
-{playerInventoryPokemons:[{name:base,description:Just for test},{name:base,description:Just for test}]}
+{
+playerInventory: [
+	{
+		name: test
+		description: This is only for testing
+		num: 1
+	}
+]
+playerInventoryPokemons: [
+	{
+		name: base
+		description: Just for test
+	}
+	{
+		name: base
+		description: Just for test
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+]
+}
