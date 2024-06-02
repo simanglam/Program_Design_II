@@ -296,7 +296,7 @@
     <property name="description" value="課桌椅"/>
    </properties>
   </object>
-  <object id="65" x="7.75" y="6" width="22.5" height="22">
+  <object id="65" x="7.75" y="6" width="10" height="11.5">
    <properties>
     <property name="entry" value="computer_screen"/>
     <property name="entryX" type="float" value="0"/>

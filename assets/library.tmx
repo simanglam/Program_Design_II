@@ -423,7 +423,7 @@
   </object>
   <object id="66" x="49" y="602.333" width="189" height="14">
    <properties>
-    <property name="deccription" value="圖書館館員的祭拜供品!"/>
+    <property name="description" value="圖書館館員的祭拜供品!"/>
    </properties>
   </object>
   <object id="67" x="312" y="394" width="15" height="10">
@@ -569,7 +569,7 @@
     <property name="description" value="火爐"/>
    </properties>
   </object>
-  <object id="171" x="9.41667" y="8.33333" width="22.5" height="22">
+  <object id="171" x="9.41667" y="8.33333" width="10.5" height="12">
    <properties>
     <property name="entry" value="classroom"/>
     <property name="entryX" type="float" value="0"/>

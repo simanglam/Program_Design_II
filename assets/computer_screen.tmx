@@ -213,7 +213,7 @@
     <property name="description" value="cmd"/>
    </properties>
   </object>
-  <object id="18" x="5.41667" y="3.66667" width="22.5" height="22">
+  <object id="18" x="5.41667" y="3.66667" width="11.8333" height="12">
    <properties>
     <property name="entry" value="library_earthquake"/>
     <property name="entryX" type="float" value="-60"/>

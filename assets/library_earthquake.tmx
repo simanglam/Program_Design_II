@@ -422,7 +422,7 @@
   <object id="46" x="257.5" y="39.25" width="125.25" height="21.7273"/>
   <object id="47" x="416.75" y="40" width="126.5" height="21.3636"/>
   <object id="48" x="576.75" y="39.5" width="126" height="21.3636"/>
-  <object id="126" x="8.75" y="9.66667" width="22.5" height="22">
+  <object id="126" x="8.75" y="9.66667" width="13.1667" height="13.3333">
    <properties>
     <property name="entry" value="library"/>
     <property name="entryX" type="float" value="0"/>
