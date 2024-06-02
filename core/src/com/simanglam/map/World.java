@@ -151,7 +151,7 @@ public class World {
             accu -= 1;
             ecounterPossibility += 1.0 / (int)((Math.random() * 50) + 1);
             System.out.println(ecounterPossibility);
-            if (ecounterPossibility >= (int)(Math.random() * 50 + 1)){
+            if (ecounterPossibility >= (int)(Math.random() * 50 + 1) && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
                 ecounterPossibility = 0;
                 return true;
             }
