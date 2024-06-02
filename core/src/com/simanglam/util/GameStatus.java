@@ -26,7 +26,7 @@ public class GameStatus {
         this.addPokemon("base");
         statusHashMap = new HashMap<>();
         this.addItem("test");
-        this.money = 1000;
+        this.money = 5000;
         currentMap = "computer_screen.tmx";
         currentPosition = new Rectangle();
     }

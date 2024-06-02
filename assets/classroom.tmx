@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="68">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="69">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
+ <tileset firstgid="2278" source="告示牌.tsx"/>
  <layer id="1" name="圖塊層 1" width="30" height="20">
   <data encoding="csv">
 149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,
@@ -44,11 +45,11 @@
 48,0,0,0,0,0,0,0,0,973,974,0,0,973,974,0,0,973,974,0,0,973,974,0,0,973,974,0,0,46,
 48,0,0,0,0,0,0,0,0,989,990,0,0,989,990,0,0,989,990,0,0,989,990,0,0,989,990,0,0,46,
 48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,850,851,0,46,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,866,867,0,46,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46
+48,0,0,0,0,0,0,0,0,2278,2279,2280,2281,2282,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
+48,0,0,0,0,0,0,0,0,2283,2284,2285,2286,2287,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
+48,0,0,0,0,0,0,0,0,2288,2289,2290,2291,2292,0,0,0,0,0,0,0,0,0,0,0,0,850,851,0,46,
+48,0,0,0,0,0,0,0,0,2293,2294,2295,2296,2297,0,0,0,0,0,0,0,0,0,0,0,0,866,867,0,46,
+48,0,0,0,0,0,0,0,0,2298,2299,2300,2301,2302,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46
 </data>
  </layer>
  <layer id="3" name="圖塊層 3" width="30" height="20">
@@ -75,7 +76,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="6" name="圖塊層 4" width="30" height="20" visible="0">
+ <layer id="6" name="圖塊層 4" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -133,7 +134,11 @@
   <object id="5" x="6.5" y="315.5" width="470" height="4"/>
   <object id="7" x="48.5833" y="24.5" width="94" height="11.5"/>
   <object id="8" x="176.917" y="26.3333" width="31" height="12.75"/>
-  <object id="9" x="272.25" y="25.875" width="158.5" height="12.75"/>
+  <object id="9" x="272.25" y="25.875" width="158.5" height="12.75">
+   <properties>
+    <property name="give" value="微分魔法球"/>
+   </properties>
+  </object>
   <object id="10" x="59.9394" y="62.7614" width="22.2348" height="14.7576">
    <properties>
     <property name="description" value="課桌椅"/>
@@ -214,11 +219,7 @@
     <property name="description" value="課桌椅"/>
    </properties>
   </object>
-  <object id="38" x="226.5" y="16.4583" width="27.6667" height="20.4167">
-   <properties>
-    <property name="description" value="黑板"/>
-   </properties>
-  </object>
+  <object id="38" x="226.5" y="16.4583" width="27.6667" height="20.4167"/>
   <object id="39" x="273.167" y="202.459" width="27.6667" height="13.0834">
    <properties>
     <property name="description" value="課桌椅"/>
@@ -311,8 +312,13 @@
     <property name="store" value="test"/>
    </properties>
   </object>
+  <object id="68" x="164.5" y="265.5" width="47" height="25">
+   <properties>
+    <property name="description" value="趕快去黑板右邊收集微分魔法球吧!"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="5" name="生怪區" visible="0">
+ <objectgroup id="5" name="生怪區">
   <object id="53" x="57" y="59.5" width="350" height="117"/>
  </objectgroup>
  <objectgroup id="9" name="其他">
