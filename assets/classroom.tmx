@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="66">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="68">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
@@ -306,8 +306,20 @@
     <property name="portal" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="66" x="49" y="282" width="16.6667" height="14.6667">
+   <properties>
+    <property name="store" value="test"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="生怪區" visible="0">
   <object id="53" x="57" y="59.5" width="350" height="117"/>
+ </objectgroup>
+ <objectgroup id="9" name="其他">
+  <object id="67" x="372.5" y="273.5" width="40" height="26">
+   <properties>
+    <property name="bosswar" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
