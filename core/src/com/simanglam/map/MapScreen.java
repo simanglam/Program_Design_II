@@ -19,6 +19,7 @@ import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 import com.simanglam.util.JsonLoaders;
+import com.simanglam.util.ui.PackageScreen;
 
 public class MapScreen extends AbstractScreen{
     Main game;
@@ -51,9 +52,6 @@ public class MapScreen extends AbstractScreen{
     public void render(float deltaT){
         ScreenUtils.clear(0, 0, 0, 0);
         SpriteBatch batch = game.getSpriteBatch();
-
-        if (world.ecounterUpdate(deltaT))
-            game.setScreen(game.getInfoScreen());
         
         this.world.update(deltaT, this);
         batch.setProjectionMatrix(this.world.camera.combined);
@@ -109,7 +107,7 @@ public class MapScreen extends AbstractScreen{
         else if(keycode == Keys.ESCAPE){
             this.world.player.freeze();
             gameStatus.currentPosition = world.player.getRectangle();
-            game.setScreen(game.getInfoScreen());
+            game.setScreen(new PackageScreen(game));
         }
         return false;
     }

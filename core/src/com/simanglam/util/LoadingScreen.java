@@ -55,7 +55,7 @@ public class LoadingScreen extends AbstractScreen{
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         if (assetsManagerWrapper.assetManager.update(17)){
-            game.setScreen(game.getGameScreen());
+            game.setScreen(new MainPage(game));
         }
         progressBar.setValue(assetsManagerWrapper.assetManager.getProgress());
         stage.act();

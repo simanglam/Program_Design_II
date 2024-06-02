@@ -1,26 +1,29 @@
 package com.simanglam.fighting;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.Main;
-import com.simanglam.fighting.skillbehavior.SimpleAttack;
 import com.simanglam.fighting.skillbehavior.SkillBehavior;
 import com.simanglam.map.ui.Dialog;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
-
-import java.util.ArrayList;
 
 public class FightingScreen extends AbstractScreen {
 
@@ -73,7 +76,8 @@ public class FightingScreen extends AbstractScreen {
         dialog.setFillParent(true);
         stack.add(dialog);
         playerPokemons = new Pokemon[4];
-        playerPokemons[0] = PokemonFactory.buildPokemon("test");
+        for (int i = 0; i < 4 && i < gameStatus.selectedPokemon.size(); i++)
+            playerPokemons[i] = PokemonFactory.buildPokemon(gameStatus.selectedPokemon.get(i).getName());
         pokemonButtons = new Button[4];
         currentPokemon = playerPokemons[0];
         for (int i = 0; i < 4; i++) {
@@ -212,6 +216,7 @@ public class FightingScreen extends AbstractScreen {
                 public void clicked(InputEvent event, float x, float y) {
                     GameStatus.getGameStatus().addPokemon(enemy.getName());
                     GameStatus.getGameStatus().save();
+                    game.setScreen(game.getGameScreen());
                 }
             });
             return;
@@ -229,8 +234,8 @@ public class FightingScreen extends AbstractScreen {
                     pokemonButtons[i].addAction(Actions.touchable(Touchable.disabled));
                 }
             }
-            for (int i = 0; i < playerPokemons.length; i++){
-                if (playerPokemons[i] != null && playerPokemons[i].alive()) {
+            for (Pokemon playerPokemon : playerPokemons) {
+                if (playerPokemon != null && playerPokemon.alive()) {
                     return;
                 }
             }

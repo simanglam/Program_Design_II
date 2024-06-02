@@ -1,4 +1,4 @@
-package com.simanglam.fighting;
+package com.simanglam.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
-import com.simanglam.util.AbstractScreen;
+import com.simanglam.map.MapScreen;
 
 public class MainPage extends AbstractScreen {
 
@@ -46,6 +46,7 @@ public class MainPage extends AbstractScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.setGameScreen(new MapScreen(game));
                 game.setScreen(game.getGameScreen());
             }
         });
@@ -64,7 +65,7 @@ public class MainPage extends AbstractScreen {
         saveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.getSavePage());
+                game.setScreen(new SavePage(game));
             }
         });
 
