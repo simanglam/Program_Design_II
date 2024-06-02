@@ -374,8 +374,7 @@
   </object>
   <object id="49" x="833.5" y="231" width="77" height="97.3333">
    <properties>
-    <property name="description" value="這是在圖書館裡的商店!"/>
-    <property name="store" value=""/>
+    <property name="store" value="test"/>
    </properties>
   </object>
   <object id="50" x="818" y="361" width="90" height="19.6667">
