@@ -75,7 +75,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="6" name="圖塊層 4" width="30" height="20">
+ <layer id="6" name="圖塊層 4" width="30" height="20" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -300,8 +300,8 @@
    <properties>
     <property name="entry" value="computer_screen"/>
     <property name="entryX" type="float" value="0"/>
-    <property name="entryY" type="float" value="15"/>
-    <property name="exit" value="library"/>
+    <property name="entryY" type="float" value="200"/>
+    <property name="exit" value="classroom"/>
     <property name="next" value="library.tmx"/>
     <property name="portal" type="bool" value="true"/>
    </properties>

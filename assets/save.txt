@@ -9,11 +9,7 @@ playerInventory: [
 playerInventoryPokemons: [
 	{
 		name: base
-		description: Just for test
-	}
-	{
-		name: base
-		description: Just for test
+		description: asd
 	}
 ]
 }

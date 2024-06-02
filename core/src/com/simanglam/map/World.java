@@ -30,7 +30,8 @@ public class World {
     double ecounterPossibility;
 
     public World(){
-        this.tiledMap = new TmxMapLoader().load("library.tmx");
+        this.tiledMap = new TmxMapLoader().load(GameStatus.getGameStatus().currentMap);
+        mapLoader = new TmxMapLoader();
         this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.camera = new OrthographicCamera();
         this.player = new Player();
@@ -108,14 +109,14 @@ public class World {
         MapObjects rectangleMapObjects = getCollideObjects(playerRectangle, layer);
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             if (rObject.getProperties().get("portal") != null){
-                this.tiledMap.dispose();
-                this.tiledMap = mapLoader.load((String)rObject.getProperties().get("next"));
+                setMap((String)rObject.getProperties().get("next"));
                 GameStatus.getGameStatus().currentMap = (String)rObject.getProperties().get("next");
-                this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {
                     if (rectangleObject.getProperties().get("portal") != null && ((String)rectangleObject.getProperties().get("entry")).equals((String)rObject.getProperties().get("exit"))){
+
                         player.setPosition(rectangleObject.getRectangle().x - (float)rectangleObject.getProperties().get("entryX"), rectangleObject.getRectangle().y - (float)rectangleObject.getProperties().get("entryY"));
                         GameStatus.getGameStatus().currentPosition.set(playerRectangle);
+                        camera.position.set(player.rectangle.x, playerRectangle.y, 0);
                         return ;
                     }
                 }

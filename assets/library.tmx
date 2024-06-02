@@ -573,8 +573,8 @@
    <properties>
     <property name="entry" value="classroom"/>
     <property name="entryX" type="float" value="0"/>
-    <property name="entryY" type="float" value="15"/>
-    <property name="exit" value="library_earthquake"/>
+    <property name="entryY" type="float" value="150"/>
+    <property name="exit" value="library"/>
     <property name="next" value="library_earthquake.tmx"/>
     <property name="portal" type="bool" value="true"/>
    </properties>

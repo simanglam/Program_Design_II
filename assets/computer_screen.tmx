@@ -215,16 +215,16 @@
   </object>
   <object id="18" x="5.41667" y="3.66667" width="22.5" height="22">
    <properties>
-    <property name="entry" value="library"/>
-    <property name="entryX" type="float" value="0"/>
-    <property name="entryY" type="float" value="15"/>
-    <property name="exit" value="library_earthquake"/>
+    <property name="entry" value="library_earthquake"/>
+    <property name="entryX" type="float" value="-60"/>
+    <property name="entryY" type="float" value="150"/>
+    <property name="exit" value="computer_screen"/>
     <property name="next" value="classroom.tmx"/>
     <property name="portal" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="4" name="生怪區" visible="0">
+ <objectgroup id="4" name="生怪區">
   <object id="2" x="1.66665" y="228.292" width="876.667" height="203.417"/>
  </objectgroup>
  <objectgroup id="8" name="其他"/>
