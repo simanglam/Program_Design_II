@@ -1,13 +1,13 @@
 {
   "ATK": 10,
-  "healthPoint": 12,
+  "healthPoint": 100,
   "attackCooldown": 10,
   "speed": 2,
   "animateCooldown": 1.25,
-  "range": 100,
+  "range": 5,
   "vision": 100,
-  "image": 2,
-  "size": 14,
+  "image": 1,
+  "size": 256,
   "money": 200,
   "spawnCooldown": 1,
 }
