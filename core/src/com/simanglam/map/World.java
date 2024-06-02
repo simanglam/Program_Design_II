@@ -14,7 +14,8 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.simanglam.fighting.bosswar.BossWarScreen;
+import com.simanglam.bosswar.BossWarScreen;
+import com.simanglam.fighting.FightingScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 
@@ -29,8 +30,8 @@ public class World {
     double ecounterPossibility;
 
     public World(){
-        this.mapLoader = new TmxMapLoader();
-        this.tiledMap = mapLoader.load("test.tmx");
+        this.tiledMap = new TmxMapLoader().load(GameStatus.getGameStatus().currentMap);
+        mapLoader = new TmxMapLoader();
         this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.camera = new OrthographicCamera();
         this.player = new Player();
@@ -50,7 +51,7 @@ public class World {
 
     public void update(float deltaT, MapScreen screen){
         if (ecounterUpdate(deltaT))
-            screen.game.setScreen(screen.game.getInfoScreen());
+            screen.game.setScreen(new FightingScreen(screen.game));
         MapObject currentCollide = getCollideObject(player.getRectangle(), "其他");
         if (currentCollide != null){
             if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty()&& screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) != false)
@@ -108,14 +109,14 @@ public class World {
         MapObjects rectangleMapObjects = getCollideObjects(playerRectangle, layer);
         for (RectangleMapObject rObject : rectangleMapObjects.getByType(RectangleMapObject.class)){
             if (rObject.getProperties().get("portal") != null){
-                this.tiledMap.dispose();
-                this.tiledMap = mapLoader.load((String)rObject.getProperties().get("next"));
+                setMap((String)rObject.getProperties().get("next"));
                 GameStatus.getGameStatus().currentMap = (String)rObject.getProperties().get("next");
-                this.renderer = new OrthogonalTiledMapRenderer(tiledMap);
                 for (RectangleMapObject rectangleObject : tiledMap.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {
                     if (rectangleObject.getProperties().get("portal") != null && ((String)rectangleObject.getProperties().get("entry")).equals((String)rObject.getProperties().get("exit"))){
+
                         player.setPosition(rectangleObject.getRectangle().x - (float)rectangleObject.getProperties().get("entryX"), rectangleObject.getRectangle().y - (float)rectangleObject.getProperties().get("entryY"));
                         GameStatus.getGameStatus().currentPosition.set(playerRectangle);
+                        camera.position.set(player.rectangle.x, playerRectangle.y, 0);
                         return ;
                     }
                 }
@@ -151,7 +152,7 @@ public class World {
             accu -= 1;
             ecounterPossibility += 1.0 / (int)((Math.random() * 50) + 1);
             System.out.println(ecounterPossibility);
-            if (ecounterPossibility >= (int)(Math.random() * 50 + 1)){
+            if (ecounterPossibility >= (int)(Math.random() * 50 + 1) && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
                 ecounterPossibility = 0;
                 return true;
             }

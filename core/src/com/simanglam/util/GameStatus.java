@@ -23,18 +23,11 @@ public class GameStatus {
         playerInventory = new ArrayList<>();
         playerInventoryPokemons = new ArrayList<>();
         selectedPokemon = new ArrayList<>();
-        InventoryPokemon i = new InventoryPokemon();
-        i.name = "base";
-        i.description = "Just for test";
-        InventoryPokemon i2 = new InventoryPokemon();
-        i2.name = "base";
-        i2.description = "Just for test";
-        playerInventoryPokemons.add(i);
-        playerInventoryPokemons.add(i2);
+        this.addPokemon("base");
         statusHashMap = new HashMap<>();
         this.addItem("test");
-        this.money = 1000;
-        currentMap = "test.tmx";
+        this.money = 5000;
+        currentMap = "computer_screen.tmx";
         currentPosition = new Rectangle();
     }
 

@@ -3,7 +3,7 @@ package com.simanglam.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.simanglam.fighting.Pokemon;
-import com.simanglam.fighting.bosswar.BossWarActor;
+import com.simanglam.bosswar.BossWarActor;
 
 public class InventoryPokemon {
     String name, description;

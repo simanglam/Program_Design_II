@@ -288,7 +288,7 @@ public class SavePage extends AbstractScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.getMainPage());
+                game.setScreen(new MainPage(game));
             }
         });
 
