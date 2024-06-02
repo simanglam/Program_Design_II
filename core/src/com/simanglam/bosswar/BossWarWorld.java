@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.util.Const;
 import com.simanglam.util.JsonLoaders;
-
 public class BossWarWorld extends InputAdapter implements Disposable {
     ArrayList<BossWarActor> pokemonArray;
     ArrayList<BossWarActor> enemyArray;

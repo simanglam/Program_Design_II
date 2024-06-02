@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.simanglam.bosswar.BossWarScreen;
+import com.simanglam.fighting.FightingScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 
@@ -49,7 +50,7 @@ public class World {
 
     public void update(float deltaT, MapScreen screen){
         if (ecounterUpdate(deltaT))
-            screen.game.setScreen(screen.game.getInfoScreen());
+            screen.game.setScreen(new FightingScreen(screen.game));
         MapObject currentCollide = getCollideObject(player.getRectangle(), "其他");
         if (currentCollide != null){
             if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty()&& screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) != false)
@@ -150,7 +151,7 @@ public class World {
             accu -= 1;
             ecounterPossibility += 1.0 / (int)((Math.random() * 50) + 1);
             System.out.println(ecounterPossibility);
-            if (ecounterPossibility >= (int)(Math.random() * 50 + 1)){
+            if (ecounterPossibility >= (int)(Math.random() * 50 + 1) && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
                 ecounterPossibility = 0;
                 return true;
             }
