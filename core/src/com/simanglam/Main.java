@@ -35,7 +35,7 @@ public class Main extends Game {
 		AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.finishLoading();
 		this.setScreen(new PackageScreen(this));
 		batch = new SpriteBatch();
-		infoScreen = new InfoScreen(this);
+		//infoScreen = new InfoScreen(this);
 		gameScreen = new MapScreen(this);
     	mainPage = new MainPage(this);
 		savePage = new SavePage(this);
