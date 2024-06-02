@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="18">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="19">
  <tileset firstgid="1" source="icons.tsx"/>
  <tileset firstgid="241" source="stores.tsx"/>
  <tileset firstgid="703" source="windows xp.tsx"/>
@@ -211,6 +211,16 @@
   <object id="17" x="180.667" y="179.333" width="29.3333" height="34">
    <properties>
     <property name="description" value="cmd"/>
+   </properties>
+  </object>
+  <object id="18" x="5.41667" y="3.66667" width="22.5" height="22">
+   <properties>
+    <property name="entry" value="library"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="15"/>
+    <property name="exit" value="library_earthquake"/>
+    <property name="next" value="classroom.tmx"/>
+    <property name="portal" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

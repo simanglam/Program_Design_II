@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="170">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="172">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="CuteRPG_Interior_custom.tsx"/>
@@ -228,7 +228,7 @@
  <objectgroup id="8" name="物件層 1">
   <object id="2" name="行李箱" x="420" y="450" width="48" height="46">
    <properties>
-    <property name="description" value="行李箱//這是一個行李箱!"/>
+    <property name="description" value="火爐"/>
    </properties>
   </object>
   <object id="5" x="50" y="40" width="157" height="20.3333">
@@ -243,7 +243,7 @@
   </object>
   <object id="8" x="114" y="167" width="93" height="21.25">
    <properties>
-    <property name="descrption" value="這是歷史書籍區!"/>
+    <property name="description" value="這是歷史書籍區!"/>
    </properties>
   </object>
   <object id="9" x="48.5" y="231" width="159" height="21.5">
@@ -364,7 +364,7 @@
   </object>
   <object id="46" x="754" y="295.67" width="60" height="21.3333">
    <properties>
-    <property name="descriptioin" value="這是摩藥學書籍區!"/>
+    <property name="description" value="這是摩藥學書籍區!"/>
    </properties>
   </object>
   <object id="47" x="849.33" y="167" width="62" height="21.6667">
@@ -494,23 +494,97 @@
     <property name="description" value="桌子"/>
    </properties>
   </object>
-  <object id="133" x="376.5" y="393" width="15" height="10"/>
-  <object id="134" x="440.5" y="392.75" width="15" height="10"/>
-  <object id="135" x="504.5" y="393" width="15" height="10"/>
-  <object id="136" x="568.5" y="393.75" width="15" height="10"/>
-  <object id="137" x="632.75" y="392.75" width="15" height="10"/>
-  <object id="138" x="313" y="456.5" width="15" height="10"/>
-  <object id="139" x="376.167" y="457.667" width="15" height="10"/>
-  <object id="140" x="504.833" y="458" width="15" height="10"/>
-  <object id="141" x="569.5" y="458.667" width="15" height="10"/>
-  <object id="142" x="633.833" y="460" width="15" height="10"/>
-  <object id="143" x="632.5" y="521.667" width="15" height="10"/>
-  <object id="144" x="568.167" y="522.333" width="15" height="10"/>
-  <object id="145" x="505.5" y="521.667" width="15" height="10"/>
-  <object id="146" x="376.5" y="520.667" width="15" height="10"/>
-  <object id="147" x="312.875" y="521.625" width="15" height="10"/>
+  <object id="133" x="376.5" y="393" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="134" x="440.5" y="392.75" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="135" x="504.5" y="393" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="136" x="568.5" y="393.75" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="137" x="632.75" y="392.75" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="138" x="313" y="456.5" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="139" x="376.167" y="457.667" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="140" x="504.833" y="458" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="141" x="569.5" y="458.667" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="142" x="633.833" y="460" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="143" x="632.5" y="521.667" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="144" x="568.167" y="522.333" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="145" x="505.5" y="521.667" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="146" x="376.5" y="520.667" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="147" x="312.875" y="521.625" width="15" height="10">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
+  <object id="171" x="9.41667" y="8.33333" width="22.5" height="22">
+   <properties>
+    <property name="entry" value="classroom"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="15"/>
+    <property name="exit" value="library_earthquake"/>
+    <property name="next" value="library_earthquake.tmx"/>
+    <property name="portal" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="10" name="生怪區">
-  <object id="150" x="291" y="390" width="377" height="165"/>
+ <objectgroup id="10" name="生怪區" visible="0">
+  <object id="150" x="291" y="390" width="377" height="165">
+   <properties>
+    <property name="description" value="火爐"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

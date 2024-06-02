@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="125">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="127">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
@@ -422,6 +422,16 @@
   <object id="46" x="257.5" y="39.25" width="125.25" height="21.7273"/>
   <object id="47" x="416.75" y="40" width="126.5" height="21.3636"/>
   <object id="48" x="576.75" y="39.5" width="126" height="21.3636"/>
+  <object id="126" x="8.75" y="9.66667" width="22.5" height="22">
+   <properties>
+    <property name="entry" value="library"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="15"/>
+    <property name="exit" value="computer_screen"/>
+    <property name="next" value="computer_screen.tmx"/>
+    <property name="portal" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="生怪區" visible="0">
   <object id="33" x="292.5" y="389.5" width="377" height="165"/>
