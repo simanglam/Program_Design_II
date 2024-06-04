@@ -1,8 +1,8 @@
 {
-  "ATK": 50,
+  "ATK": 500,
   "healthPoint": 50,
   "attackCooldown": 10,
-  "speed": 3,
+  "speed": 7,
   "animateCooldown": 1.25,
   "range": 200,
   "vision": 200,
