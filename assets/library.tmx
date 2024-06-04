@@ -599,7 +599,7 @@
  <objectgroup id="12" name="其他">
   <object id="173" x="912" y="9" width="39.5" height="30.5">
    <properties>
-    <property name="bosswar" value=""/>
+    <property name="bosswar" value="ex1"/>
    </properties>
   </object>
  </objectgroup>

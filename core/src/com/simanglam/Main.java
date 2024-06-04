@@ -18,15 +18,18 @@ public class Main extends Game {
 	public SpriteBatch getSpriteBatch(){return this.batch;}
 	public Screen getGameScreen(){return gameScreen;}
 	public void setGameScreen(Screen s){gameScreen = s;}
+    
 
 	@Override
 	public void create () {
 		this.setScreen(new LoadingScreen(this));
+        GameStatus.getGameStatus().addPokemon("for()");
 		batch = new SpriteBatch();
 	}
 
     @Override
     public void setScreen(Screen screen) {
+        
         super.setScreen(screen);
         ((AbstractScreen)screen).handleInput();
     }
