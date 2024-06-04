@@ -1,8 +1,8 @@
 package com.simanglam.map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player implements InputProcessor{
     static int MOVING_SPEED = 4;
     Rectangle rectangle;
+    Rectangle invesgateRectangle;
     public Vector2 heading;
     Vector2 lastHeading;
     TextureRegion texturesRegions[][];
@@ -19,6 +20,7 @@ public class Player implements InputProcessor{
     float accu;
     public Player(){
         this.rectangle = new Rectangle(16, 16, 16, 16);
+        invesgateRectangle = new Rectangle(rectangle);
         this.heading = new Vector2(0, 0);
         this.lastHeading = this.heading.cpy();
         accu = 0f;
@@ -32,7 +34,7 @@ public class Player implements InputProcessor{
 
     public void draw(SpriteBatch batch){
         int direction = 0;
-        Vector2 currentHeading = null;
+        Vector2 currentHeading;
         if (heading.y != 0 || heading.x != 0)
             currentHeading = heading;
         else
@@ -77,7 +79,8 @@ public class Player implements InputProcessor{
 
     public Vector2 getPosition(){return new Vector2(rectangle.x, rectangle.y);}
     public Rectangle creatInvestgateRectangle(){
-        return new Rectangle((float)Math.floor(this.rectangle.x / 16) * 16 + lastHeading.x * 16, (float)Math.floor(this.rectangle.y / 16) * 16 + lastHeading.y * 16, 16, 16);
+        invesgateRectangle.setPosition(this.rectangle.x + lastHeading.x * 16, this.rectangle.y + lastHeading.y * 16);
+        return invesgateRectangle;
     }
 
     public void updateX(float deltaT){

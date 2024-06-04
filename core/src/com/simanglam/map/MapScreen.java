@@ -13,11 +13,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
+import com.simanglam.map.ui.PuzzleDialog;
 import com.simanglam.store.StoreScreen;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 import com.simanglam.util.JsonLoaders;
+import com.simanglam.util.ui.PackageScreen;
 
 public class MapScreen extends AbstractScreen{
     Main game;
@@ -36,7 +38,7 @@ public class MapScreen extends AbstractScreen{
         this.inputMultiplexer.addProcessor(this.stage);
         this.inputMultiplexer.addProcessor(this.world.player);
         this.inputMultiplexer.addProcessor(this);
-        this.dialog = new Dialog(this.stage);
+        this.dialog = new Dialog();
         gameStatus = GameStatus.getGameStatus();
     }
 
@@ -50,9 +52,6 @@ public class MapScreen extends AbstractScreen{
     public void render(float deltaT){
         ScreenUtils.clear(0, 0, 0, 0);
         SpriteBatch batch = game.getSpriteBatch();
-
-        if (world.ecounterUpdate(deltaT))
-            game.setScreen(game.getInfoScreen());
         
         this.world.update(deltaT, this);
         batch.setProjectionMatrix(this.world.camera.combined);
@@ -87,10 +86,18 @@ public class MapScreen extends AbstractScreen{
                         gameStatus.getStatusHashMap().put(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give"), true);
                         
                 }
-                if (collMapObject.getProperties().get("description") != null){
+                else if (collMapObject.getProperties().get("description") != null){
                     addDialog(((String)collMapObject.getProperties().get("description")));
                 }
-                if (collMapObject.getProperties().get("store") != null){
+                else if (collMapObject.getProperties().get("earthquack") != null){
+                    world.setMap((String)collMapObject.getProperties().get("next"));
+                }
+                else if (collMapObject.getProperties().get("puzzle") != null){
+                    PuzzleDialog p = new PuzzleDialog(this, (String)collMapObject.getProperties().get("puzzle"), (String)collMapObject.getProperties().get("reward"), (String)collMapObject.getProperties().get("word"));
+                    p.setSize(stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight() / 5);
+                    stage.addActor(p);
+                }
+                else if (collMapObject.getProperties().get("store") != null){
                     game.setScreen(new StoreScreen(game, (String)collMapObject.getProperties().get("store")));
                 }
                 gameStatus.save();
@@ -100,7 +107,7 @@ public class MapScreen extends AbstractScreen{
         else if(keycode == Keys.ESCAPE){
             this.world.player.freeze();
             gameStatus.currentPosition = world.player.getRectangle();
-            game.setScreen(game.getInfoScreen());
+            game.setScreen(new PackageScreen(game));
         }
         return false;
     }
