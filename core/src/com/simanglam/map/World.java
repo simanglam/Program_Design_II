@@ -54,7 +54,7 @@ public class World {
             screen.game.setScreen(new FightingScreen(screen.game));
         MapObject currentCollide = getCollideObject(player.getRectangle(), "其他");
         if (currentCollide != null){
-            if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty()&& screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) != false)
+            if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty() && screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) == null)
                 screen.game.setScreen(new BossWarScreen(screen.game, (String)currentCollide.getProperties().get("bosswar")));
             else if(currentCollide.getProperties().get("bosswar") != null && screen.gameStatus.selectedPokemon.isEmpty()){
                 screen.addDialog("You Must select pokemon to continue");
