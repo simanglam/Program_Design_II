@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="178">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="179">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="CuteRPG_Interior_custom.tsx"/>
@@ -229,7 +229,7 @@
  <objectgroup id="8" name="物件層 1">
   <object id="2" name="行李箱" x="424.333" y="479.333" width="15.3333" height="13">
    <properties>
-    <property name="description" value="行李相"/>
+    <property name="description" value="行李箱"/>
    </properties>
   </object>
   <object id="5" x="50" y="40" width="157" height="20.3333">
@@ -588,8 +588,13 @@
 凱薩加密&quot;折磨詩人俱樂部的相關魔法數字!</property>
    </properties>
   </object>
+  <object id="178" x="821.75" y="86.75" width="21" height="16.75">
+   <properties>
+    <property name="once" value="modern_cryptography_book"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="10" name="生怪區" visible="0">
+ <objectgroup id="10" name="生怪區">
   <object id="150" x="291" y="390" width="377" height="165">
    <properties>
     <property name="description" value="火爐"/>
@@ -599,7 +604,7 @@
  <objectgroup id="12" name="其他">
   <object id="173" x="912" y="9" width="39.5" height="30.5">
    <properties>
-    <property name="bosswar" value=""/>
+    <property name="bosswar" value="ex1.json"/>
    </properties>
   </object>
  </objectgroup>
