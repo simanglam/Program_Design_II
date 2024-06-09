@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="69">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="71">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
@@ -315,6 +315,16 @@
   <object id="68" x="164.5" y="265.5" width="47" height="25">
    <properties>
     <property name="description" value="趕快去黑板右邊收集微分魔法球吧!"/>
+   </properties>
+  </object>
+  <object id="70" x="6.5" y="305.25" width="10" height="11.5">
+   <properties>
+    <property name="entry" value="library"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="150"/>
+    <property name="exit" value="classroom"/>
+    <property name="next" value="computer_screen.tmx"/>
+    <property name="portal" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
