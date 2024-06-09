@@ -79,11 +79,12 @@ public class MapScreen extends AbstractScreen{
             Rectangle iRectangle = this.world.player.creatInvestgateRectangle();
             RectangleMapObject collMapObject = world.getCollideObject(iRectangle, "物件層 1");
             if (collMapObject != null){
-                if (collMapObject.getProperties().get("give") != null){
+                if (collMapObject.getProperties().get("give") != null && gameStatus.getStatusHashMap().get(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give")) == null){
                     if (gameStatus.getStatusHashMap().get(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give")) == null)
                         gameStatus.addItem((String)collMapObject.getProperties().get("give"));
                     if (collMapObject.getProperties().get("once") == null)
                         gameStatus.getStatusHashMap().put(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give"), true);
+                    addDialog("你獲得了" + (String)collMapObject.getProperties().get("give"));
                         
                 }
                 else if (collMapObject.getProperties().get("description") != null){
