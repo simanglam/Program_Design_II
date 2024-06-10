@@ -24,6 +24,7 @@ import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
+import com.simanglam.util.InventoryItem;
 
 public class FightingScreen extends AbstractScreen {
 
@@ -36,6 +37,7 @@ public class FightingScreen extends AbstractScreen {
     Table skillTable;
     Table switchTable;
     Table optionTable;
+    Table packageTable;
     Dialog dialog;
     BitmapFont font;
 
@@ -60,9 +62,10 @@ public class FightingScreen extends AbstractScreen {
         resultButton.setPosition((Const.maxViewportWidth - resultButton.getWidth()) / 2f, (Const.maxViewportHeight - resultButton.getHeight()) / 2f);
         this.enemy = PokemonFactory.buildPokemon("tower");
         Table finalTable = new Table();
-        skillTable = new Table();
-        switchTable = new Table();
+        skillTable = new Table(skin);
+        switchTable = new Table(skin);
         optionTable = new Table(skin);
+        packageTable = new Table(skin);
 
         optionTable.setSize(Const.maxViewportWidth / 4f, Const.maxViewportHeight / 4f);
 
@@ -74,6 +77,7 @@ public class FightingScreen extends AbstractScreen {
         dialog.setVisible(false);
         dialog.setWidth(Const.maxViewportWidth);
         dialog.setFillParent(true);
+        dialog.setMovable(false);
         stack.add(dialog);
         playerPokemons = new Pokemon[4];
         for (int i = 0; i < 4 && i < gameStatus.selectedPokemon.size(); i++)
@@ -160,12 +164,36 @@ public class FightingScreen extends AbstractScreen {
         skillTable.setVisible(false);
         stack.add(skillTable);
 
+        for (InventoryItem item: gameStatus.playerInventory){
+            if (item.getName().equals("回復藥水") || item.getName().equals("超級回復藥水") || item.getName().equals("究極回復藥水")){
+                Button b = new Button(skin);
+                b.add(item.getName());
+                b.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        currentPokemon.setHP(currentPokemon.getHP() + PosionEffectFactory.getEffect(item.getName()));
+                        item.consume();
+                        if (item.getNum() == 0){
+                            b.setDisabled(true);
+                            gameStatus.playerInventory.remove(item);
+                        }
+                        enemyTurn();
+                        packageTable.setVisible(false);
+                    }
+                });
+                packageTable.add(b);
+            }
+        }
+        packageTable.setVisible(false);
+        stack.add(packageTable);
+
         Button pokemonButton = new Button(skin);
         pokemonButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 switchTable.setVisible(true);
                 skillTable.setVisible(false);
+                packageTable.setVisible(false);
             }
         });
         pokemonButton.add("Pokemon");
@@ -177,6 +205,7 @@ public class FightingScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 switchTable.setVisible(false);
                 skillTable.setVisible(true);
+                packageTable.setVisible(false);
             }
         });
 
@@ -189,6 +218,7 @@ public class FightingScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 switchTable.setVisible(false);
                 skillTable.setVisible(false);
+                packageTable.setVisible(true);
             }
         });
         backPack.add("Backpack");

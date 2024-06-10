@@ -1,6 +1,7 @@
 package com.simanglam.util.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -22,7 +23,7 @@ public class PackageScreen extends AbstractScreen {
     
 
     public PackageScreen(final Main game){
-        stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight));
+        stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
 
         t = new Table(skin);

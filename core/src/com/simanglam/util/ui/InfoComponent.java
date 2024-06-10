@@ -10,6 +10,6 @@ public class InfoComponent extends Table {
 
     public InfoComponent(){
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-        this.add(new Label("Money: %d".formatted(GameStatus.getGameStatus().money), skin));
+        this.add(new Label("Money" + String.valueOf(GameStatus.getGameStatus().money), skin));
     }
 }

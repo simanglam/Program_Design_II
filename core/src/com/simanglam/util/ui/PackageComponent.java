@@ -41,7 +41,7 @@ public class PackageComponent extends Table{
             });
             Cell<Button> c = lowerTable.add(b).expandX().padBottom(20).prefSize(20).left();
             b.add(ib1);
-            b.add(new Label(item.getName(), skin));
+            b.add(new Label(String.format("%.5s %d", item.getName(), item.getNum()), skin));
             if (i % 2 == 0){
                 i = 0;
                 c.row();
@@ -54,7 +54,7 @@ public class PackageComponent extends Table{
         Table outterTable = new Table(skin);
         outterTable.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
         outterTable.add(upperTable).prefSize(Const.maxViewportWidth, Const.maxViewportHeight / 6).row();
-        outterTable.add(lowerTable).expandY();
+        outterTable.add(lowerTable).expand().prefSize(Const.maxViewportWidth, 5 * Const.maxViewportHeight / 6).row();
         this.add(outterTable);
     }
 }
