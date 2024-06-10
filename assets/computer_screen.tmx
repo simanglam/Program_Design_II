@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="24">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="25">
  <tileset firstgid="1" source="icons.tsx"/>
  <tileset firstgid="241" source="stores.tsx"/>
  <tileset firstgid="703" source="windows xp.tsx"/>
@@ -9,6 +9,7 @@
  <tileset firstgid="2461" source="final_project_B.tsx"/>
  <tileset firstgid="2486" source="final_project_C.tsx"/>
  <tileset firstgid="2511" source="告示牌.tsx"/>
+ <tileset firstgid="2536" source="CuteRPG_Castle_New.tsx"/>
  <layer id="1" name="圖塊層 1" width="55" height="27">
   <data encoding="csv">
 758,759,760,761,762,763,764,765,766,767,768,769,770,771,772,773,774,775,776,777,778,779,780,781,782,783,784,785,786,787,788,789,790,791,792,793,794,795,796,797,798,799,800,801,802,803,804,805,806,807,808,809,810,811,812,
@@ -42,7 +43,7 @@
  </layer>
  <layer id="2" name="圖塊層 2" width="55" height="27">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2411,2412,2413,2414,2415,
+3031,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2411,2412,2413,2414,2415,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2416,2417,2418,2419,2420,
 0,68,69,70,71,72,73,74,75,0,0,77,78,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2421,2422,2423,2424,2425,
 0,98,99,100,101,102,103,104,105,0,0,107,108,109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2426,2427,2428,2429,2430,
@@ -68,7 +69,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,3031,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="5" name="圖塊層 3" width="55" height="27">
@@ -170,10 +171,10 @@
     <property name="description" value="這是在電腦螢幕上的商店!"/>
    </properties>
   </object>
-  <object id="3" x="4" y="-0.333333" width="877" height="1.66667"/>
-  <object id="4" x="0.333333" y="429.833" width="877" height="2"/>
+  <object id="3" x="-4.44089e-16" y="0.303031" width="881" height="1.03031"/>
+  <object id="4" x="0.145833" y="429.833" width="877.188" height="2"/>
   <object id="5" x="875.5" y="1.5" width="5" height="432"/>
-  <object id="6" x="0.5" y="3" width="5" height="432"/>
+  <object id="6" x="-0.0454545" y="1.28977" width="0.75" height="428.013"/>
   <object id="7" x="32.6667" y="57.3333" width="30.6667" height="20.6667">
    <properties>
     <property name="description" value="這是Eclipse!"/>
@@ -214,10 +215,10 @@
     <property name="description" value="cmd"/>
    </properties>
   </object>
-  <object id="18" x="5.41667" y="3.66667" width="11.8333" height="12">
+  <object id="18" x="0.927252" y="1.58533" width="2.39724" height="2.4673">
    <properties>
     <property name="entry" value="library_earthquake"/>
-    <property name="entryX" type="float" value="-60"/>
+    <property name="entryX" type="float" value="0"/>
     <property name="entryY" type="float" value="150"/>
     <property name="exit" value="computer_screen"/>
     <property name="next" value="classroom.tmx"/>
@@ -243,6 +244,16 @@
   <object id="23" x="196.667" y="66.6667" width="16.3333" height="17.3333">
    <properties>
     <property name="give" value="程式碼碎片三"/>
+   </properties>
+  </object>
+  <object id="24" x="53.8902" y="420.396" width="7.9583" height="8">
+   <properties>
+    <property name="entry" value="library_earthquake"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="50"/>
+    <property name="exit" value="computer_screen"/>
+    <property name="next" value="library_earthquake.tmx"/>
+    <property name="portal" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

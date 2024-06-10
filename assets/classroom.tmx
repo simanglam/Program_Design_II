@@ -4,6 +4,7 @@
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
  <tileset firstgid="2278" source="告示牌.tsx"/>
+ <tileset firstgid="2303" source="CuteRPG_Castle_New.tsx"/>
  <layer id="1" name="圖塊層 1" width="30" height="20">
   <data encoding="csv">
 149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,149,
@@ -54,7 +55,7 @@
  </layer>
  <layer id="3" name="圖塊層 3" width="30" height="20">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2798,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,691,692,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,691,692,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -72,7 +73,7 @@
 0,0,1995,1996,1997,1998,1999,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,2016,2017,2018,2019,2020,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1109,1110,0,0,
 0,0,2037,2038,2039,2040,2041,0,0,0,0,0,0,0,0,0,1034,1035,1005,1006,1067,1068,1069,1064,1065,1066,1125,1126,0,0,
-0,0,2058,2059,2060,2061,2062,0,0,0,0,0,0,0,0,0,1050,1051,1021,1022,1083,1084,1085,1080,1081,1082,0,0,0,0,
+2798,0,2058,2059,2060,2061,2062,0,0,0,0,0,0,0,0,0,1050,1051,1021,1022,1083,1084,1085,1080,1081,1082,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
@@ -128,10 +129,10 @@
   <properties>
    <property name="description" value="這是教室裡的商店!"/>
   </properties>
-  <object id="1" x="1.5" y="0" width="5" height="319"/>
+  <object id="1" x="1.5" y="0" width="3.54545" height="319"/>
   <object id="2" x="474.5" y="0" width="5" height="319"/>
   <object id="3" x="5" y="1" width="470" height="4"/>
-  <object id="5" x="6.5" y="315.5" width="470" height="4"/>
+  <object id="5" x="5.1875" y="318.239" width="470" height="1.63636"/>
   <object id="7" x="48.5833" y="24.5" width="94" height="11.5"/>
   <object id="8" x="176.917" y="26.3333" width="31" height="12.75"/>
   <object id="9" x="272.25" y="25.875" width="158.5" height="12.75">
@@ -297,11 +298,11 @@
     <property name="description" value="課桌椅"/>
    </properties>
   </object>
-  <object id="65" x="7.75" y="6" width="10" height="11.5">
+  <object id="65" x="5.375" y="5.375" width="2" height="1.75">
    <properties>
     <property name="entry" value="computer_screen"/>
     <property name="entryX" type="float" value="0"/>
-    <property name="entryY" type="float" value="200"/>
+    <property name="entryY" type="float" value="150"/>
     <property name="exit" value="classroom"/>
     <property name="next" value="library.tmx"/>
     <property name="portal" type="bool" value="true"/>
@@ -317,11 +318,11 @@
     <property name="description" value="趕快去黑板右邊收集微分魔法球吧!"/>
    </properties>
   </object>
-  <object id="70" x="6.5" y="305.25" width="10" height="11.5">
+  <object id="70" x="9.57575" y="296.505" width="4.18182" height="2.59091">
    <properties>
-    <property name="entry" value="library"/>
+    <property name="entry" value="computer_screen"/>
     <property name="entryX" type="float" value="0"/>
-    <property name="entryY" type="float" value="150"/>
+    <property name="entryY" type="float" value="100"/>
     <property name="exit" value="classroom"/>
     <property name="next" value="computer_screen.tmx"/>
     <property name="portal" type="bool" value="true"/>
@@ -332,7 +333,7 @@
   <object id="53" x="57" y="59.5" width="350" height="117"/>
  </objectgroup>
  <objectgroup id="9" name="其他">
-  <object id="67" x="372.5" y="273.5" width="40" height="26">
+  <object id="67" x="450.47" y="297.773" width="21.697" height="18.3939">
    <properties>
     <property name="bosswar" value=""/>
    </properties>
