@@ -335,7 +335,7 @@
  <objectgroup id="9" name="其他">
   <object id="67" x="421.47" y="276.773" width="21.697" height="20.7272">
    <properties>
-    <property name="bosswar" value=""/>
+    <property name="bosswar" value="ex1.json"/>
    </properties>
   </object>
  </objectgroup>

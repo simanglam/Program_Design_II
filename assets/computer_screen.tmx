@@ -263,7 +263,7 @@
  <objectgroup id="8" name="其他">
   <object id="20" x="823.061" y="373.303" width="20.9394" height="22.6364">
    <properties>
-    <property name="bosswar" value=""/>
+    <property name="bosswar" value="ex1.json"/>
    </properties>
   </object>
  </objectgroup>
