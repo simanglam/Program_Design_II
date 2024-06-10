@@ -261,7 +261,7 @@
   <object id="2" x="1.66665" y="228.292" width="876.667" height="203.417"/>
  </objectgroup>
  <objectgroup id="8" name="其他">
-  <object id="20" x="823.061" y="373.303" width="20.9394" height="22.6364">
+  <object id="20" x="821.727" y="370.97" width="20.9394" height="22.6364">
    <properties>
     <property name="bosswar" value="ex1.json"/>
    </properties>
