@@ -12,10 +12,10 @@ playerInventoryPokemons: [
 		description: asd
 	}
 ]
-currentMap: library.tmx
+currentMap: classroom.tmx
 currentPosition: {
-	x: 5.32292
-	y: 480.1667
+	x: 5.375
+	y: 162.875
 	width: 16
 	height: 16
 }
