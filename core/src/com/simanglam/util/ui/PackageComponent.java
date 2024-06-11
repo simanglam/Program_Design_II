@@ -1,5 +1,7 @@
 package com.simanglam.util.ui;
 
+import java.util.Comparator;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -9,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.simanglam.fighting.Pokemon;
@@ -18,30 +19,29 @@ import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
 import com.simanglam.util.InventoryItem;
 
-import java.util.Comparator;
-
 public class PackageComponent extends Table{
 
     TextArea pokemonDescriptionLabel;
+    Table upperTable;
 
     public PackageComponent(){
         super(AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class));
         AssetsManagerWrapper assetsManagerWrapper = AssetsManagerWrapper.getAssetsManagerWrapper();
         Skin skin = assetsManagerWrapper.assetManager.get("data/uiskin.json", Skin.class);
-        Table upperTable = new Table(skin);
+        upperTable = new Table(skin);
         GameStatus gameStatus = GameStatus.getGameStatus();
         gameStatus.addItem("atest");
         GameStatus.getGameStatus().playerInventory.sort(Comparator.comparing(InventoryItem::getName));
-        Button reverseButton = new Button(skin);
+        Button nameReverseButton = new Button(new Label("依名字排序", skin), skin);
+        Button numberReversqButton = new Button(new Label("依數量排序", skin), skin);
 
         Table lowerTable = new Table(skin);
         lowerTable.setWidth(Const.maxViewportWidth);
         pokemonDescriptionLabel = new TextArea("", skin);
-        int i = 0;
 
-        initLowerTable(lowerTable, upperTable);
+        initLowerTable(lowerTable);
 
-        reverseButton.addListener(new ClickListener() {
+        nameReverseButton.addListener(new ClickListener() {
             boolean reverse = false;
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -51,10 +51,25 @@ public class PackageComponent extends Table{
                     gameStatus.playerInventory.sort(Comparator.comparing(InventoryItem::getName).reversed());
                 reverse = !reverse;
                 lowerTable.clear();
-                initLowerTable(lowerTable, upperTable);
+                initLowerTable(lowerTable);
            }
         });
-        upperTable.add(reverseButton).prefHeight(Const.maxViewportHeight / 6f).prefWidth(Const.maxViewportWidth);
+
+        numberReversqButton.addListener(new ClickListener() {
+            boolean reverse = false;
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (reverse)
+                    gameStatus.playerInventory.sort(Comparator.comparing(InventoryItem::getNum));
+                else
+                    gameStatus.playerInventory.sort(Comparator.comparing(InventoryItem::getNum).reversed());
+                reverse = !reverse;
+                lowerTable.clear();
+                initLowerTable(lowerTable);
+           }
+        });
+        upperTable.add(nameReverseButton).prefHeight(Const.maxViewportHeight / 6f).prefWidth(Const.maxViewportWidth / 2);
+        upperTable.add(numberReversqButton).prefHeight(Const.maxViewportHeight / 6f).prefWidth(Const.maxViewportWidth / 2);
         lowerTable.top().left();
         Table outterTable = new Table(skin);
         outterTable.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
@@ -65,8 +80,8 @@ public class PackageComponent extends Table{
         this.add(outterTable);
     }
 
-    private void initLowerTable(Table lowerTable, Table upperTable) {
-        int i = 0;
+    private void initLowerTable(Table lowerTable) {
+        int i = 1;
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
         for (InventoryItem item : GameStatus.getGameStatus().playerInventory) {
             Button b = new Button(skin);
@@ -80,19 +95,12 @@ public class PackageComponent extends Table{
             Cell<Button> c = lowerTable.add(b).expandX().padBottom(20).prefSize(20).left();
             b.add(ib1);
             b.add(new Label(String.format("%.5s %d", item.getName(), item.getNum()), skin));
-            if (i % 2 == 0){
+            if (i % 4 == 0){
                 i = 0;
                 c.row();
             }
             i++;
         }
 
-        upperTable.add(pokemonDescriptionLabel).prefHeight(Const.maxViewportHeight / 6).prefWidth(Const.maxViewportWidth).row();
-
-        Table outterTable = new Table(skin);
-        outterTable.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
-        outterTable.add(upperTable).prefSize(Const.maxViewportWidth, Const.maxViewportHeight / 6).row();
-        outterTable.add(lowerTable).expand().prefSize(Const.maxViewportWidth, 5 * Const.maxViewportHeight / 6).row();
-        this.add(outterTable);
     }
 }
