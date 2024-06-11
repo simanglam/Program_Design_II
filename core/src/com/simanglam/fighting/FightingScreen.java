@@ -3,6 +3,7 @@ package com.simanglam.fighting;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -49,7 +50,8 @@ public class FightingScreen extends AbstractScreen {
 
 
     public FightingScreen(Main game) {
-        this.viewport = new  FitViewport(Const.maxViewportWidth, Const.maxViewportHeight);
+        this.viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera(Const.maxViewportWidth, Const.maxViewportHeight));
+        viewport.apply();
         this.stage = new Stage(viewport);
         this.gameStatus = GameStatus.getGameStatus();
         this.game = game;
@@ -101,7 +103,7 @@ public class FightingScreen extends AbstractScreen {
                     skillTable.setVisible(false);
                     optionTable.setVisible(true);
                     dialog.setVisible(true);
-                    dialog.setDescription("換成了%s".formatted(currentPokemon.getName()));
+                    dialog.setDescription(String.format("換成了%s", currentPokemon.getName()));
                     dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide(), Actions.run(() -> enemyTurn())));
                     ArrayList<SkillBehavior> skills = currentPokemon.getSkill();
                     for (int j = 0; j < 4; j++) {
@@ -120,7 +122,7 @@ public class FightingScreen extends AbstractScreen {
                                 switchTable.setVisible(false);
                                 skillTable.setVisible(false);
                                 dialog.setVisible(true);
-                                dialog.setDescription("%s使用了%s".formatted(currentPokemon.getName(), skills.get(t).description()));
+                                dialog.setDescription(String.format("%s使用了%s", currentPokemon.getName(), skills.get(t).description()));
                                 dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide(), Actions.run(() -> enemyTurn())));
                             }
                         });
@@ -156,7 +158,7 @@ public class FightingScreen extends AbstractScreen {
                     switchTable.setVisible(false);
                     skillTable.setVisible(false);
                     dialog.setVisible(true);
-                    dialog.setDescription("%s使用了%s".formatted(currentPokemon.getName(), skills.get(t).description()));
+                    dialog.setDescription(String.format("%s使用了%s", currentPokemon.getName(), skills.get(t).description()));
                     dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide(), Actions.run(() -> enemyTurn())));
                 }
             });
@@ -252,9 +254,8 @@ public class FightingScreen extends AbstractScreen {
             return;
         }
         currentPokemon.beingAttack(Math.max((int)(enemy.getATK() * 0.2f), 1));
-        System.out.printf("Pokemon: %d, Enemy: %d\n", currentPokemon.getHP(), enemy.getHP());
         dialog.setVisible(true);
-        dialog.setDescription("%s攻擊".formatted(enemy.getName()));
+        dialog.setDescription(String.format("%s攻擊", enemy.getName()));
         dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide()));
         if (!currentPokemon.alive()){
             optionTable.setVisible(false);
@@ -288,17 +289,17 @@ public class FightingScreen extends AbstractScreen {
         stage.getBatch().begin();
         stage.getBatch().draw(currentPokemon.texture, 0, 100);
         stage.getBatch().draw(enemy.texture, Const.maxViewportWidth - enemy.texture.getWidth(), 100);
-        font.draw(stage.getBatch(), "HP: %d".formatted(currentPokemon.getHP()), 0 + currentPokemon.texture.getWidth() / 2f, 100 + currentPokemon.texture.getHeight());
-        font.draw(stage.getBatch(), "HP: %d".formatted(enemy.getHP()), Const.maxViewportWidth - enemy.texture.getWidth() / 2f, 100 + enemy.texture.getHeight());
+        font.draw(stage.getBatch(), String.format("HP: %d", currentPokemon.getHP()), 0 + currentPokemon.texture.getWidth() / 2f, 100 + currentPokemon.texture.getHeight());
+        font.draw(stage.getBatch(), String.format("HP: %d", enemy.getHP()), Const.maxViewportWidth - enemy.texture.getWidth() / 2f, 100 + enemy.texture.getHeight());
         stage.getBatch().end();
         stage.act(delta);
+        stage.getViewport().apply();
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-        stage.getViewport().apply();
+        stage.getViewport().update(width, height);
     }
 
     @Override

@@ -29,8 +29,7 @@ public class PackageComponent extends Table{
         Skin skin = assetsManagerWrapper.assetManager.get("data/uiskin.json", Skin.class);
         upperTable = new Table(skin);
         GameStatus gameStatus = GameStatus.getGameStatus();
-        gameStatus.addItem("atest");
-        GameStatus.getGameStatus().playerInventory.sort(Comparator.comparing(InventoryItem::getName));
+        gameStatus.playerInventory.sort(Comparator.comparing(InventoryItem::getName));
         Button nameReverseButton = new Button(new Label("依名字排序", skin), skin);
         Button numberReversqButton = new Button(new Label("依數量排序", skin), skin);
 

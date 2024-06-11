@@ -10,7 +10,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.simanglam.Main;
 import com.simanglam.map.ui.Dialog;
 import com.simanglam.map.ui.PuzzleDialog;
@@ -32,7 +32,7 @@ public class MapScreen extends AbstractScreen{
     public MapScreen(final Main game){
         this.game = game;
         this.world = new World();
-        this.stage = new Stage(new ExtendViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
+        this.stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
         this.stage.getCamera().position.set(0, 480, 0);
         this.inputMultiplexer = new InputMultiplexer();
         this.inputMultiplexer.addProcessor(this.stage);
