@@ -109,13 +109,26 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         return false;
     }
 
-    @Override
+   @Override
     public boolean touchDragged(int x, int y, int pointer){
         camera.position.add(lastTouchDown.sub(x, 0, 0));
         centerCamera();
         lastTouchDown.set(x, 0, 0);
         return true;
     }
+
+    /*public void resizeWindow(int width, int height) {
+        Gdx.graphics.setWindowedMode(width, height);
+        this.resize(width, height);
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.F) {  // For example, 'F' key to toggle full screen
+            resizeWindow(1920, 1080);  // Resize to 1920x1080
+        }
+        return true;
+    }*/
 
     public void resize(int x, int y){
         this.viewport.setScreenSize(x, y);
