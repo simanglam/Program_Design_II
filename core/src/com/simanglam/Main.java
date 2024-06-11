@@ -9,11 +9,6 @@ import com.simanglam.util.LoadingScreen;
 public class Main extends Game {
     private SpriteBatch batch;
     private Screen gameScreen;
-    private Screen infoScreen;
-    private Screen bossWarScreen;
-    private Screen pokemonScreen;
-    private Screen mainPage;
-    private Screen savePage;
 
 	public SpriteBatch getSpriteBatch(){return this.batch;}
 	public Screen getGameScreen(){return gameScreen;}
