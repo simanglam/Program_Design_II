@@ -43,7 +43,7 @@ public class StoreScreen extends AbstractScreen {
         storeItems = loader.fromJson(ArrayList.class, StoreItem.class, Gdx.files.internal("store/" + path + ".json"));
         gameStatus = GameStatus.getGameStatus();
 
-        stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera()));
+        stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera(Const.maxViewportWidth, Const.maxViewportHeight)));
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
         background = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("store_background.png", Texture.class);
         Table rightTable = new Table(skin);
@@ -120,7 +120,6 @@ public class StoreScreen extends AbstractScreen {
     @Override
     public void render(float delta){
         ScreenUtils.clear(0, 0, 0, 1);
-        stage.getViewport().apply();
         game.getSpriteBatch().setProjectionMatrix(stage.getCamera().combined);
         game.getSpriteBatch().begin();
         game.getSpriteBatch().draw(background, 0, 0);
@@ -132,13 +131,11 @@ public class StoreScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height){
         stage.getViewport().update(width, height);
-        stage.getViewport().apply();
+        stage.getCamera().update();
     }
 
     @Override
     public void handleInput(){
-        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        stage.getViewport().apply(true);
         Gdx.input.setInputProcessor(stage);
     }
 
