@@ -150,10 +150,11 @@ public class World {
         accu += deltaT;
         if ((int)accu >= 1){
             accu -= 1;
-            ecounterPossibility += 1.0 / (int)((Math.random() * 50) + 1);
+            ecounterPossibility += 1.0 / (int)((Math.random() * 5) + 1);
             System.out.println(ecounterPossibility);
-            if (ecounterPossibility >= (int)(Math.random() * 50 + 1) && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
+            if (ecounterPossibility >= (int)(Math.random() * 50) + 1 && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
                 ecounterPossibility = 0;
+                player.freeze();
                 return true;
             }
         }

@@ -25,19 +25,24 @@ public class Main extends Game {
 	public void setGameScreen(Screen s){gameScreen = s;}
 
 	@Override
-	public void create () {
+	public void create(){
 		this.setScreen(new LoadingScreen(this));
 		batch = new SpriteBatch();
 	}
 
     @Override
-    public void setScreen(Screen screen) {
+    public void setScreen(Screen screen){
         super.setScreen(screen);
         ((AbstractScreen)screen).handleInput();
     }
 
     @Override
-    public void dispose() {
+    public void render(){
+        super.render();
+    }
+
+    @Override
+    public void dispose(){
         screen.dispose();
         batch.dispose();
     }
