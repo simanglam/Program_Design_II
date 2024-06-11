@@ -241,7 +241,7 @@
     <property name="give" value="程式碼碎片一"/>
    </properties>
   </object>
-  <object id="23" x="196.667" y="66.6667" width="16.3333" height="17.3333">
+  <object id="23" x="196.667" y="65.9167" width="16.3333" height="22.0833">
    <properties>
     <property name="give" value="程式碼碎片三"/>
    </properties>

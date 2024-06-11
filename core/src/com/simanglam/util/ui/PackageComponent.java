@@ -39,7 +39,7 @@ public class PackageComponent extends Table{
         pokemonDescriptionLabel = new TextArea("", skin);
         int i = 0;
 
-        initLowerTable(lowerTable);
+        initLowerTable(lowerTable, upperTable);
 
         reverseButton.addListener(new ClickListener() {
             boolean reverse = false;
@@ -51,7 +51,7 @@ public class PackageComponent extends Table{
                     gameStatus.playerInventory.sort(Comparator.comparing(InventoryItem::getName).reversed());
                 reverse = !reverse;
                 lowerTable.clear();
-                initLowerTable(lowerTable);
+                initLowerTable(lowerTable, upperTable);
            }
         });
         upperTable.add(reverseButton).prefHeight(Const.maxViewportHeight / 6f).prefWidth(Const.maxViewportWidth);
@@ -65,7 +65,7 @@ public class PackageComponent extends Table{
         this.add(outterTable);
     }
 
-    private void initLowerTable(Table lowerTable) {
+    private void initLowerTable(Table lowerTable, Table upperTable) {
         int i = 0;
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
         for (InventoryItem item : GameStatus.getGameStatus().playerInventory) {
@@ -79,19 +79,13 @@ public class PackageComponent extends Table{
             });
             Cell<Button> c = lowerTable.add(b).expandX().padBottom(20).prefSize(20).left();
             b.add(ib1);
-<<<<<<< HEAD
-            b.add(item.getName());
-            i += 1;
-            if (i % 2 == 0) c.row();
-        }
-=======
             b.add(new Label(String.format("%.5s %d", item.getName(), item.getNum()), skin));
             if (i % 2 == 0){
                 i = 0;
                 c.row();
             }
             i++;
-        });
+        }
 
         upperTable.add(pokemonDescriptionLabel).prefHeight(Const.maxViewportHeight / 6).prefWidth(Const.maxViewportWidth).row();
 
@@ -100,6 +94,5 @@ public class PackageComponent extends Table{
         outterTable.add(upperTable).prefSize(Const.maxViewportWidth, Const.maxViewportHeight / 6).row();
         outterTable.add(lowerTable).expand().prefSize(Const.maxViewportWidth, 5 * Const.maxViewportHeight / 6).row();
         this.add(outterTable);
->>>>>>> origin/final_enhance
     }
 }
