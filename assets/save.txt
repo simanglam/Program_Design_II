@@ -5,19 +5,56 @@ playerInventory: [
 		description: This is only for testing
 		num: 1
 	}
+<<<<<<< HEAD
 	{
 		name: 程式碼碎片一
 		description: 路上撿到的程式碼碎片。或許在某些地方有特別的用處...?
 		num: 1
 	}
+=======
+>>>>>>> origin/fighting_system
 ]
 playerInventoryPokemons: [
 	{
 		name: base
+<<<<<<< HEAD
 		description: asd
 	}
 ]
 statusHashMap: {
 	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:179},height:{class:java.lang.Float,value:22},id:{class:java.lang.Integer,value:22},give:{class:java.lang.String,value:程式碼碎片一},y:{class:java.lang.Float,value:344.3333},width:{class:java.lang.Float,value:16.3333}}},rectangle:{x:179,y:344.3333,width:16.3333,height:22}}程式碼碎片一": true
 }
+=======
+		description: Just for test
+	}
+	{
+		name: base
+		description: Just for test
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+	{
+		name: a
+		description: asd
+	}
+]
+>>>>>>> origin/fighting_system
 }

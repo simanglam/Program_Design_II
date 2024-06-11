@@ -3,8 +3,19 @@ package com.simanglam;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<<<<<<< HEAD
+=======
+import com.simanglam.fighting.FightingScreen;
+import com.simanglam.fighting.MainPage;
+import com.simanglam.map.MapScreen;
+>>>>>>> origin/fighting_system
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.LoadingScreen;
+<<<<<<< HEAD
+=======
+import com.simanglam.util.SavePage;
+import com.simanglam.util.ui.PackageScreen;
+>>>>>>> origin/fighting_system
 
 public class Main extends Game {
     private SpriteBatch batch;
@@ -29,11 +40,6 @@ public class Main extends Game {
     public void setScreen(Screen screen) {
         super.setScreen(screen);
         ((AbstractScreen)screen).handleInput();
-    }
-
-    @Override
-    public void render() {
-        super.render();
     }
 
     @Override

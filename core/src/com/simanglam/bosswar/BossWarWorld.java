@@ -117,19 +117,6 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         return true;
     }
 
-    /*public void resizeWindow(int width, int height) {
-        Gdx.graphics.setWindowedMode(width, height);
-        this.resize(width, height);
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.F) {  // For example, 'F' key to toggle full screen
-            resizeWindow(1920, 1080);  // Resize to 1920x1080
-        }
-        return true;
-    }*/
-
     public void resize(int x, int y){
         this.viewport.setScreenSize(x, y);
         if (this.camera.position.y - viewport.getWorldHeight() / 2 + 120 != 0)
