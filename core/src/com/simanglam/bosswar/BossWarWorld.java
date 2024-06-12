@@ -127,7 +127,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
     }
 
     public void update(float delta, SpriteBatch batch){
-        this.money = Math.max(16500, money + Math.max((int)delta, 1));
+        this.money = Math.min(16500, money + Math.max((int)delta, 1));
         if (enemyTower.healtPoint > 0 && playerTower.healtPoint > 0){
             spawnAccu += delta;
             for (EnemySpawnInfo info: enemySpawnInfos){
@@ -211,7 +211,15 @@ public class BossWarWorld extends InputAdapter implements Disposable {
     }
 
     public void useitem(String itemName){
-        
+        if (itemName.equals("我超有錢"))
+            money = 16500;
+        else if (itemName.equals("冰凍藥水"))
+            freezeAccu += 3;
+        else if (itemName.equals("大風吹")){
+            for (BossWarActor b: enemyArray){
+                b.setPosition(enemyTower.position.x, enemyTower.position.y);
+            }
+        }
     }
 
     public boolean win(){return enemyTower.healtPoint <= 0;}

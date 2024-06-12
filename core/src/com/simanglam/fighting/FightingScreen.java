@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -48,7 +49,7 @@ public class FightingScreen extends AbstractScreen {
     Pokemon[] playerPokemons;
     Pokemon currentPokemon;
 
-
+    Texture background;
     public FightingScreen(Main game) {
         this.viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera(Const.maxViewportWidth, Const.maxViewportHeight));
         viewport.apply();
@@ -57,6 +58,7 @@ public class FightingScreen extends AbstractScreen {
         this.game = game;
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
         font = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/font/font.fnt", BitmapFont.class);
+        background = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("FTbg.jpg", Texture.class);
 
         resultButton = new Button(skin);
         resultButton.add("你輸了");
@@ -286,14 +288,15 @@ public class FightingScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 0);
+        stage.getViewport().apply();
         stage.getBatch().begin();
+        stage.getBatch().draw(background, 0, 0, stage.getWidth(), stage.getHeight());
         stage.getBatch().draw(currentPokemon.texture, 0, 100);
         stage.getBatch().draw(enemy.texture, Const.maxViewportWidth - enemy.texture.getWidth(), 100);
         font.draw(stage.getBatch(), String.format("HP: %d", currentPokemon.getHP()), 0 + currentPokemon.texture.getWidth() / 2f, 100 + currentPokemon.texture.getHeight());
         font.draw(stage.getBatch(), String.format("HP: %d", enemy.getHP()), Const.maxViewportWidth - enemy.texture.getWidth() / 2f, 100 + enemy.texture.getHeight());
         stage.getBatch().end();
         stage.act(delta);
-        stage.getViewport().apply();
         stage.draw();
     }
 

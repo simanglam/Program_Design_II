@@ -24,6 +24,8 @@ import com.simanglam.Main;
 import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
+import com.simanglam.util.InventoryItem;
+import com.sun.tools.javac.comp.Lower;
 
 public class BossWarScreen extends AbstractScreen {
     Main game;
@@ -48,6 +50,8 @@ public class BossWarScreen extends AbstractScreen {
         playerPokemons = new BossWarActor[]{null, null, null, null};
         Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         Table table = new Table(skin);
+        Table outterTable = new Table(skin);
+        Table upperTable = new Table(skin);
         ProgressBar[] progressBars = new ProgressBar[4];
         Button[] buttons = new Button[4];
         ImageButton[] imageButtons = new ImageButton[4];
@@ -64,7 +68,7 @@ public class BossWarScreen extends AbstractScreen {
             progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
             progressBars[i].setVisible(false);
             playerPokemons[i] = new BossWarActor("enemies/" + gameStatus.selectedPokemon.get(i).getName(), false);
-            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + gameStatus.selectedPokemon.get(i).getName() + "/image/idle-0.png")));
+            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + gameStatus.selectedPokemon.get(i).getName() + "/image/icon.png")));
             buttons[i].add(imageButtons[i]).row();
             Label moneyLabel = new Label(String.valueOf(playerPokemons[i].money), skin);
             buttons[i].add(stack).width(60);
@@ -88,11 +92,32 @@ public class BossWarScreen extends AbstractScreen {
             });
         }
 
+        for (InventoryItem item: gameStatus.playerInventory){
+            if (item.getName().equals("大風吹") || item.getName().equals("冰凍藥水") || item.getName().equals("我超有錢") || item.getName().equals("狂暴藥水")){
+                Button b = new Button(skin);
+                b.add(item.getName());
+                b.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        world.useitem(item.getName());
+                        item.consume();
+                        if (item.getNum() == 0){
+                            b.setDisabled(true);
+                            gameStatus.playerInventory.remove(item);
+                        }
+                    }
+                });
+                upperTable.add(b);
+            }
+        }
+
 
         table.setBounds(0, 25, Const.maxViewportWidth, 75);
         table.center();
-        this.fightStage.addActor(label);
-        this.fightStage.addActor(table);
+        outterTable.add(label).left().row();
+        outterTable.add(upperTable).top().right().expandY().row();
+        outterTable.add(table);
+        this.fightStage.addActor(outterTable);
         currentStage = fightStage;
 
         winStage = new Stage(viewport);
