@@ -18,3 +18,6 @@ The repo for final project of program design II in CCU.
 ![image](https://github.com/simanglam/Program_Design_II/blob/map/assets/guideline1.png)
 
 ![image](https://github.com/simanglam/Program_Design_II/blob/map/assets/guideline2.png)
+
+![image](https://github.com/simanglam/Program_Design_II/blob/map/assets/guideline3.png)
+
