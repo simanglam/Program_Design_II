@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="30">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="55" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="47">
  <tileset firstgid="1" source="icons.tsx"/>
  <tileset firstgid="241" source="stores.tsx"/>
  <tileset firstgid="703" source="windows xp.tsx"/>
@@ -210,7 +210,7 @@
     <property name="description" value="本機"/>
    </properties>
   </object>
-  <object id="16" x="829.25" y="32.25" width="25.5" height="17.75">
+  <object id="16" x="821.25" y="35.25" width="20" height="17.75">
    <properties>
     <property name="description" value="chrome"/>
    </properties>
@@ -261,6 +261,27 @@
     <property name="portal" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="30" x="121.667" y="182.333" width="13.3333" height="12"/>
+  <object id="31" x="45" y="115.667" width="13.3333" height="12">
+   <properties>
+    <property name="description" value="setting"/>
+   </properties>
+  </object>
+  <object id="32" x="330.333" y="59" width="13.3333" height="12"/>
+  <object id="33" x="275.833" y="57.5" width="13.3333" height="12"/>
+  <object id="34" x="386.333" y="59" width="13.3333" height="12"/>
+  <object id="35" x="439.333" y="59" width="13.3333" height="12"/>
+  <object id="36" x="492.333" y="59.5" width="13.3333" height="12"/>
+  <object id="37" x="275.833" y="120.5" width="13.3333" height="12"/>
+  <object id="38" x="330.833" y="121" width="13.3333" height="12"/>
+  <object id="39" x="384.333" y="121" width="13.3333" height="12"/>
+  <object id="40" x="437.333" y="120.5" width="13.3333" height="12"/>
+  <object id="41" x="489.833" y="120" width="13.3333" height="12"/>
+  <object id="42" x="273.833" y="188.5" width="15.3333" height="12"/>
+  <object id="43" x="330.333" y="187.5" width="13.3333" height="12"/>
+  <object id="44" x="382.833" y="189.5" width="13.3333" height="12"/>
+  <object id="45" x="494.833" y="194" width="13.3333" height="12"/>
+  <object id="46" x="197.333" y="180" width="13.3333" height="12"/>
  </objectgroup>
  <objectgroup id="4" name="生怪區" visible="0">
   <object id="2" x="1.66665" y="228.292" width="876.667" height="203.417"/>

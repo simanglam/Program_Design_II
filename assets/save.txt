@@ -12,4 +12,11 @@ playerInventoryPokemons: [
 		description: asd
 	}
 ]
+currentMap: library.tmx
+currentPosition: {
+	x: 26.0729
+	y: 461.9167
+	width: 16
+	height: 16
+}
 }
