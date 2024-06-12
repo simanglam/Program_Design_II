@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="192">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="199">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="CuteRPG_Interior_custom.tsx"/>
@@ -91,9 +91,9 @@
 48,0,0,892,893,894,895,0,0,0,0,0,0,0,0,0,0,0,655,656,657,658,655,656,657,658,655,656,657,658,655,656,657,658,655,656,657,658,655,656,657,658,0,0,0,0,0,48,1643,1644,1645,1646,48,0,0,0,46,0,0,46,
 48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3573,672,673,674,671,672,673,674,671,672,673,674,671,672,673,674,671,672,673,674,671,672,673,674,0,0,0,0,0,48,0,0,0,0,0,0,0,0,46,0,0,46,
 48,0,0,1545,1546,1547,1548,1549,1550,1551,1552,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
-48,0,0,1561,1562,1563,1564,1565,1566,1567,1568,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
-48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
+48,0,0,1561,1562,1563,1564,1565,1566,1567,1568,0,0,0,0,0,0,0,0,0,0,0,0,3877,3878,3879,3877,3878,3879,3877,3878,3879,3877,3878,3879,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3880,3881,3882,3880,3881,3882,3880,3881,3882,3880,3881,3882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
+48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3883,3884,3885,3883,3884,3885,3883,3884,3885,3883,3884,3885,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,
 48,3348,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46
 </data>
  </layer>
@@ -573,22 +573,22 @@
   </object>
   <object id="174" x="448.75" y="437.667" width="28.75" height="26.75">
    <properties>
-    <property name="puzzle" value="4474"/>
-    <property name="reward" value="究極回復藥水"/>
+    <property name="puzzle" value="3956"/>
+    <property name="reward" value="現代密碼學"/>
     <property name="word">恭喜你，成功打開此行李箱，
-並成為“折磨詩人俱樂部The Tortuted Poets Department”的一員，並獲得究極回復藥水。</property>
+並獲得現代密碼學。</property>
    </properties>
   </object>
   <object id="175" x="128.917" y="432.5" width="22.8333" height="13.4167">
    <properties>
-    <property name="description">前兩位數字代表這是黴黴的第幾張專輯，
-後兩位代表這張專輯一共收錄幾首歌曲&quot;</property>
+    <property name="description">請用卡薩加密，前兩位數字代表&quot;艾倫圖靈的生日月分&quot;
+，後兩位是&quot;艾倫圖靈的生日日期!&quot;</property>
    </properties>
   </object>
   <object id="176" x="81.75" y="432.083" width="22.8333" height="13.9167">
    <properties>
-    <property name="description">去解行李箱!
-凱薩加密&quot;折磨詩人俱樂部的相關魔法數字!</property>
+    <property name="description">去解火爐區的行李箱!
+有四個魔法數字。</property>
    </properties>
   </object>
   <object id="179" x="24.4713" y="631.229" width="5.19318" height="5.68182">
@@ -611,8 +611,6 @@
     <property name="description" value="行李箱"/>
    </properties>
   </object>
-  <object id="182" x="63.6667" y="103.667" width="25.3333" height="23"/>
-  <object id="183" x="64.3333" y="168.833" width="25.3333" height="23"/>
   <object id="184" x="64.6667" y="128.333" width="15.3333" height="14">
    <properties>
     <property name="description" value="行李箱"/>
@@ -651,6 +649,46 @@
   <object id="191" x="112.75" y="40.0833" width="29.75" height="20.3333">
    <properties>
     <property name="give" value="麻瓜研究書"/>
+   </properties>
+  </object>
+  <object id="192" x="66.625" y="101.125" width="28.75" height="26.75">
+   <properties>
+    <property name="puzzle" value="3141"/>
+    <property name="reward" value="石頭"/>
+    <property name="word">恭喜你，成功打開此行李箱，
+並獲得石頭(?)。</property>
+   </properties>
+  </object>
+  <object id="193" x="65.625" y="164.125" width="28.75" height="26.75">
+   <properties>
+    <property name="puzzle" value="3432"/>
+    <property name="reward" value="石內卜的魔杖"/>
+    <property name="word">恭喜你，成功打開此行李箱，
+並獲得石內卜的魔杖。</property>
+   </properties>
+  </object>
+  <object id="194" x="385.75" y="592.375" width="22.8333" height="13.9167">
+   <properties>
+    <property name="description">去解左上方第一個行李箱!
+有四個魔法數字。</property>
+   </properties>
+  </object>
+  <object id="195" x="483.083" y="592.542" width="22.8333" height="13.9167">
+   <properties>
+    <property name="description">去解左上方第二個行李箱!
+有四個魔法數字。</property>
+   </properties>
+  </object>
+  <object id="197" x="432.583" y="592.292" width="22.8333" height="13.4167">
+   <properties>
+    <property name="description">請用卡薩加密，前兩位數字代表&quot;派大星的生日月分&quot;
+，後兩位是&quot;派大星的生日日期!&quot;</property>
+   </properties>
+  </object>
+  <object id="198" x="530.083" y="592.792" width="22.8333" height="13.4167">
+   <properties>
+    <property name="description">請用卡薩加密，前兩位數字代表&quot;石內卜的生日月分&quot;
+，後兩位是&quot;石內卜的生日日期!&quot;</property>
    </properties>
   </object>
  </objectgroup>
