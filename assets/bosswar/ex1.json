@@ -12,7 +12,7 @@
             "spawnCoolDown": 1
         },
         {
-            "name": "HellowWorld{}",
+            "name": "HelloWorld{}",
             "spawnCoolDown": 1
         },
         {
@@ -24,10 +24,29 @@
             "spawnCoolDown": 1
         },
         {
+            "name": "DES",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "ECC",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "RSA",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "很喜歡暴力試錯的同學",
+            "spawnCoolDown": 1
+        },
+        {
             "name": "你那個超雷的同學",
             "spawnCoolDown": 1
         },
-
+        {
+            "name": "密碼學實作大師",
+            "spawnCoolDown": 1
+        }
     ],
     "enemies": [
         {

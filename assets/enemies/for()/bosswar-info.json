@@ -7,7 +7,7 @@
   "range": 5,
   "vision": 100,
   "image": 1,
-  "size": 256,
+  "size": 128,
   "money": 200,
-  "spawnCooldown": 1,
+  "spawnCooldown": 1
 }
