@@ -453,7 +453,7 @@
  <objectgroup id="8" name="其他">
   <object id="128" x="900.439" y="595.894" width="22.8788" height="22.3031">
    <properties>
-    <property name="bosswar" value="ex1.json"/>
+    <property name="bosswar" value="library_earthquake.json"/>
    </properties>
   </object>
  </objectgroup>

@@ -5,26 +5,53 @@ playerInventory: [
 		description: This is only for testing
 		num: 1
 	}
+	{
+		name: 微分魔法球1
+		description: 明知不可微而微之
+		num: 2
+	}
+	{
+		name: 微分魔法球2
+		description: 明知不可微而微之
+		num: 2
+	}
+	{
+		name: 微分魔法球3
+		description: 明知不可微而微之
+		num: 2
+	}
+	{
+		name: 微分魔法球4
+		description: 明知不可微而微之
+		num: 2
+	}
+	{
+		name: 微分魔法球5
+		description: 明知不可微而微之
+		num: 1
+	}
 ]
 playerInventoryPokemons: [
 	{
 		name: base
 		description: asd
 	}
-	{
-		name: a
-		description: asd
-	}
 ]
-selectedPokemon: [
-	{
-		name: base
-		description: asd
-	}
-]
+statusHashMap: {
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:369.125},height:{class:java.lang.Float,value:7.65909},id:{class:java.lang.Integer,value:79},give:{class:java.lang.String,value:微分魔法球3},y:{class:java.lang.Float,value:286.6704},width:{class:java.lang.Float,value:30.75}}},rectangle:{x:369.125,y:286.6704,width:30.75,height:7.65909}}微分魔法球3": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:80.9091},height:{class:java.lang.Float,value:9.13636},id:{class:java.lang.Integer,value:75},give:{class:java.lang.String,value:微分魔法球2},y:{class:java.lang.Float,value:286.86365},width:{class:java.lang.Float,value:32}}},rectangle:{x:80.9091,y:286.86365,width:32,height:9.13636}}微分魔法球2": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:304.375},height:{class:java.lang.Float,value:7.65909},id:{class:java.lang.Integer,value:77},give:{class:java.lang.String,value:微分魔法球1},y:{class:java.lang.Float,value:286.4204},width:{class:java.lang.Float,value:31.75}}},rectangle:{x:304.375,y:286.4204,width:31.75,height:7.65909}}微分魔法球1": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:400.125},height:{class:java.lang.Float,value:7.65909},id:{class:java.lang.Integer,value:80},give:{class:java.lang.String,value:微分魔法球4},y:{class:java.lang.Float,value:286.6704},width:{class:java.lang.Float,value:29}}},rectangle:{x:400.125,y:286.6704,width:29,height:7.65909}}微分魔法球4": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:113.455},height:{class:java.lang.Float,value:9.86364},id:{class:java.lang.Integer,value:76},give:{class:java.lang.String,value:微分魔法球3},y:{class:java.lang.Float,value:286.61365},width:{class:java.lang.Float,value:29.0909}}},rectangle:{x:113.455,y:286.61365,width:29.0909,height:9.86364}}微分魔法球3": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:177.099},height:{class:java.lang.Float,value:8.20455},id:{class:java.lang.Integer,value:8},give:{class:java.lang.String,value:微分魔法球4},y:{class:java.lang.Float,value:287.46213},width:{class:java.lang.Float,value:31}}},rectangle:{x:177.099,y:287.46213,width:31,height:8.20455}}微分魔法球4": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:337.125},height:{class:java.lang.Float,value:7.65909},id:{class:java.lang.Integer,value:78},give:{class:java.lang.String,value:微分魔法球2},y:{class:java.lang.Float,value:286.6704},width:{class:java.lang.Float,value:31.75}}},rectangle:{x:337.125,y:286.6704,width:31.75,height:7.65909}}微分魔法球2": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:272.25},height:{class:java.lang.Float,value:7.65909},id:{class:java.lang.Integer,value:9},give:{class:java.lang.String,value:微分魔法球5},y:{class:java.lang.Float,value:286.4659},width:{class:java.lang.Float,value:31.75}}},rectangle:{x:272.25,y:286.4659,width:31.75,height:7.65909}}微分魔法球5": true
+	"{name:null,properties:{properties:{x:{class:java.lang.Float,value:48.5833},height:{class:java.lang.Float,value:8.95455},id:{class:java.lang.Integer,value:7},give:{class:java.lang.String,value:微分魔法球1},y:{class:java.lang.Float,value:286.54544},width:{class:java.lang.Float,value:32}}},rectangle:{x:48.5833,y:286.54544,width:32,height:8.95455}}微分魔法球1": true
+}
+currentMap: classroom.tmx
 currentPosition: {
-	x: 193.00056
-	y: 51.99091
+	x: 5.375
+	y: 162.875
 	width: 16
 	height: 16
 }
