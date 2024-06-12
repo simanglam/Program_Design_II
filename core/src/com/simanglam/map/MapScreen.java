@@ -82,7 +82,7 @@ public class MapScreen extends AbstractScreen{
                 if (collMapObject.getProperties().get("give") != null && gameStatus.getStatusHashMap().get(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give")) == null){
                     if (gameStatus.getStatusHashMap().get(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give")) == null)
                         gameStatus.addItem((String)collMapObject.getProperties().get("give"));
-                    if (collMapObject.getProperties().get("once") == null)
+                    if (collMapObject.getProperties().get("once") != null && (boolean)collMapObject.getProperties().get("once") == true)
                         gameStatus.getStatusHashMap().put(JsonLoaders.normalLoader.toJson(collMapObject) + collMapObject.getProperties().get("give"), true);
                     addDialog("你獲得了" + (String)collMapObject.getProperties().get("give"));
                         
