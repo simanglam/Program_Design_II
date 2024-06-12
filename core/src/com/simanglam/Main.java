@@ -10,15 +10,15 @@ public class Main extends Game {
     private SpriteBatch batch;
     private Screen gameScreen;
 
-    public SpriteBatch getSpriteBatch(){return this.batch;}
-    public Screen getGameScreen(){return gameScreen;}
-    public void setGameScreen(Screen s){gameScreen = s;}
+	public SpriteBatch getSpriteBatch(){return this.batch;}
+	public Screen getGameScreen(){return gameScreen;}
+	public void setGameScreen(Screen s){gameScreen = s;}
 
-    @Override
-    public void create(){
-        this.setScreen(new LoadingScreen(this));
-        batch = new SpriteBatch();
-    }
+	@Override
+	public void create(){
+		this.setScreen(new LoadingScreen(this));
+		batch = new SpriteBatch();
+	}
 
     @Override
     public void setScreen(Screen screen){

@@ -110,7 +110,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         return false;
     }
 
-   @Override
+    @Override
     public boolean touchDragged(int x, int y, int pointer){
         camera.position.add(lastTouchDown.sub(x, 0, 0));
         centerCamera();

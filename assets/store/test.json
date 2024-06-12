@@ -21,11 +21,6 @@
         "price": 400
     },  
     {
-        "name": "治癒藥水",
-        "description": "恢復5點血量",
-        "price": 100
-    },
-    {
         "name": "回復藥水",
         "description": "恢復10點血量",
         "price": 200
@@ -38,6 +33,6 @@
     {
         "name": "究極回復藥水",
         "description": "恢復50點血量",
-        "price": 450
+        "price": 500
     }
 ]
