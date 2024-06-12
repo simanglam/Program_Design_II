@@ -5,6 +5,11 @@ playerInventory: [
 		description: This is only for testing
 		num: 1
 	}
+	{
+		name: 麻瓜研究書
+		description: 如果妳想研究為甚麼這個世界有這麼多麻瓜
+		num: 1
+	}
 ]
 playerInventoryPokemons: [
 	{
@@ -13,10 +18,4 @@ playerInventoryPokemons: [
 	}
 ]
 currentMap: library.tmx
-currentPosition: {
-	x: 26.0729
-	y: 461.9167
-	width: 16
-	height: 16
-}
 }
