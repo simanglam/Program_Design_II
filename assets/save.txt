@@ -5,51 +5,6 @@ playerInventory: [
 		description: This is only for testing
 		num: 1
 	}
-	{
-		name: 微分魔法球1
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球2
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球3
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球4
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球5
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球6
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球7
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球8
-		description: 明知不可微而微之
-		num: 1
-	}
-	{
-		name: 微分魔法球9
-		description: 明知不可微而微之
-		num: 1
-	}
 ]
 playerInventoryPokemons: [
 	{
@@ -57,11 +12,4 @@ playerInventoryPokemons: [
 		description: asd
 	}
 ]
-currentMap: classroom.tmx
-currentPosition: {
-	x: 5.375
-	y: 162.875
-	width: 16
-	height: 16
-}
 }
