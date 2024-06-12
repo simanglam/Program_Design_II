@@ -1,57 +1,9 @@
 {
 playerInventory: [
 	{
-		name: atest
-		description: This is only for a testing
-<<<<<<< HEAD
-		num: 1
-	}
-	{
-		name: test
-		description: This is only for testing
-=======
-		num: 3
-	}
-	{
 		name: test
 		description: This is only for testing
 		num: 1
-	}
-	{
-		name: 冰凍藥水
-		description: A...Achooooooo!怎麼突然這麼冷!能使場上所有敵人暫停動作3秒鐘的藥水。
-		num: 5
-	}
-	{
-		name: 回復藥水
-		description: 喝一口，稍微休息吧!能回復角色一些體力的回覆藥水。
-		num: 2
-	}
-	{
-		name: 大風吹
-		description: 啊啊啊啊啊你不要過來啊!你像敵人吹了一大口氣，於是敵人全都飛回家門口了。
-		num: 2
-	}
-	{
-		name: 我超有錢
-		description: 讓你體驗一夕之間當富豪的暴發戶道具。在bosswar中使用可以直接使金錢生產速度達到最高。
-		num: 2
-	}
-	{
-		name: 狂暴藥水
-		description: 哦哦哦哦哦哦哦我感受到了!感受到驚人的力量在我體內爆發!使用之後，3秒內使場上所有角色攻擊速度*2。
-		num: 2
-	}
-	{
-		name: 究極回復藥水
-		description: 喝一口就直接升天(?)能回復角色全部體力的究極回覆藥水。
->>>>>>> origin/final_enhance
-		num: 1
-	}
-	{
-		name: 超級回復藥水
-		description: 啊斯~真是太好喝了!讓人一口接著一口欲罷不能!能回復角色更多體力的超級回覆藥水。
-		num: 2
 	}
 ]
 playerInventoryPokemons: [
@@ -60,17 +12,4 @@ playerInventoryPokemons: [
 		description: asd
 	}
 ]
-<<<<<<< HEAD
-currentPosition: {
-	x: 241.07542
-	y: 54.333008
-=======
-money: 400
-currentPosition: {
-	x: 192.38593
-	y: 54.957436
->>>>>>> origin/final_enhance
-	width: 16
-	height: 16
-}
 }

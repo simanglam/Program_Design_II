@@ -574,7 +574,7 @@
     <property name="puzzle" value="4474"/>
     <property name="reward" value="究極回復藥水"/>
     <property name="word">恭喜你，成功打開此行李箱，
-並成為“折磨詩人俱樂部The Tortuted Poets Department”的一員，它可以帶妳進入BossWar最終章。</property>
+並成為“折磨詩人俱樂部The Tortuted Poets Department”的一員，並獲得究極回復藥水。</property>
    </properties>
   </object>
   <object id="175" x="130.667" y="420" width="51.3333" height="20.6667">
@@ -600,7 +600,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="10" name="生怪區">
+ <objectgroup id="10" name="生怪區" visible="0">
   <object id="150" x="291" y="390" width="377" height="165">
    <properties>
     <property name="description" value="火爐"/>
