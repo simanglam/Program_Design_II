@@ -31,7 +31,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
     Vector3 lastTouchDown;
     int money;
     int maxEnemy;
-    float spawnAccu, freezeAccu;
+    float spawnAccu;
     Label enemyLabel;
     Label playerLabel;
     Stage stage;
@@ -56,7 +56,6 @@ public class BossWarWorld extends InputAdapter implements Disposable {
                 enemyArray.add(new BossWarActor("enemies/" + info.name + "/", true));
         }
         maxEnemy = 0;
-        freezeAccu = 0;
         spawnAccu = 1.0f;
         for (SpawnInfo info: bs.enemies){
             enemySpawnInfos.add(new EnemySpawnInfo(new BossWarActor("enemies/" + info.name + "/", true), info.spawnCoolDown));
@@ -110,7 +109,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
         return false;
     }
 
-   @Override
+    @Override
     public boolean touchDragged(int x, int y, int pointer){
         camera.position.add(lastTouchDown.sub(x, 0, 0));
         centerCamera();
@@ -127,7 +126,7 @@ public class BossWarWorld extends InputAdapter implements Disposable {
     }
 
     public void update(float delta, SpriteBatch batch){
-        this.money = Math.min(16500, money + Math.max((int)delta, 1));
+        this.money += Math.max((int)delta, 1);
         if (enemyTower.healtPoint > 0 && playerTower.healtPoint > 0){
             spawnAccu += delta;
             for (EnemySpawnInfo info: enemySpawnInfos){
@@ -152,19 +151,12 @@ public class BossWarWorld extends InputAdapter implements Disposable {
             if(actor.readyToAttack())
                 pendingAttack.add(actor.generateAttackInfo());
         }
-
-        if (freezeAccu <= 0){
-            for (BossWarActor actor: enemyArray){
-                actor.update(delta, detectEnemy(true, actor.getVisionRange()));
-                actor.draw(batch);
-                if(actor.readyToAttack())
-                    pendingAttack.add(actor.generateAttackInfo());
-            }
+        for (BossWarActor actor: enemyArray){
+            actor.update(delta, detectEnemy(true, actor.getVisionRange()));
+            actor.draw(batch);
+            if(actor.readyToAttack())
+                pendingAttack.add(actor.generateAttackInfo());
         }
-        else{
-            freezeAccu -= delta;
-        }
-
         for (AttackInfo attackInfo: pendingAttack){
             for (BossWarActor actor : (attackInfo.from.equals("enemy")) ? pokemonArray : enemyArray)
                 if(actor.beingAttack(attackInfo))
@@ -208,18 +200,6 @@ public class BossWarWorld extends InputAdapter implements Disposable {
                 return true;
         }
         return false;
-    }
-
-    public void useitem(String itemName){
-        if (itemName.equals("我超有錢"))
-            money = 16500;
-        else if (itemName.equals("冰凍藥水"))
-            freezeAccu += 3;
-        else if (itemName.equals("大風吹")){
-            for (BossWarActor b: enemyArray){
-                b.setPosition(enemyTower.position.x, enemyTower.position.y);
-            }
-        }
     }
 
     public boolean win(){return enemyTower.healtPoint <= 0;}
