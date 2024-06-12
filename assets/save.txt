@@ -11,5 +11,21 @@ playerInventoryPokemons: [
 		name: base
 		description: asd
 	}
+	{
+		name: a
+		description: asd
+	}
 ]
+selectedPokemon: [
+	{
+		name: base
+		description: asd
+	}
+]
+currentPosition: {
+	x: 193.00056
+	y: 51.99091
+	width: 16
+	height: 16
+}
 }

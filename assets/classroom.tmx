@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="75">
  <tileset firstgid="1" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="392" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1816" source="stores.tsx"/>
@@ -325,6 +325,16 @@
     <property name="entryY" type="float" value="100"/>
     <property name="exit" value="classroom"/>
     <property name="next" value="computer_screen.tmx"/>
+    <property name="portal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="74" x="25.942" y="24.3996" width="3.1042" height="3.28785">
+   <properties>
+    <property name="entry" value="computer_screen"/>
+    <property name="entryX" type="float" value="0"/>
+    <property name="entryY" type="float" value="150"/>
+    <property name="exit" value="classroom"/>
+    <property name="next" value="library.tmx"/>
     <property name="portal" type="bool" value="true"/>
    </properties>
   </object>

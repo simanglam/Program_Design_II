@@ -1,0 +1,29 @@
+{
+    "image": "bosswar.png",
+    "enemyTower": "tower",
+    "playerTower": "tower",
+    "onstage":[
+        {
+            "name": "ECC",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "RSA",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "很喜歡暴力試錯的同學",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "密碼學實作大師",
+            "spawnCoolDown": 1
+        }
+    ],
+    "enemies": [
+        {
+            "name": "密碼學實作大師",
+            "spawnCoolDown": 12
+        }
+    ]
+}
