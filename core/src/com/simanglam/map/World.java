@@ -54,17 +54,17 @@ public class World {
             screen.game.setScreen(new FightingScreen(screen.game));
         MapObject currentCollide = getCollideObject(player.getRectangle(), "其他");
         if (currentCollide != null){
+            player.updateX(deltaT);
+            playerCollideUpdate(true, "其他");
+
+            player.updateY(deltaT);
+            playerCollideUpdate(false, "其他");
+            player.freeze();
             if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty() && screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) == null)
                 screen.game.setScreen(new BossWarScreen(screen.game, (String)currentCollide.getProperties().get("bosswar")));
-            else if(currentCollide.getProperties().get("bosswar") != null && screen.gameStatus.selectedPokemon.isEmpty()){
+            else if(currentCollide.getProperties().get("bosswar") != null && screen.gameStatus.selectedPokemon.isEmpty())
                 screen.addDialog("You Must select pokemon to continue");
-                player.updateX(deltaT);
-                playerCollideUpdate(true, "其他");
-
-                player.updateY(deltaT);
-                playerCollideUpdate(false, "其他");
-                player.freeze();
-            }
+            
         }
         player.updateX(deltaT);
         playerCollideUpdate(true, "物件層 1");

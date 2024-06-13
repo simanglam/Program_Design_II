@@ -20,7 +20,7 @@
     "enemies": [
         {
             "name": "你那個超雷的同學",
-            "spawnCoolDown": 12
+            "spawnCoolDown": 120000
         }
     ]
 }

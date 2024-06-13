@@ -64,7 +64,7 @@ public class BossWarScreen extends AbstractScreen {
             progressBars[i] = new ProgressBar(0, 1, 0.2f, false, skin);
             progressBars[i].setVisible(false);
             playerPokemons[i] = new BossWarActor("enemies/" + gameStatus.selectedPokemon.get(i).getName(), false);
-            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + gameStatus.selectedPokemon.get(i).getName() + "/image/idle-0.png")));
+            imageButtons[i] = new ImageButton(new TextureRegionDrawable(new Texture("enemies/" + gameStatus.selectedPokemon.get(i).getName() + "/image/icon.png")));
             buttons[i].add(imageButtons[i]).row();
             Label moneyLabel = new Label(String.valueOf(playerPokemons[i].money), skin);
             buttons[i].add(stack).width(60);

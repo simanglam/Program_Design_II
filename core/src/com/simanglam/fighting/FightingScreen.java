@@ -64,7 +64,7 @@ public class FightingScreen extends AbstractScreen {
         resultButton.add("你輸了");
         resultButton.setSize(72, 20);
         resultButton.setPosition((Const.maxViewportWidth - resultButton.getWidth()) / 2f, (Const.maxViewportHeight - resultButton.getHeight()) / 2f);
-        this.enemy = PokemonFactory.buildPokemon("tower");
+        this.enemy = PokemonFactory.buildPokemon("base");
         Table finalTable = new Table();
         skillTable = new Table(skin);
         switchTable = new Table(skin);

@@ -41,7 +41,7 @@ public class SelectComponent extends Table {
         int i = 1;
         for (InventoryPokemon pokemon : gameStatus.playerInventoryPokemons) {
             Button b = new Button(skin);
-            ImageButton ib1 = new ImageButton(new TextureRegionDrawable(assetsManagerWrapper.assetManager.get("enemies/" + pokemon.getName() + "/image/idle-0.png", Texture.class)));
+            ImageButton ib1 = new ImageButton(new TextureRegionDrawable(assetsManagerWrapper.assetManager.get("enemies/" + pokemon.getName() + "/image/icon.png", Texture.class)));
             ImageButton ib2 = new ImageButton(new TextureRegionDrawable(assetsManagerWrapper.assetManager.get("character.png", Texture.class)));
             ib1.setVisible(!gameStatus.selectedPokemon.contains(pokemon));
             ib2.setVisible(gameStatus.selectedPokemon.contains(pokemon));
