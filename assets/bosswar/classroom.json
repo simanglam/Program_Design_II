@@ -1,0 +1,26 @@
+{
+    "image": "bosswar.png",
+    "enemyTower": "tower",
+    "playerTower": "tower",
+    "onstage":[
+        {
+            "name": "X",
+            "spawnCoolDown": 1
+        },
+        {
+            "name": "X^2",
+            "spawnCoolDown": 1
+        },
+       
+        {
+            "name": "你那個超雷的同學",
+            "spawnCoolDown": 1
+        }
+    ],
+    "enemies": [
+        {
+            "name": "你那個超雷的同學",
+            "spawnCoolDown": 120000
+        }
+    ]
+}

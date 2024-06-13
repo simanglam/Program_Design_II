@@ -14,25 +14,30 @@
         "name": "狂暴藥水",
         "description": "短時間使在場上的所有角色攻擊速度*2",
         "price": 400
-    }
+    },
     {
         "name": "大風吹",
         "description": "使得對方所有角色退回到對方塔前並且造成1/10最大生命值傷害",
         "price": 400
-    }    
+    },  
+    {
+        "name": "治癒藥水",
+        "description": "恢復5點血量",
+        "price": 100
+    },
     {
         "name": "回復藥水",
         "description": "恢復10點血量",
         "price": 200
-    }
+    },
     {
         "name": "超級回復藥水",
         "description": "恢復30點血量",
         "price": 250
-    }
+    },
     {
         "name": "究極回復藥水",
         "description": "恢復50點血量",
-        "price": 500
+        "price": 450
     }
 ]

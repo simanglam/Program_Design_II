@@ -12,4 +12,13 @@ The repo for final project of program design II in CCU.
 | xup6m4c06 | 林育函 | 412530036 | 
 | WillieHuang | 黃偉宸 | 411315011 | 
 | Brightchao | 趙柏榕 | 411315044 | 
+
+
+# Guideline
+
+![image](https://github.com/simanglam/Program_Design_II/blob/map/assets/guideline1.png)
+
 ![image](https://github.com/simanglam/Program_Design_II/blob/map/assets/guideline2.png)
+
+![image](https://github.com/simanglam/Program_Design_II/blob/map/assets/guideline3.png)
+

@@ -14,8 +14,8 @@ playerInventoryPokemons: [
 ]
 currentMap: library.tmx
 currentPosition: {
-	x: 9.41667
-	y: 469.6667
+	x: 96.375
+	y: 520.00037
 	width: 16
 	height: 16
 }

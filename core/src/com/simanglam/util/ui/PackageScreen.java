@@ -1,6 +1,8 @@
 package com.simanglam.util.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -19,11 +21,16 @@ import com.simanglam.util.Const;
 public class PackageScreen extends AbstractScreen {
     Stage stage;
     Table t;
+    Texture backgroung;
     
 
     public PackageScreen(final Main game){
-        stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight));
+        OrthographicCamera camera = new OrthographicCamera();
+        camera.setToOrtho(false, Const.maxViewportWidth, Const.maxViewportHeight);
+        stage = new Stage(new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, camera));
+        camera.update();
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
+        backgroung = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("main.png", Texture.class);
 
         t = new Table(skin);
         t.setSize(Const.maxViewportWidth, Const.maxViewportHeight);
@@ -101,6 +108,10 @@ public class PackageScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 0);
+        stage.getViewport().apply();
+        stage.getBatch().begin();
+        stage.getBatch().draw(backgroung, 0, 0, stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
+        stage.getBatch().end();
         stage.act(delta);
         stage.draw();
     }
@@ -108,7 +119,6 @@ public class PackageScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height);
-        stage.getViewport().apply();
     }
 
     @Override

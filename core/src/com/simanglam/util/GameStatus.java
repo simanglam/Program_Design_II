@@ -23,9 +23,9 @@ public class GameStatus {
         playerInventory = new ArrayList<>();
         playerInventoryPokemons = new ArrayList<>();
         selectedPokemon = new ArrayList<>();
-        this.addPokemon("base");
+        this.addPokemon("你那個超雷的同學");
+        this.addPokemon("HelloWorld{}");
         statusHashMap = new HashMap<>();
-        this.addItem("test");
         this.money = 5000;
         currentMap = "computer_screen.tmx";
         currentPosition = new Rectangle();
