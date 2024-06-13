@@ -3,6 +3,8 @@ package com.simanglam.fighting;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -24,6 +26,7 @@ import com.simanglam.util.AbstractScreen;
 import com.simanglam.util.AssetsManagerWrapper;
 import com.simanglam.util.Const;
 import com.simanglam.util.GameStatus;
+import com.simanglam.util.InventoryItem;
 
 public class FightingScreen extends AbstractScreen {
 
@@ -36,6 +39,7 @@ public class FightingScreen extends AbstractScreen {
     Table skillTable;
     Table switchTable;
     Table optionTable;
+    Table packageTable;
     Dialog dialog;
     BitmapFont font;
 
@@ -45,14 +49,16 @@ public class FightingScreen extends AbstractScreen {
     Pokemon[] playerPokemons;
     Pokemon currentPokemon;
 
-
+    Texture background;
     public FightingScreen(Main game) {
-        this.viewport = new  FitViewport(Const.maxViewportWidth, Const.maxViewportHeight);
+        this.viewport = new FitViewport(Const.maxViewportWidth, Const.maxViewportHeight, new OrthographicCamera(Const.maxViewportWidth, Const.maxViewportHeight));
+        viewport.apply();
         this.stage = new Stage(viewport);
         this.gameStatus = GameStatus.getGameStatus();
         this.game = game;
         Skin skin = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/uiskin.json", Skin.class);
         font = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("data/font/font.fnt", BitmapFont.class);
+        background = AssetsManagerWrapper.getAssetsManagerWrapper().assetManager.get("FTbg.jpg", Texture.class);
 
         resultButton = new Button(skin);
         resultButton.add("你輸了");
@@ -60,9 +66,10 @@ public class FightingScreen extends AbstractScreen {
         resultButton.setPosition((Const.maxViewportWidth - resultButton.getWidth()) / 2f, (Const.maxViewportHeight - resultButton.getHeight()) / 2f);
         this.enemy = PokemonFactory.buildPokemon("tower");
         Table finalTable = new Table();
-        skillTable = new Table();
-        switchTable = new Table();
+        skillTable = new Table(skin);
+        switchTable = new Table(skin);
         optionTable = new Table(skin);
+        packageTable = new Table(skin);
 
         optionTable.setSize(Const.maxViewportWidth / 4f, Const.maxViewportHeight / 4f);
 
@@ -74,6 +81,7 @@ public class FightingScreen extends AbstractScreen {
         dialog.setVisible(false);
         dialog.setWidth(Const.maxViewportWidth);
         dialog.setFillParent(true);
+        dialog.setMovable(false);
         stack.add(dialog);
         playerPokemons = new Pokemon[4];
         for (int i = 0; i < 4 && i < gameStatus.selectedPokemon.size(); i++)
@@ -97,7 +105,7 @@ public class FightingScreen extends AbstractScreen {
                     skillTable.setVisible(false);
                     optionTable.setVisible(true);
                     dialog.setVisible(true);
-                    dialog.setDescription("換成了%s".formatted(currentPokemon.getName()));
+                    dialog.setDescription(String.format("換成了%s", currentPokemon.getName()));
                     dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide(), Actions.run(() -> enemyTurn())));
                     ArrayList<SkillBehavior> skills = currentPokemon.getSkill();
                     for (int j = 0; j < 4; j++) {
@@ -116,7 +124,7 @@ public class FightingScreen extends AbstractScreen {
                                 switchTable.setVisible(false);
                                 skillTable.setVisible(false);
                                 dialog.setVisible(true);
-                                dialog.setDescription("%s使用了%s".formatted(currentPokemon.getName(), skills.get(t).description()));
+                                dialog.setDescription(String.format("%s使用了%s", currentPokemon.getName(), skills.get(t).description()));
                                 dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide(), Actions.run(() -> enemyTurn())));
                             }
                         });
@@ -152,7 +160,7 @@ public class FightingScreen extends AbstractScreen {
                     switchTable.setVisible(false);
                     skillTable.setVisible(false);
                     dialog.setVisible(true);
-                    dialog.setDescription("%s使用了%s".formatted(currentPokemon.getName(), skills.get(t).description()));
+                    dialog.setDescription(String.format("%s使用了%s", currentPokemon.getName(), skills.get(t).description()));
                     dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide(), Actions.run(() -> enemyTurn())));
                 }
             });
@@ -160,12 +168,36 @@ public class FightingScreen extends AbstractScreen {
         skillTable.setVisible(false);
         stack.add(skillTable);
 
+        for (InventoryItem item: gameStatus.playerInventory){
+            if (item.getName().equals("回復藥水") || item.getName().equals("超級回復藥水") || item.getName().equals("究極回復藥水")){
+                Button b = new Button(skin);
+                b.add(item.getName());
+                b.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        currentPokemon.setHP(currentPokemon.getHP() + PosionEffectFactory.getEffect(item.getName()));
+                        item.consume();
+                        if (item.getNum() == 0){
+                            b.setDisabled(true);
+                            gameStatus.playerInventory.remove(item);
+                        }
+                        enemyTurn();
+                        packageTable.setVisible(false);
+                    }
+                });
+                packageTable.add(b);
+            }
+        }
+        packageTable.setVisible(false);
+        stack.add(packageTable);
+
         Button pokemonButton = new Button(skin);
         pokemonButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 switchTable.setVisible(true);
                 skillTable.setVisible(false);
+                packageTable.setVisible(false);
             }
         });
         pokemonButton.add("Pokemon");
@@ -177,6 +209,7 @@ public class FightingScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 switchTable.setVisible(false);
                 skillTable.setVisible(true);
+                packageTable.setVisible(false);
             }
         });
 
@@ -189,6 +222,7 @@ public class FightingScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 switchTable.setVisible(false);
                 skillTable.setVisible(false);
+                packageTable.setVisible(true);
             }
         });
         backPack.add("Backpack");
@@ -222,9 +256,8 @@ public class FightingScreen extends AbstractScreen {
             return;
         }
         currentPokemon.beingAttack(Math.max((int)(enemy.getATK() * 0.2f), 1));
-        System.out.printf("Pokemon: %d, Enemy: %d\n", currentPokemon.getHP(), enemy.getHP());
         dialog.setVisible(true);
-        dialog.setDescription("%s攻擊".formatted(enemy.getName()));
+        dialog.setDescription(String.format("%s攻擊", enemy.getName()));
         dialog.addAction(Actions.sequence(Actions.delay(2), Actions.hide()));
         if (!currentPokemon.alive()){
             optionTable.setVisible(false);
@@ -255,11 +288,13 @@ public class FightingScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 0);
+        stage.getViewport().apply();
         stage.getBatch().begin();
+        stage.getBatch().draw(background, 0, 0, stage.getWidth(), stage.getHeight());
         stage.getBatch().draw(currentPokemon.texture, 0, 100);
         stage.getBatch().draw(enemy.texture, Const.maxViewportWidth - enemy.texture.getWidth(), 100);
-        font.draw(stage.getBatch(), "HP: %d".formatted(currentPokemon.getHP()), 0 + currentPokemon.texture.getWidth() / 2f, 100 + currentPokemon.texture.getHeight());
-        font.draw(stage.getBatch(), "HP: %d".formatted(enemy.getHP()), Const.maxViewportWidth - enemy.texture.getWidth() / 2f, 100 + enemy.texture.getHeight());
+        font.draw(stage.getBatch(), String.format("HP: %d", currentPokemon.getHP()), 0 + currentPokemon.texture.getWidth() / 2f, 100 + currentPokemon.texture.getHeight());
+        font.draw(stage.getBatch(), String.format("HP: %d", enemy.getHP()), Const.maxViewportWidth - enemy.texture.getWidth() / 2f, 100 + enemy.texture.getHeight());
         stage.getBatch().end();
         stage.act(delta);
         stage.draw();
@@ -267,8 +302,7 @@ public class FightingScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-        stage.getViewport().apply();
+        stage.getViewport().update(width, height);
     }
 
     @Override

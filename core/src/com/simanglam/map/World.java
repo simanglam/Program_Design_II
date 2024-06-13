@@ -54,7 +54,7 @@ public class World {
             screen.game.setScreen(new FightingScreen(screen.game));
         MapObject currentCollide = getCollideObject(player.getRectangle(), "其他");
         if (currentCollide != null){
-            if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty()&& screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) != false)
+            if (currentCollide.getProperties().get("bosswar") != null && !screen.gameStatus.selectedPokemon.isEmpty() && screen.gameStatus.getStatusHashMap().get((String)currentCollide.getProperties().get("bosswar")) == null)
                 screen.game.setScreen(new BossWarScreen(screen.game, (String)currentCollide.getProperties().get("bosswar")));
             else if(currentCollide.getProperties().get("bosswar") != null && screen.gameStatus.selectedPokemon.isEmpty()){
                 screen.addDialog("You Must select pokemon to continue");
@@ -150,10 +150,11 @@ public class World {
         accu += deltaT;
         if ((int)accu >= 1){
             accu -= 1;
-            ecounterPossibility += 1.0 / (int)((Math.random() * 50) + 1);
+            ecounterPossibility += 1.0 / (int)((Math.random() * 5) + 1);
             System.out.println(ecounterPossibility);
-            if (ecounterPossibility >= (int)(Math.random() * 50 + 1) && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
+            if (ecounterPossibility >= (int)(Math.random() * 50) + 1 && !GameStatus.getGameStatus().selectedPokemon.isEmpty()){
                 ecounterPossibility = 0;
+                player.freeze();
                 return true;
             }
         }
