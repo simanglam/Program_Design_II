@@ -68,7 +68,7 @@ public class SelectComponent extends Table {
                         }
                         gameStatus.selectedPokemon.add(pokemon);
                     } else {
-                        gameStatus.selectedPokemon.remove(gameStatus.playerInventoryPokemons.indexOf(pokemon));
+                        gameStatus.selectedPokemon.remove(pokemon);
                     }
                     ib2.setVisible(!ib2.isVisible());
                     ib1.setVisible(!ib1.isVisible());
